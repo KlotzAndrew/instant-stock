@@ -1,0 +1,19 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'client/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+
+  DisplayCopNames: true
+  DisplayStyleGuide: true
