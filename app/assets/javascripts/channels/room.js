@@ -4,12 +4,10 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
   disconnected: function() {},
 
   received: function(data) {
-    console.log('message212', data);
     return $('#messages').append(data['message']);
   },
 
   speak: function(message) {
-    console.log('message', message);
     return this.perform('speak', {
       message: message
     });

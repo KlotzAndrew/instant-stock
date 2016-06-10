@@ -13,6 +13,9 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5.x'
 gem 'jbuilder', '~> 2.0'
 gem 'rubocop'
+gem 'sidekiq'
+gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
