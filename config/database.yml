@@ -22,7 +22,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
   host: db
-  password: <%= ENV['INSTANT-STOCK_DATABASE_PASSWORD'] %>
+  password:
 
 
 development:
@@ -85,5 +85,4 @@ test:
 production:
   <<: *default
   database: instant-stock_production
-  username: instant-stock
-  password: <%= ENV['INSTANT-STOCK_DATABASE_PASSWORD'] %>
+

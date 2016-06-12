@@ -11,7 +11,7 @@ services:
       - "6379:6379"
 
   web:
-    build: .
+    image: klotzandrew/instantstock_web
     command: sh lib/scripts/start_webapp.sh
     volumes:
       - .:/myapp
@@ -24,7 +24,7 @@ services:
       REDIS_URL: redis://redis:6379
 
   sidekiq:
-    build: .
+    image: klotzandrew/instantstock_web
     volumes:
       - .:/myapp
     links:
