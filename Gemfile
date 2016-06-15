@@ -8,6 +8,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'interactor'
+require 'open-uri'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5.x'
@@ -23,8 +24,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'pry-rails'
-  #gem 'minitest-rails'
-  #gem 'minitest-reporters'
+  # gem 'minitest-rails'
+  # gem 'minitest-reporters'
 end
 
 group :development do
