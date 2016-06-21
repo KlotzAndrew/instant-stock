@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20160619215556) do
 
   create_table "holdings", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.boolean  "active",       default: true, null: false
-    t.bigint   "portfolio_id",                null: false
-    t.bigint   "stock_id",                    null: false
+    t.uuid     "portfolio_id",                null: false
+    t.uuid     "stock_id",                    null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["portfolio_id"], name: "index_holdings_on_portfolio_id", using: :btree
@@ -50,10 +50,11 @@ ActiveRecord::Schema.define(version: 20160619215556) do
   end
 
   create_table "trades", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.integer  "holding_id",                           null: false
+    t.uuid     "holding_id",                           null: false
     t.integer  "quantity",                             null: false
     t.decimal  "enter_price", precision: 15, scale: 2, null: false
-    t.decimal  "exit_price",  precision: 15, scale: 2, null: false
+    t.decimal  "exit_price",  precision: 15, scale: 2
+    t.datetime "ex"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.index ["holding_id"], name: "index_trades_on_holding_id", using: :btree

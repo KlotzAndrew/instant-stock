@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :stocks
   resources :holdings
   resources :portfolios
-  root to: 'portfolio#show'
+
+  root to: 'portfolios#index'
 
   get 'portfolio/show'
 

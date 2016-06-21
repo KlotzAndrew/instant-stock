@@ -11,5 +11,6 @@ class RoomChannel < ApplicationCable::Channel
 
   def speak(data)
     Message.create! content: data['message']
+    ExecutePortfolioTrade.call data
   end
 end

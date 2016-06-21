@@ -1,4 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<h1 id="portfolio-title" data="<%= @portfolio.id %>">Portfolio!! #</h1>
+
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<h3>Trades:</h3>
+  <div id="trades">
+    <%= render @trades %>
+  </div>
+</div>
+
+<form>
+  <label>Say Something:</label></br>
+  <input type="text" data-behavior="room_speaker">
+</form>
+
+
 <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
 <%= link_to 'Back', portfolios_path %>

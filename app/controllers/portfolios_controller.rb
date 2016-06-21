@@ -10,6 +10,8 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
+    @messages = Message.all
+    @trades = Trade.all
   end
 
   # GET /portfolios/new
@@ -64,7 +66,7 @@ class PortfoliosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_portfolio
-      @portfolio = Portfolio.find(params[:id])
+      @portfolio = Portfolio.includes(holdings: :trades).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
