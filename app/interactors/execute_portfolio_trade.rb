@@ -1,6 +1,8 @@
 class ExecutePortfolioTrade
   include Interactor
 
+  # organize CheckChatCommand, GetStockQuote, UpdateStock, CompleteTrade
+
   def call
     message      = context['message']
     portfolio_id = context['portfolio_id']
