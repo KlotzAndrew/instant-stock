@@ -3,13 +3,13 @@ require 'test_helper'
 class CheckChatCommandTest < ActiveSupport::TestCase
   test 'returns ticker for buy command' do
     mock_quantity = 1
-    mock_ticker   = 'TICKER'
-    mock_message  = "buy #{mock_ticker}"
+    mock_tickers   = ['TICKER']
+    mock_message  = "buy #{mock_tickers[0]}"
 
     result = CheckChatCommand.call({message: mock_message})
 
     assert result.success?
-    assert_equal mock_ticker, result.ticker
+    assert_equal mock_tickers, result.tickers
     assert_equal mock_quantity, result.quantity
   end
 

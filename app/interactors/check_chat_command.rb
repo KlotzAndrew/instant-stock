@@ -10,7 +10,7 @@ class CheckChatCommand
     ticker        = match_ticker command_match
 
     context.quantity = 1
-    context.ticker   = ticker
+    context.tickers   = [ticker]
   end
 
   private
