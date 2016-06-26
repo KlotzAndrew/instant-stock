@@ -4,6 +4,7 @@ class CreateStocks < ActiveRecord::Migration[5.0]
       t.string :ticker, null: false
       t.string :stock_exchange, null: false
       t.string :name
+      t.string :currency, null: false
 
       t.datetime :last_quote_time
       t.decimal :last_quote, precision: 15, scale: 2

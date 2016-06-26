@@ -1,7 +1,42 @@
+# == Schema Information
+#
+# Table name: portfolios
+#
+#  id         :uuid             not null, primary key
+#  name       :string
+#  cash       :decimal(15, 2)   default(0.0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'test_helper'
 
 class PortfolioTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @portfolio    = FactoryGirl.build :portfolio
+    @cash_holding = FactoryGirl.build :cash_holding, portfolio: @portfolio
+    @portfolio.cash_holdings << @cash_holding
+  end
+
+  test 'requires name' do
+    @portfolio.name = nil
+    refute @portfolio.valid?
+  end
+
+  test 'requires cash' do
+    @portfolio.cash = nil
+    refute @portfolio.valid?
+  end
+
+  test '#change_cash calls cash holding' do
+    mock_amount   = 100
+    mock_currency = CashHolding::USD
+
+    @portfolio.cash_holdings.expects(:find_by)
+      .with(currency: mock_currency).returns(@cash_holding)
+
+    @cash_holding.expects(:change_cash).with(mock_amount)
+
+    @portfolio.change_cash(mock_amount, mock_currency)
+  end
 end

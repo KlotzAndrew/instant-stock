@@ -29,6 +29,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
@@ -38,6 +39,8 @@ group :development do
 end
 
 group :test do
+  gem 'faker'
+  gem 'factory_girl_rails'
   gem 'webmock'
   gem 'vcr'
   gem 'mocha'
@@ -47,4 +50,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-

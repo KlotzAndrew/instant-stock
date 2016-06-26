@@ -20,15 +20,20 @@ class PerformStockTrade
 
   def complete_trade(stock, portfolio, quantity)
     holding = find_or_create_holding stock, portfolio
-    trade = create_trade holding, stock, quantity
+    trade = create_trade holding, stock, portfolio, quantity
   end
 
-  def create_trade(holding, stock, quantity)
-    Trade.create(
-      holding_id:  holding.id,
-      enter_price: stock.last_quote,
-      quantity:    quantity
-    )
+  def create_trade(holding, stock, portfolio, quantity)
+    ActiveRecord::Base.transaction do
+      Trade.create(
+        holding_id:  holding.id,
+        enter_price: stock.last_quote,
+        quantity:    quantity
+      )
+      currency = stock.currency
+      amount = stock.last_quote * quantity
+      portfolio.change_cash(amount, currency)
+    end
   end
 
   def find_or_create_holding(stock, portfolio)

@@ -1,0 +1,11 @@
+# == Schema Information
+#
+# Table name: portfolios
+#
+#  id         :uuid             not null, primary key
+#  name       :string
+#  cash       :decimal(15, 2)   default(0.0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+

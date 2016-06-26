@@ -57,7 +57,8 @@ class UpdateStockFromQuote
       stock_exchange:  quote[:stock_exchange],
       last_quote_time: quote[:last_trade],
       last_quote:      quote[:last_price],
-      name:            quote[:name]
+      name:            quote[:name],
+      currency:        CashHolding::USD
     }
   end
 end

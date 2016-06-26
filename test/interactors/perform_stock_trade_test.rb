@@ -2,9 +2,9 @@ require 'test_helper'
 
 class PerformStockTradeTest < ActiveSupport::TestCase
   test 'creates trade with holding for portfolio' do
-    mock_portfolio = Portfolio.new id: 9
-    mock_stocks = [Stock.new]
-    mock_holding = Holding.new
+    mock_portfolio = FactoryGirl.build :portfolio
+    mock_stocks = [FactoryGirl.build(:stock)]
+    mock_holding = FactoryGirl.build :holding
     mock_quantity = 1
     expected_trades = {}
     mock_params = {
@@ -15,6 +15,10 @@ class PerformStockTradeTest < ActiveSupport::TestCase
     Portfolio.expects(:find_by)
       .with(id: mock_portfolio.id)
       .returns(mock_portfolio)
+
+    mock_value = mock_quantity * mock_stocks[0].last_quote
+    mock_portfolio.expects(:change_cash)
+      .with(mock_value, mock_stocks[0].currency)
 
     mock_holding_values = holding_values mock_stocks[0], mock_portfolio
     Holding.expects(:find_or_create_by)
@@ -43,7 +47,8 @@ class PerformStockTradeTest < ActiveSupport::TestCase
   def trade_values(holding, stock)
     {
       holding_id:  holding.id,
-      enter_price: stock.last_quote
+      enter_price: stock.last_quote,
+      quantity: 1
     }
   end
 
