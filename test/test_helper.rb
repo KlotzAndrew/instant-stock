@@ -27,7 +27,8 @@ module ActiveSupport
       config.hook_into :webmock
       config.default_cassette_options = {
         match_requests_on: [:uri],
-        record: :new_episodes }
+        record:            :new_episodes
+      }
     end
   end
 end

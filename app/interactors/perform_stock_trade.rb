@@ -21,6 +21,7 @@ class PerformStockTrade
   def complete_trade(stock, portfolio, quantity)
     holding = find_or_create_holding stock, portfolio
     trade = create_trade holding, stock, portfolio, quantity
+    trade
   end
 
   def create_trade(holding, stock, portfolio, quantity)

@@ -1,9 +1,10 @@
 class TradeOrderWorker
   include Sidekiq::Worker
 
-  def perform(some_string)
+  def perform(*)
     new_message = Message.create(content: Message.count)
-    ActionCable.server.broadcast 'room_channel', message: render_message(new_message)
+    ActionCable.server.broadcast 'room_channel',
+                                 message: render_message(new_message)
   end
 
   private

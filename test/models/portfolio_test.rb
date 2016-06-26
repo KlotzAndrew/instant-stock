@@ -32,8 +32,10 @@ class PortfolioTest < ActiveSupport::TestCase
     mock_amount   = 100
     mock_currency = CashHolding::USD
 
-    @portfolio.cash_holdings.expects(:find_by)
-      .with(currency: mock_currency).returns(@cash_holding)
+    @portfolio.cash_holdings
+              .expects(:find_by)
+              .with(currency: mock_currency)
+              .returns(@cash_holding)
 
     @cash_holding.expects(:change_cash).with(mock_amount)
 

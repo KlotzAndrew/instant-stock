@@ -6,23 +6,23 @@ class UpdateStockFromQuoteTest < ActiveSupport::TestCase
     expected_stock = Stock.new mapped_values
     Stock.expects(:create).with(mapped_values).returns(expected_stock)
 
-    result = UpdateStockFromQuote.call({quotes: mock_quotes})
+    result = UpdateStockFromQuote.call(quotes: mock_quotes)
 
     assert result.success?
     assert_equal result.stocks, [expected_stock]
   end
 
   test 'updates stock from quote' do
-    expected_stock = Stock.new
-    expect_search = search_values mock_quotes[0]
+    expected_stock  = Stock.new
+    expect_search   = search_values mock_quotes[0]
     expected_update = update_values mock_quotes[0]
 
     Stock.expects(:find_by).with(expect_search).returns(expected_stock)
     expected_stock.expects(:update)
-      .with(expected_update)
-      .returns(true)
+                  .with(expected_update)
+                  .returns(true)
 
-    result = UpdateStockFromQuote.call({quotes: mock_quotes})
+    result = UpdateStockFromQuote.call(quotes: mock_quotes)
 
     assert result.success?
     assert_equal result.stocks, [expected_stock]
@@ -55,11 +55,11 @@ class UpdateStockFromQuoteTest < ActiveSupport::TestCase
   def mock_quotes
     [
       {
-        :ticker         => 'GOOG',
-        :name           => 'Alphabet Inc.',
-        :last_price     => 19.99,
-        :last_trade     => '2016-06-14T16:00:00-04:00',
-        :stock_exchange => 'NMS'
+        ticker: 'GOOG',
+        name: 'Alphabet Inc.',
+        last_price: 19.99,
+        last_trade: '2016-06-14T16:00:00-04:00',
+        stock_exchange: 'NMS'
       }
     ]
   end

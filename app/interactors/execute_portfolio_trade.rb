@@ -1,5 +1,8 @@
 class ExecutePortfolioTrade
   include Interactor::Organizer
 
-  organize CheckChatCommand, FetchStockQuotes, UpdateStockFromQuote, PerformStockTrade
+  organize CheckChatCommand,
+           FetchStockQuotes,
+           UpdateStockFromQuote,
+           PerformStockTrade
 end

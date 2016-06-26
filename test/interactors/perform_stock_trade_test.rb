@@ -13,17 +13,17 @@ class PerformStockTradeTest < ActiveSupport::TestCase
       quantity: mock_quantity
     }
     Portfolio.expects(:find_by)
-      .with(id: mock_portfolio.id)
-      .returns(mock_portfolio)
+             .with(id: mock_portfolio.id)
+             .returns(mock_portfolio)
 
     mock_value = mock_quantity * mock_stocks[0].last_quote
     mock_portfolio.expects(:change_cash)
-      .with(mock_value, mock_stocks[0].currency)
+                  .with(mock_value, mock_stocks[0].currency)
 
     mock_holding_values = holding_values mock_stocks[0], mock_portfolio
     Holding.expects(:find_or_create_by)
-      .with(mock_holding_values)
-      .returns(mock_holding)
+           .with(mock_holding_values)
+           .returns(mock_holding)
 
     mock_trade_values = trade_values mock_holding, mock_stocks[0]
     Trade.expects(:create).with(mock_trade_values)
