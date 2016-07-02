@@ -22,10 +22,11 @@ module ActiveSupport
     # for all tests in alphabetical order.
     fixtures :all
 
-    VCR.configure do |config|
-      config.cassette_library_dir = 'fixtures/vcr_cassettes'
-      config.hook_into :webmock
-      config.default_cassette_options = {
+    VCR.configure do |c|
+      c.cassette_library_dir = 'fixtures/vcr_cassettes'
+      c.hook_into :webmock
+      c.ignore_localhost = true
+      c.default_cassette_options = {
         match_requests_on: [:uri],
         record:            :new_episodes
       }
