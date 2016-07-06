@@ -41,7 +41,10 @@ end
 group :test do
   gem 'launchy'
   gem 'capybara'
+  gem 'database_cleaner'
   gem 'poltergeist'
+  gem 'site_prism'
+
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'webmock'
