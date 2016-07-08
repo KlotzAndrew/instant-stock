@@ -2,7 +2,7 @@
 #
 # Table name: cash_holdings
 #
-#  id           :integer          not null, primary key
+#  id           :uuid             not null, primary key
 #  amount       :decimal(15, 2)
 #  currency     :string           not null
 #  portfolio_id :uuid             not null

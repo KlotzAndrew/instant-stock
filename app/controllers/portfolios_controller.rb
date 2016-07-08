@@ -12,6 +12,9 @@ class PortfoliosController < ApplicationController
   def show
     @messages = Message.all
     @trades = Trade.all
+
+    value_result = FindPortfolioValue.call portfolio: @portfolio
+    @portfolio_value = value_result.value
   end
 
   # GET /portfolios/new

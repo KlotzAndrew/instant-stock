@@ -20,7 +20,7 @@ class ExecuteStockBuyTest < ActionDispatch::IntegrationTest
     assert @page.has_messages_area?
     assert @page.has_trades_area?
 
-    @page.has_messages? :count => 0
+    @page.has_messages? count: 0
 
     @page.message_input.set('TSLA')
     @page.message_input.has_content?('TSLA')
@@ -32,7 +32,7 @@ class ExecuteStockBuyTest < ActionDispatch::IntegrationTest
     assert_equal 1, enqueued_jobs.size
     perform_message_job enqueued_jobs.pop
 
-    @page.has_messages? :count => 1
+    @page.has_messages? count: 1
   end
 
   private

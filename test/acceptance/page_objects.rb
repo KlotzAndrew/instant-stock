@@ -1,5 +1,5 @@
 class PortfolioPage < SitePrism::Page
-  set_url "/portfolios/{id}"
+  set_url '/portfolios/{id}'
 
   element :page_title, '#portfolio-title'
   element :messages_area, '#messages'
