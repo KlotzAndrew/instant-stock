@@ -4,7 +4,8 @@ class HoldingsController < ApplicationController
   # GET /holdings
   # GET /holdings.json
   def index
-    @holdings = Holding.all
+    @portfolio = Portfolio.find(params[:portfolio_id])
+    @holdings = @portfolio.holdings.includes(:trades)
   end
 
   # GET /holdings/1
@@ -62,13 +63,12 @@ class HoldingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_holding
-      @holding = Holding.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def holding_params
-      params.fetch(:holding, {})
-    end
+  def set_holding
+    @holding = Holding.find(params[:id])
+  end
+
+  def holding_params
+    params.fetch(:holding, {})
+  end
 end

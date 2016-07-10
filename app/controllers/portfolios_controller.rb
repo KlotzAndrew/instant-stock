@@ -11,7 +11,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1.json
   def show
     @messages = Message.all
-    @trades = Trade.all
+    @trades = []
     @holdings = @portfolio.holdings
 
     value_result = FindPortfolioValue.call portfolio: @portfolio
@@ -69,11 +69,11 @@ class PortfoliosController < ApplicationController
 
   private
 
-    def set_portfolio
-      @portfolio = Portfolio.includes(holdings: :trades).find(params[:id])
-    end
+  def set_portfolio
+    @portfolio = Portfolio.includes(holdings: :trades).find(params[:id])
+  end
 
-    def portfolio_params
-      params.fetch(:portfolio, {}).permit('name', 'cash')
-    end
+  def portfolio_params
+    params.fetch(:portfolio, {}).permit('name', 'cash')
+  end
 end

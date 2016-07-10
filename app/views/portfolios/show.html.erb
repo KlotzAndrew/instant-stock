@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1 id="portfolio-title" data="<%= @portfolio.id %>">Portfolio!! #</h1>
+<%= link_to 'Holdings', portfolio_holdings_path(@portfolio) %>
 <p><%= @portfolio.name %></p>
 
 <div id="messages">

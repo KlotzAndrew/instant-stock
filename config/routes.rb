@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :cash_holdings
   resources :trades
   resources :stocks
-  resources :holdings
-  resources :portfolios
+  resources :portfolios do
+    resources :holdings
+  end
 
   root to: 'portfolios#index'
 

@@ -12,9 +12,18 @@
   <tbody>
     <% @holdings.each do |holding| %>
       <tr>
-        <td><%= link_to 'Show', holding %></td>
-        <td><%= link_to 'Edit', edit_holding_path(holding) %></td>
-        <td><%= link_to 'Destroy', holding, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><b><%= holding.stock.name %></b></td>
+        <td><%= holding.current_total %></td>
+        <td><%= link_to 'Show', portfolio_holding_path(@portfolio.id, holding) %></td>
+        <td><%= link_to 'Edit', edit_portfolio_holding_path(@portfolio, holding) %></td>
+        <td><%= link_to 'Destroy', portfolio_holding_path(@portfolio.id, holding), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% holding.trades.each do |trade| %>
+          <tr>
+            <td><%= trade.created_at %></td>
+            <td>$<%= trade.enter_price.to_i %></td>
+            <td><%= trade.quantity %></td>
+          </tr>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +31,5 @@
 
 <br>
 
-<%= link_to 'New Holding', new_holding_path %>
+<%= link_to 'Back', portfolio_path(@portfolio) %> |
+<%= link_to 'New Holding', new_portfolio_holding_path %>
