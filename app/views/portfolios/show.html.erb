@@ -1,12 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <h1 id="portfolio-title" data="<%= @portfolio.id %>">Portfolio!! #</h1>
+<p><%= @portfolio.name %></p>
 
 <div id="messages">
   <%= render @messages %>
 </div>
 
 <h3>Net Value: <%= @portfolio_value %> </h3>
+
+<h3>Holdings:</h3>
+<%= render @holdings %>
+
 <h3>Trades:</h3>
   <div id="trades">
     <%= render @trades %>

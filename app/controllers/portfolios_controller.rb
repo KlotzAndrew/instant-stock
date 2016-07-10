@@ -12,6 +12,7 @@ class PortfoliosController < ApplicationController
   def show
     @messages = Message.all
     @trades = Trade.all
+    @holdings = @portfolio.holdings
 
     value_result = FindPortfolioValue.call portfolio: @portfolio
     @portfolio_value = value_result.value
@@ -67,12 +68,11 @@ class PortfoliosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_portfolio
       @portfolio = Portfolio.includes(holdings: :trades).find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
       params.fetch(:portfolio, {}).permit('name', 'cash')
     end

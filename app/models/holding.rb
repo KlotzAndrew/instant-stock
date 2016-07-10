@@ -14,4 +14,8 @@ class Holding < ApplicationRecord
   belongs_to :portfolio
   belongs_to :stock
   has_many :trades
+
+  def current_total
+    trades.to_a.sum(&:quantity)
+  end
 end
