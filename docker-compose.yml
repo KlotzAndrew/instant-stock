@@ -16,7 +16,7 @@ services:
     volumes:
       - .:/myapp/server
     ports:
-      - "3000:3000"
+      - "4000:4000"
     depends_on:
       - db
       - redis
@@ -33,3 +33,11 @@ services:
     command: sh lib/scripts/start_sidekiq.sh
     environment:
       REDIS_URL: redis://redis:6379
+
+  web_client:
+    build: web_client
+    command: npm run start
+    volumes:
+      - .:/myapp/web_client
+    ports:
+      - "3000:3000"
