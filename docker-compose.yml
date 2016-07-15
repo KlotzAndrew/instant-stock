@@ -11,10 +11,10 @@ services:
       - "6379:6379"
 
   web:
-    build: .
+    build: server
     command: sh lib/scripts/start_webapp.sh
     volumes:
-      - .:/myapp
+      - .:/myapp/server
     ports:
       - "3000:3000"
     depends_on:
@@ -24,9 +24,9 @@ services:
       REDIS_URL: redis://redis:6379
 
   sidekiq:
-    build: .
+    build: server
     volumes:
-      - .:/myapp
+      - .:/myapp/server
     links:
       - db
       - redis

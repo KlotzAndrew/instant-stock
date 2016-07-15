@@ -15,6 +15,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-log/
+server/log/
+server/coverage/
+server/tmp/
+
 .idea/
-coverage/

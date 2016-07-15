@@ -1,0 +1,13 @@
+I"Ë(function() {
+  window.SidekiqMonitor = {
+    settings: {
+      api_url: function(path) {
+        return "/api/" + path;
+      },
+      graphs: null,
+      poll_interval: 3000
+    }
+  };
+
+}).call(this);
+:ET
