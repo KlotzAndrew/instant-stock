@@ -11,10 +11,10 @@ services:
       - "6379:6379"
 
   web:
-    build: server
+    build: ./server
     command: sh lib/scripts/start_webapp.sh
     volumes:
-      - .:/myapp/server
+      - ./server:/myapp
     ports:
       - "4000:4000"
     depends_on:
@@ -24,9 +24,9 @@ services:
       REDIS_URL: redis://redis:6379
 
   sidekiq:
-    build: server
+    build: ./server
     volumes:
-      - .:/myapp/server
+      - ./server:/myapp
     links:
       - db
       - redis
@@ -34,10 +34,14 @@ services:
     environment:
       REDIS_URL: redis://redis:6379
 
+  # NOTE: need to start node locally for development
+  # https://github.com/docker/compose/issues/184
   web_client:
-    build: web_client
+    build: ./web_client
     command: npm run start
     volumes:
-      - .:/myapp/web_client
+      - ./web_client:/myapp
     ports:
       - "3000:3000"
+    links:
+      - web

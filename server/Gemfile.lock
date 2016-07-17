@@ -160,6 +160,7 @@ GEM
       pry (>= 0.9.10)
     puma (3.4.0)
     rack (2.0.1)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -287,6 +288,7 @@ DEPENDENCIES
   pry
   pry-rails
   puma (~> 3.0)
+  rack-cors
   rails (= 5.0.0)
   rubocop
   sass-rails (~> 5.0)
