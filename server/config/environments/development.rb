@@ -53,7 +53,7 @@ Rails.application.configure do
   # http://stackoverflow.com/questions/29417328/how-to-disable-cannot-render-console-from-on-rails
   Rails.application.config.action_cable.allowed_request_origins = %w(
     http://dockermachine:4000
-    http://159.203.62.55:4000
+    http://159.203.62.55:000
   )
   config.web_console.whitelisted_ips = %w(
     192.168.99.1

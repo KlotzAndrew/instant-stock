@@ -4,7 +4,7 @@ import axiosInstance from './config/axios';
 export default class App extends Component {
   render() {
     function apiCall() {
-      return axiosInstance.get('')
+      return axiosInstance.get('/promo')
                   .then(function (response) {
                     console.log(response);
                   })
