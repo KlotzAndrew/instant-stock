@@ -2,11 +2,11 @@
 #
 # Table name: portfolios
 #
-#  id         :uuid             not null, primary key
-#  name       :string
-#  cash       :decimal(15, 2)   default(0.0)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :uuid             not null, primary key
+#  name            :string
+#  promo_portfolio :boolean          default(FALSE), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 require 'test_helper'
@@ -20,11 +20,6 @@ class PortfolioTest < ActiveSupport::TestCase
 
   test 'requires name' do
     @portfolio.name = nil
-    refute @portfolio.valid?
-  end
-
-  test 'requires cash' do
-    @portfolio.cash = nil
     refute @portfolio.valid?
   end
 

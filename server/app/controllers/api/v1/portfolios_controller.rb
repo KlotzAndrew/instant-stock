@@ -4,9 +4,13 @@ module Api
       before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
       def promo
-        @portfolio = Portfolio.first
-        if true
-          render json: { portfolio: @portfolio }, status: 200
+        result = ReturnPromoPortfolio.call
+
+        if result.success?
+          render json: {
+            portfolio: result.portfolio,
+            value:     result.value
+          }, status:   200
         else
           render json: { error: 'something bad' }, status: 400
         end

@@ -29,7 +29,8 @@ export default class App extends Component {
                             store.dispatch({
                               type: 'SET_PORTFOLIO',
                               state: {
-                                portfolio: response.data.portfolio
+                                portfolio: response.data.portfolio,
+                                value: response.data.value,
                               }
                             });
                           })

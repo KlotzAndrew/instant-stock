@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(version: 20160626031008) do
 
   create_table "portfolios", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
-    t.decimal  "cash",       precision: 15, scale: 2, default: "0.0"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.boolean  "promo_portfolio", default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "stocks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

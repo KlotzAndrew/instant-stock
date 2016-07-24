@@ -8,7 +8,6 @@ module Api
       end
 
       test '#promo returns 200 and promo portfolio' do
-        Portfolio.expects(:first).returns(@portfolio)
         expected_portfolio = JSON.parse({
                                           id: @portfolio.id,
                                           name: @portfolio.name,
@@ -16,13 +15,20 @@ module Api
                                           created_at: @portfolio.created_at,
                                           updated_at: @portfolio.updated_at,
                                         }.to_json)
+        expected_value = 99
+        mock_interactor = mock 'mock interactor'
+        mock_interactor.expects(:success?).returns(true)
+        mock_interactor.expects(:portfolio).returns(expected_portfolio)
+        mock_interactor.expects(:value).returns(expected_value)
+        ReturnPromoPortfolio.expects(:call).returns(mock_interactor)
 
         get api_v1_promo_url
 
         body = JSON.parse @response.body
 
-        assert_equal body['portfolio'], expected_portfolio
         assert_response :success
+        assert_equal body['portfolio'], expected_portfolio
+        assert_equal body['value'], expected_value
       end
 
       test 'should get index' do

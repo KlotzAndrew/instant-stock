@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+if Portfolio.count == 0
+  portfolio = Portfolio.create(
+    name: 'demo portfolio',
+    promo_portfolio: true
+  )
+  cash_holding = CashHolding.create(
+    currency: CashHolding::USD,
+    amount: 1_000_000
+  )
+  portfolio.cash_holdings << cash_holding
+else
+  p 'database already seeded!'
+end

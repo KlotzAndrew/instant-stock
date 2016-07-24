@@ -7,7 +7,7 @@ export const Portfolio = React.createClass({
       <div>
         <h1>Portfolio~</h1>
         <h3>Portfolio name: {this.props.name}</h3>
-        <h3>Portfolio cash: {this.props.cash}</h3>
+        <h3>Portfolio value: {this.props.value}</h3>
       </div>
     )
   }
@@ -16,7 +16,7 @@ export const Portfolio = React.createClass({
 function mapStateToProps(state) {
   return {
     name: state.getIn(['portfolio', 'name']),
-    cash: state.getIn(['portfolio', 'cash']),
+    value: state.getIn(['value']),
   }
 }
 

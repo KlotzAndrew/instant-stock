@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :portfolio do
     id { SecureRandom.uuid }
     name { Faker::Company.name }
-    cash { Faker::Number.decimal(10, 2) }
   end
 
   trait :with_cash_holding do
