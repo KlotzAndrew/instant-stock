@@ -59,4 +59,5 @@ Rails.application.configure do
     192.168.99.1
     159.203.62.55
   )
+  Rails.application.config.action_cable.disable_request_forgery_protection = true
 end

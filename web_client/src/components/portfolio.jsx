@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {MessagesContainer} from './messages'
 
 export const Portfolio = React.createClass({
   render: function() {
@@ -8,6 +9,7 @@ export const Portfolio = React.createClass({
         <h1>Portfolio~</h1>
         <h3>Portfolio name: {this.props.name}</h3>
         <h3>Portfolio value: {this.props.value}</h3>
+        <MessagesContainer />
       </div>
     )
   }

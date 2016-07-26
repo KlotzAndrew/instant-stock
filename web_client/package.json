@@ -36,6 +36,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "actioncable": "^5.0.0",
     "axios": "^0.13.1",
     "immutable": "^3.8.1",
     "react": "^0.14.6",

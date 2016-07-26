@@ -34,10 +34,12 @@ ActiveRecord::Schema.define(version: 20160626031008) do
     t.index ["stock_id"], name: "index_holdings_on_stock_id", using: :btree
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "portfolio_id", null: false
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["portfolio_id"], name: "index_messages_on_portfolio_id", using: :btree
   end
 
   create_table "portfolios", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

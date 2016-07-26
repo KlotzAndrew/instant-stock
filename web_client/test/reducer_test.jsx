@@ -1,11 +1,12 @@
 import { List, Map, fromJS } from 'immutable';
 import { expect } from 'chai';
+import { INITIAL_STATE } from '../src/reducer'
 
 import reducer from '../src/reducer';
 
 describe('reducer', () => {
-  it('handles SET_PORTFOLIO', () => {
-    const initialState = fromJS({})
+  it('SET_PORTFOLIO sets portfolio', () => {
+    const initialState = fromJS({});
     const action = {
       type: 'SET_PORTFOLIO',
       state: {
@@ -20,5 +21,19 @@ describe('reducer', () => {
         cash: '0.0'
       }
     }));
+  });
+
+  it('ADD_MESSAGE adds messages', () => {
+    const newMessage = {content: 'some content'};
+    const action = {
+      type: 'ADD_MESSAGE',
+      message: {content: 'some content'}
+    };
+    const nextState = reducer(INITIAL_STATE, action);
+
+    const messages = nextState.getIn(['messages']);
+    expect(messages).to.equal(fromJS(
+      [newMessage]
+    ))
   })
 });
