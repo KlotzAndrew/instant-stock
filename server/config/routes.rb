@@ -8,11 +8,10 @@ Rails.application.routes.draw do
       resources :stocks
       resources :portfolios do
         resources :holdings
+        resources :messages
       end
 
       get 'promo' => 'portfolios#promo'
-
-      post 'portfolio/message'
     end
   end
 
