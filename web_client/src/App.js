@@ -19,12 +19,18 @@ cable.subscriptions.create('RoomChannel', {
   },
 
   received: function(data) {
-    if (data.message !== undefined || data.message !== null) {
+    if (data.message) {
       const message = JSON.parse(data.message);
        store.dispatch({
          type: 'ADD_MESSAGE',
          message: message,
        })
+    } else if (data.trade) {
+      const trade = JSON.parse(data.trade);
+      store.dispatch({
+        type: 'ADD_TRADE',
+        trade: trade,
+      })
     }
   },
 });

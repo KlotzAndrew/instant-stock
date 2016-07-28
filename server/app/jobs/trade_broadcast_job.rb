@@ -7,8 +7,11 @@ class TradeBroadcastJob < ApplicationJob
   end
 
   def render_trade(trade)
-    ApplicationController.renderer.render(
-      partial: 'trades/trade', locals: { trade: trade }
-    )
+    {
+      id:          trade.id,
+      stock_name:  trade.holding.stock.name,
+      quantity:    trade.quantity,
+      enter_price: trade.enter_price
+    }.to_json
   end
 end

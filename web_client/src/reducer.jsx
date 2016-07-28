@@ -17,12 +17,22 @@ function addMessage(state, message) {
   return returnState
 }
 
+function addTrade(state, trade) {
+  const newTrade = fromJS(trade);
+  const newTrades = state.getIn(['trades']).concat([newTrade]);
+  const returnState = state.set('trades', newTrades);
+
+  return returnState
+}
+
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'SET_PORTFOLIO':
       return resetPortfolio(setState(state, action.state));
     case 'ADD_MESSAGE':
       return addMessage(state, action.message);
+    case 'ADD_TRADE':
+      return addTrade(state, action.trade);
   }
 
   return state;
@@ -30,5 +40,6 @@ export default function (state = INITIAL_STATE, action) {
 
 export const INITIAL_STATE = fromJS({
     portfolio: null,
-    messages: []
+    messages: [],
+    trades: []
 });

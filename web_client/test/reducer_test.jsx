@@ -10,7 +10,7 @@ describe('reducer', () => {
     const action = {
       type: 'SET_PORTFOLIO',
       state: {
-        portfolio: {name: 'my_port', cash: '0.0'}
+        portfolio: {name: 'my_port', cash: '0.0', id: '123-abc'}
       }
     };
     const nextState = reducer(initialState, action);
@@ -18,7 +18,8 @@ describe('reducer', () => {
     expect(nextState).to.equal(fromJS({
       portfolio: {
         name: 'my_port',
-        cash: '0.0'
+        cash: '0.0',
+        id: '123-abc'
       }
     }));
   });
@@ -27,13 +28,31 @@ describe('reducer', () => {
     const newMessage = {content: 'some content'};
     const action = {
       type: 'ADD_MESSAGE',
-      message: {content: 'some content'}
+      message: newMessage
     };
     const nextState = reducer(INITIAL_STATE, action);
 
     const messages = nextState.getIn(['messages']);
     expect(messages).to.equal(fromJS(
       [newMessage]
+    ))
+  })
+
+  it('ADD_TRADE adds trade', () => {
+    const newTrade = {
+      stock_name: 'my stock',
+      enter_price: '99.99',
+      quantity: '1'
+    };
+    const action = {
+      type: 'ADD_TRADE',
+      trade: newTrade
+    };
+    const nextState = reducer(INITIAL_STATE, action);
+
+    const trades = nextState.getIn(['trades']);
+    expect(trades).to.equal(fromJS(
+      [newTrade]
     ))
   })
 });

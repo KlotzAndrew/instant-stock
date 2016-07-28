@@ -6,14 +6,14 @@ import { List, Map, fromJS } from 'immutable';
 
 export const Messages = React.createClass({
   getInitialState: function() {
-    return {value: 'Hello!'};
+    return {value: ''};
   },
   handleChange: function(event) {
     this.setState({value: event.target.value});
   },
   _handleKeyPress: function(e) {
     if (e.key === 'Enter') {
-      this._submitMessage(this.state.value, '4fa6de17-52be-4708-bd9e-95a7b4ec6555')
+      this._submitMessage(this.state.value, this.props.portfolioId);
       this.state.value = '';
     }
   },
@@ -28,6 +28,7 @@ export const Messages = React.createClass({
           value={this.state.value}
           onChange={this.handleChange}
           onKeyPress={this._handleKeyPress}
+          placeholder="Message"
         />
       </div>
     )
