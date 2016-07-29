@@ -21,6 +21,7 @@ server/log/
 server/coverage/
 server/tmp/
 
+web_client/coverage
 web_client/node_modules
 web_client/npm-debug.log
 web_client/.DS_Store

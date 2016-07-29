@@ -6,10 +6,11 @@ class CheckChatCommand
   def call
     message = context[:message]
 
-    command_match = match_command message
-    ticker        = match_ticker command_match
+    command_message = match_command message
+    ticker          = find_ticker command_message
+    quantity        = find_quantity command_message
 
-    context.quantity = 1
+    context.quantity = quantity
     context.tickers  = [ticker]
   end
 
@@ -23,10 +24,37 @@ class CheckChatCommand
   end
 
   def check_available_commands(message)
-    /(buy [A-Z]{1,6})/.match(message)
+    /((buy|sell) [A-Z]{1,6}\s*\d*)/.match message
   end
 
-  def match_ticker(command)
-    command.string[4..command.string.length - 1]
+  def find_ticker(command_message)
+    command_message.string.split[1]
+  end
+
+  def find_quantity(command_message)
+    quantity = command_message.string.split[2]
+    return adjust_sign_input(command_message, quantity) if integer? quantity
+    default_quantity(command_message)
+  end
+
+  def default_quantity(command_message)
+    command = command_message.string.split[0]
+    default_quantities_hash[command]
+  end
+
+  def adjust_sign_input(command_message, quantity)
+    command = command_message.string.split[0]
+    quantity.to_i.abs * default_quantities_hash[command]
+  end
+
+  def default_quantities_hash
+    {
+      buy: 1,
+      sell: -1
+    }.with_indifferent_access
+  end
+
+  def integer?(string)
+    string =~ /\A-?\d+\z/ ? true : false
   end
 end
