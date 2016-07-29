@@ -6,12 +6,17 @@ import {TradesContainer} from './trades'
 export const Portfolio = React.createClass({
   render: function() {
     return (
-      <div>
-        <h1>Portfolio~</h1>
-        <h3>Portfolio name: {this.props.name}</h3>
-        <h3>Portfolio value: {this.props.value}</h3>
-        <TradesContainer />
-        <MessagesContainer portfolioId={this.props.id} />
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12 col-sm-6">
+            <h3>Portfolio name: {this.props.name}</h3>
+            <h3>Portfolio value: {this.props.value}</h3>
+            <TradesContainer />
+          </div>
+          <div className="col-xs-12 col-sm-6">
+            <MessagesContainer portfolioId={this.props.id} />
+          </div>
+        </div>
       </div>
     )
   }

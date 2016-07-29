@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {PortfolioContainer} from './components/portfolio';
+import {FullNavbar} from './components/fullNavbar'
 import axiosInstance from './config/axios';
 import {createStore} from 'redux';
 import reducer from './reducer';
@@ -44,6 +45,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <div>
+          <FullNavbar />
           <PortfolioContainer />
         </div>
       </Provider>
