@@ -16,9 +16,4 @@ class Portfolio < ApplicationRecord
   has_many :messages
 
   validates :name, presence: true
-
-  def change_cash(amount, currency)
-    holding = cash_holdings.find_by currency: currency
-    holding.change_cash amount
-  end
 end

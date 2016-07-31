@@ -4,7 +4,6 @@
 # Table name: cash_holdings
 #
 #  id           :uuid             not null, primary key
-#  amount       :decimal(15, 2)
 #  currency     :string           not null
 #  portfolio_id :uuid             not null
 #  created_at   :datetime         not null

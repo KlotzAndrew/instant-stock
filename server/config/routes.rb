@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :cash_holdings
-      resources :trades
+      resources :cash_trades
+      resources :stock_trades
       resources :stocks
       resources :portfolios do
-        resources :holdings
+        resources :stock_holdings
         resources :messages
       end
 

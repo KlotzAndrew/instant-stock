@@ -16,7 +16,7 @@ class FindPortfolioValue
     cash_holdings = portfolio.cash_holdings
 
     cash_holdings.reduce(0) do |sum, cash|
-      sum + cash.amount
+      sum + cash.current_total
     end
   end
 

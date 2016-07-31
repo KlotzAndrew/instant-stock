@@ -33,18 +33,4 @@ class PortfolioTest < ActiveSupport::TestCase
     @portfolio.name = nil
     refute @portfolio.valid?
   end
-
-  test '#change_cash calls cash holding' do
-    mock_amount   = 100
-    mock_currency = CashHolding::USD
-
-    @portfolio.cash_holdings
-              .expects(:find_by)
-              .with(currency: mock_currency)
-              .returns(@cash_holding)
-
-    @cash_holding.expects(:change_cash).with(mock_amount)
-
-    @portfolio.change_cash(mock_amount, mock_currency)
-  end
 end

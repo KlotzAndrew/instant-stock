@@ -4,10 +4,10 @@ FactoryGirl.define do
     name { Faker::Company.name }
   end
 
-  trait :with_cash_holding do
+  trait :with_cash do
     after(:build) do |portfolio|
-      holding = build_list :holding, 1, portfolio: portfolio
-      portfolio.holdings << holding
+      holding = build_list :cash_holding, 1, :with_cash_trade, portfolio: portfolio
+      portfolio.cash_holdings << holding
     end
   end
 end

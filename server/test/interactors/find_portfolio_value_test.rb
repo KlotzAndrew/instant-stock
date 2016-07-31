@@ -4,6 +4,9 @@ class FindPortfolioValueTest < ActiveSupport::TestCase
   test '#call returns value with cash_holding and stocks' do
     portfolio    = FactoryGirl.build :portfolio
     cash_holding = FactoryGirl.build :cash_holding, portfolio: portfolio
+    cash_trade   = FactoryGirl.build :cash_trade
+    cash_holding.cash_trades << cash_trade
+
     portfolio.cash_holdings << cash_holding
     stock   = FactoryGirl.build :stock
     holding = FactoryGirl.build :stock_holding,
@@ -15,7 +18,7 @@ class FindPortfolioValueTest < ActiveSupport::TestCase
 
     result = FindPortfolioValue.call(portfolio: portfolio)
 
-    expected_cash_value  = cash_holding.amount
+    expected_cash_value  = cash_holding.current_total
     expected_stock_value = trade.quantity * stock.last_quote
     expected_value       = expected_cash_value + expected_stock_value
     assert result.success?
