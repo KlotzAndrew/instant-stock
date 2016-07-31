@@ -4,7 +4,7 @@ class TradesController < ApplicationController
   # GET /trades
   # GET /trades.json
   def index
-    @trades = Trade.all
+    @trades = StockTrade.all
   end
 
   # GET /trades/1
@@ -14,7 +14,7 @@ class TradesController < ApplicationController
 
   # GET /trades/new
   def new
-    @trade = Trade.new
+    @trade = StockTrade.new
   end
 
   # GET /trades/1/edit
@@ -24,7 +24,7 @@ class TradesController < ApplicationController
   # POST /trades
   # POST /trades.json
   def create
-    @trade = Trade.new(trade_params)
+    @trade = StockTrade.new(trade_params)
 
     respond_to do |format|
       if @trade.save
@@ -64,7 +64,7 @@ class TradesController < ApplicationController
   private
 
   def set_trade
-    @trade = Trade.find(params[:id])
+    @trade = StockTrade.find(params[:id])
   end
 
   def trade_params

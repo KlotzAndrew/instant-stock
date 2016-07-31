@@ -14,6 +14,10 @@
 #
 
 class Stock < ApplicationRecord
-  has_many :holdings
-  has_many :portfolios, through: :holdings
+  has_many :stock_holdings
+  has_many :portfolios, through: :stock_holdings
+
+  validates :ticker, presence: true
+  validates :stock_exchange, presence: true
+  validates :currency, presence: true
 end

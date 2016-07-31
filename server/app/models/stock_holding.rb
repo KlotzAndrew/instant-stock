@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: holdings
+# Table name: stock_holdings
 #
 #  id           :uuid             not null, primary key
 #  active       :boolean          default(TRUE), not null
@@ -10,12 +10,12 @@
 #  updated_at   :datetime         not null
 #
 
-class Holding < ApplicationRecord
+class StockHolding < ApplicationRecord
   belongs_to :portfolio
   belongs_to :stock
-  has_many :trades
+  has_many :stock_trades
 
   def current_total
-    trades.to_a.sum(&:quantity)
+    stock_trades.to_a.sum(&:quantity)
   end
 end

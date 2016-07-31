@@ -8,13 +8,14 @@ module Api
       end
 
       test '#promo returns 200 and promo portfolio' do
-        expected_portfolio = JSON.parse({
-                                          id: @portfolio.id,
-                                          name: @portfolio.name,
-                                          cash: @portfolio.cash,
-                                          created_at: @portfolio.created_at,
-                                          updated_at: @portfolio.updated_at,
-                                        }.to_json)
+        expected_portfolio = JSON.parse(
+          {
+            id:         @portfolio.id,
+            name:       @portfolio.name,
+            created_at: @portfolio.created_at,
+            updated_at: @portfolio.updated_at
+          }.to_json
+        )
         expected_value = 99
         mock_interactor = mock 'mock interactor'
         mock_interactor.expects(:success?).returns(true)

@@ -3,7 +3,9 @@ require 'test_helper'
 class FindPromoPortfolioTest < ActiveSupport::TestCase
   test '#call returns promo portfolio' do
     mock_portfolio = FactoryGirl.build :portfolio
-    Portfolio.expects(:find_by).with(promo_portfolio: true).returns(mock_portfolio)
+    Portfolio.expects(:find_by)
+             .with(promo_portfolio: true)
+             .returns(mock_portfolio)
 
     result = FindPromoPortfolio.call
 

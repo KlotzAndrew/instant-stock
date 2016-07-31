@@ -3,5 +3,4 @@ class ReturnPromoPortfolio
 
   organize FindPromoPortfolio,
            FindPortfolioValue
-
 end

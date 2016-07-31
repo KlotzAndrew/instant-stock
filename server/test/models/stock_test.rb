@@ -16,7 +16,14 @@
 require 'test_helper'
 
 class StockTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  context '#relations' do
+    should have_many :stock_holdings
+    should have_many :portfolios
+  end
+
+  context '#validations' do
+    should validate_presence_of :ticker
+    should validate_presence_of :stock_exchange
+    should validate_presence_of :currency
+  end
 end

@@ -6,10 +6,12 @@ class FindPortfolioValueTest < ActiveSupport::TestCase
     cash_holding = FactoryGirl.build :cash_holding, portfolio: portfolio
     portfolio.cash_holdings << cash_holding
     stock   = FactoryGirl.build :stock
-    holding = FactoryGirl.build :holding, stock: stock, portfolio: portfolio
-    portfolio.holdings << holding
-    trade = FactoryGirl.build :trade, holding: holding
-    holding.trades << trade
+    holding = FactoryGirl.build :stock_holding,
+                                stock: stock,
+                                portfolio: portfolio
+    portfolio.stock_holdings << holding
+    trade = FactoryGirl.build :stock_trade, stock_holding: holding
+    holding.stock_trades << trade
 
     result = FindPortfolioValue.call(portfolio: portfolio)
 

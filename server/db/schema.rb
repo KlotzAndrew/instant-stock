@@ -24,16 +24,6 @@ ActiveRecord::Schema.define(version: 20160626031008) do
     t.datetime "updated_at",                            null: false
   end
 
-  create_table "holdings", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.boolean  "active",       default: true, null: false
-    t.uuid     "portfolio_id",                null: false
-    t.uuid     "stock_id",                    null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.index ["portfolio_id"], name: "index_holdings_on_portfolio_id", using: :btree
-    t.index ["stock_id"], name: "index_holdings_on_stock_id", using: :btree
-  end
-
   create_table "messages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "portfolio_id", null: false
     t.text     "content"
@@ -49,6 +39,27 @@ ActiveRecord::Schema.define(version: 20160626031008) do
     t.datetime "updated_at",                      null: false
   end
 
+  create_table "stock_holdings", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.boolean  "active",       default: true, null: false
+    t.uuid     "portfolio_id",                null: false
+    t.uuid     "stock_id",                    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["portfolio_id"], name: "index_stock_holdings_on_portfolio_id", using: :btree
+    t.index ["stock_id"], name: "index_stock_holdings_on_stock_id", using: :btree
+  end
+
+  create_table "stock_trades", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "stock_holding_id",                          null: false
+    t.integer  "quantity",                                  null: false
+    t.decimal  "enter_price",      precision: 15, scale: 2
+    t.decimal  "exit_price",       precision: 15, scale: 2
+    t.datetime "exit_time"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["stock_holding_id"], name: "index_stock_trades_on_stock_holding_id", using: :btree
+  end
+
   create_table "stocks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "ticker",                                   null: false
     t.string   "stock_exchange",                           null: false
@@ -58,17 +69,6 @@ ActiveRecord::Schema.define(version: 20160626031008) do
     t.decimal  "last_quote",      precision: 15, scale: 2
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-  end
-
-  create_table "trades", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "holding_id",                           null: false
-    t.integer  "quantity",                             null: false
-    t.decimal  "enter_price", precision: 15, scale: 2
-    t.decimal  "exit_price",  precision: 15, scale: 2
-    t.datetime "ex"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.index ["holding_id"], name: "index_trades_on_holding_id", using: :btree
   end
 
 end

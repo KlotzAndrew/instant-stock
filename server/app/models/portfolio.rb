@@ -10,9 +10,9 @@
 #
 
 class Portfolio < ApplicationRecord
-  has_many :holdings
+  has_many :stock_holdings
   has_many :cash_holdings
-  has_many :stocks, through: :holdings
+  has_many :stocks, through: :stock_holdings
 
   validates :name, presence: true
 

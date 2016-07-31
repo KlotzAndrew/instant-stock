@@ -13,6 +13,9 @@
 class CashHolding < ApplicationRecord
   belongs_to :portfolio
 
+  validates :portfolio_id, presence: true
+  validates :currency, presence: true
+
   USD = 'USD'.freeze
 
   def change_cash(amount_change)

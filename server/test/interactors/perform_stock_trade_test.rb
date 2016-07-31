@@ -4,7 +4,7 @@ class PerformStockTradeTest < ActiveSupport::TestCase
   test 'creates trade with holding for portfolio' do
     mock_portfolio = FactoryGirl.build :portfolio
     mock_stocks = [FactoryGirl.build(:stock)]
-    mock_holding = FactoryGirl.build :holding
+    mock_holding = FactoryGirl.build :stock_holding
     mock_quantity = 1
     expected_trades = {}
     mock_params = {
@@ -21,12 +21,12 @@ class PerformStockTradeTest < ActiveSupport::TestCase
                   .with(mock_value, mock_stocks[0].currency)
 
     mock_holding_values = holding_values mock_stocks[0], mock_portfolio
-    Holding.expects(:find_or_create_by)
-           .with(mock_holding_values)
-           .returns(mock_holding)
+    StockHolding.expects(:find_or_create_by)
+                .with(mock_holding_values)
+                .returns(mock_holding)
 
     mock_trade_values = trade_values mock_holding, mock_stocks[0]
-    Trade.expects(:create).with(mock_trade_values)
+    StockTrade.expects(:create).with(mock_trade_values)
 
     result = PerformStockTrade.call mock_params
 

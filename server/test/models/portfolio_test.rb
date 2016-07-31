@@ -18,6 +18,16 @@ class PortfolioTest < ActiveSupport::TestCase
     @portfolio.cash_holdings << @cash_holding
   end
 
+  context '#relations' do
+    should have_many :stock_holdings
+    should have_many :cash_holdings
+    should have_many :stocks
+  end
+
+  context '#validations' do
+    should validate_presence_of :name
+  end
+
   test 'requires name' do
     @portfolio.name = nil
     refute @portfolio.valid?

@@ -21,7 +21,7 @@ class FindPortfolioValue
   end
 
   def find_stock_value(portfolio)
-    holdings = portfolio.holdings
+    holdings = portfolio.stock_holdings
 
     holdings.reduce(0) do |sum, holding|
       sum + find_holding_value(holding)
@@ -29,7 +29,7 @@ class FindPortfolioValue
   end
 
   def find_holding_value(holding)
-    trades = holding.trades
+    trades = holding.stock_trades
     stock = holding.stock
 
     quantity = trades.reduce(0) do |sum, trade|

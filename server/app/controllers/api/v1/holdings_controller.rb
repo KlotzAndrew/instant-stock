@@ -15,7 +15,7 @@ class HoldingsController < ApplicationController
 
   # GET /holdings/new
   def new
-    @holding = Holding.new
+    @holding = StockHolding.new
   end
 
   # GET /holdings/1/edit
@@ -25,7 +25,7 @@ class HoldingsController < ApplicationController
   # POST /holdings
   # POST /holdings.json
   def create
-    @holding = Holding.new(holding_params)
+    @holding = StockHolding.new(holding_params)
 
     respond_to do |format|
       if @holding.save
@@ -65,7 +65,7 @@ class HoldingsController < ApplicationController
   private
 
   def set_holding
-    @holding = Holding.find(params[:id])
+    @holding = StockHolding.find(params[:id])
   end
 
   def holding_params

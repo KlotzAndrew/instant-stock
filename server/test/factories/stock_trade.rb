@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :trade do
+  factory :stock_trade do
     id { SecureRandom.uuid }
-    holding
+    stock_holding
     quantity { rand(10..100) }
     enter_price nil
     exit_price nil
