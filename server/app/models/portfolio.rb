@@ -13,6 +13,7 @@ class Portfolio < ApplicationRecord
   has_many :stock_holdings
   has_many :cash_holdings
   has_many :stocks, through: :stock_holdings
+  has_many :messages
 
   validates :name, presence: true
 

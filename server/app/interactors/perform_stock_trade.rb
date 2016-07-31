@@ -27,7 +27,7 @@ class PerformStockTrade
   def create_trade(holding, stock, portfolio, quantity)
     ActiveRecord::Base.transaction do
       StockTrade.create(
-        holding_id:  holding.id,
+        stock_holding_id:  holding.id,
         enter_price: stock.last_quote,
         quantity:    quantity
       )

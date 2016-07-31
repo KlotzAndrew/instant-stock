@@ -46,7 +46,7 @@ class PerformStockTradeTest < ActiveSupport::TestCase
 
   def trade_values(holding, stock)
     {
-      holding_id:  holding.id,
+      stock_holding_id:  holding.id,
       enter_price: stock.last_quote,
       quantity: 1
     }

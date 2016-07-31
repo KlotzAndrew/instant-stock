@@ -9,7 +9,7 @@ class TradeBroadcastJob < ApplicationJob
   def render_trade(trade)
     {
       id:          trade.id,
-      stock_name:  trade.holding.stock.name,
+      stock_name:  trade.stock_holding.stock.name,
       quantity:    trade.quantity,
       enter_price: trade.enter_price
     }.to_json

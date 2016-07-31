@@ -22,6 +22,7 @@ class PortfolioTest < ActiveSupport::TestCase
     should have_many :stock_holdings
     should have_many :cash_holdings
     should have_many :stocks
+    should have_many :messages
   end
 
   context '#validations' do
