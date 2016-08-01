@@ -21,23 +21,31 @@ class PerformStockTrade
   def complete_trade(stock, portfolio, quantity)
     stock_holding = find_or_create_stock_holding stock, portfolio
     cash_holding = find_or_create_cash_holding stock, portfolio
-    trade = create_trade stock_holding, cash_holding, stock, portfolio, quantity
+    trade = create_trade stock_holding, cash_holding, stock, quantity
     trade
   end
 
-  def create_trade(stock_holding, cash_holding, stock, portfolio, quantity)
+  def create_trade(stock_holding, cash_holding, stock, quantity)
     ActiveRecord::Base.transaction do
       amount = stock.last_quote * quantity
-      StockTrade.create(
-        stock_holding_id:  stock_holding.id,
-        enter_price: stock.last_quote,
-        quantity:    quantity
-      )
-      CashTrade.create(
-        cash_holding_id: cash_holding.id,
-        quantity:        amount * -1
-      )
+      create_stock_trade(stock_holding, stock, quantity)
+      create_cash_trade(cash_holding, amount)
     end
+  end
+
+  def create_stock_trade(stock_holding, stock, quantity)
+    StockTrade.create(
+      stock_holding_id:  stock_holding.id,
+      enter_price: stock.last_quote,
+      quantity:    quantity
+    )
+  end
+
+  def create_cash_trade(cash_holding, amount)
+    CashTrade.create(
+      cash_holding_id: cash_holding.id,
+      quantity:        amount * -1
+    )
   end
 
   def find_or_create_stock_holding(stock, portfolio)

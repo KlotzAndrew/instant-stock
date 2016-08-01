@@ -3,15 +3,15 @@ require 'integration_test_helper'
 
 class MessageToTradeTest < ActionDispatch::IntegrationTest
   def setup
-    time = Time.local(2016, 7, 31, 14, 0, 0)
+    time = Time.zone.local(2016, 7, 31, 14, 0, 0)
     Timecop.freeze(time)
 
     @portfolio   = FactoryGirl.create :portfolio,
                                       name:            'demo portfolio',
                                       promo_portfolio: true
     cash_holding = FactoryGirl.create :cash_holding
-    cash_trade   = FactoryGirl.create :cash_trade,
-                                      cash_holding: cash_holding
+    FactoryGirl.create :cash_trade,
+                       cash_holding: cash_holding
   end
 
   test 'sending a message should correctly buy a stock' do

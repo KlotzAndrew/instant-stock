@@ -9,7 +9,6 @@ class PerformStockTradeTest < ActiveSupport::TestCase
     mock_stock_holding = FactoryGirl.build :stock_holding
 
     mock_quantity = 1
-    expected_trades = {}
     mock_params = {
       portfolio_id: mock_portfolio.id,
       stocks: mock_stocks,
@@ -19,18 +18,20 @@ class PerformStockTradeTest < ActiveSupport::TestCase
              .with(id: mock_portfolio.id)
              .returns(mock_portfolio)
 
-
-    mock_stock_holding_values = stock_holding_values mock_stocks[0], mock_portfolio
+    mock_stock_holding_values = stock_holding_values mock_stocks[0],
+                                                     mock_portfolio
     StockHolding.expects(:find_or_create_by)
                 .with(mock_stock_holding_values)
                 .returns(mock_stock_holding)
 
-    mock_cash_holding_values = cash_holding_values mock_stocks[0], mock_portfolio
+    mock_cash_holding_values = cash_holding_values mock_stocks[0],
+                                                   mock_portfolio
     CashHolding.expects(:find_or_create_by)
                .with(mock_cash_holding_values)
                .returns(mock_cash_holding)
 
-    mock_stock_trade_values = stock_trade_values mock_stock_holding, mock_stocks[0]
+    mock_stock_trade_values = stock_trade_values mock_stock_holding,
+                                                 mock_stocks[0]
     StockTrade.expects(:create).with(mock_stock_trade_values)
 
     mock_value = mock_quantity * mock_stocks[0].last_quote

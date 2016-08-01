@@ -4,7 +4,7 @@ class FindPortfolioValue
   def call
     portfolio = context.portfolio
 
-    cash_value = find_cash_value portfolio
+    cash_value  = find_cash_value portfolio
     stock_value = find_stock_value portfolio
 
     context.value = cash_value + stock_value
