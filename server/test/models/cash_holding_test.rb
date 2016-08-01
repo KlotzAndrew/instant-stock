@@ -36,14 +36,4 @@ class CashHoldingTest < ActiveSupport::TestCase
 
     assert_equal expected_total, @cash_holding.current_total
   end
-
-  test '#change_cash updates amount' do
-    skip 'not sure this should be here'
-    mock_amount = 100
-    new_amount = @cash_holding.amount + mock_amount
-
-    @cash_holding.expects(:update).with(amount: new_amount)
-
-    @cash_holding.change_cash(mock_amount)
-  end
 end

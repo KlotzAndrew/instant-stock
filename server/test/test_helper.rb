@@ -5,6 +5,7 @@ SimpleCov.start do
   add_group 'Models', 'app/models'
   add_group 'Interactors', 'app/interactors'
   add_group 'Controllers', 'app/controllers'
+  add_group 'Jobs', 'app/jobs'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
