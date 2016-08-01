@@ -61,6 +61,8 @@ export default class App extends Component {
                               state: {
                                 portfolio: response.data.portfolio,
                                 value: response.data.value,
+                                cashHoldings: response.data.cash_holdings,
+                                stockHoldings: response.data.stock_holdings
                               }
                             });
                           })

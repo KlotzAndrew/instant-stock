@@ -7,20 +7,26 @@ import reducer from '../src/reducer';
 describe('reducer', () => {
   it('SET_PORTFOLIO sets portfolio', () => {
     const initialState = fromJS({});
+    const mockPortoflio = {name: 'my_port', cash: '0.0', id: '123-abc'};
+    const mockValue = '99';
+    const mockCashHoldings = [{current_total: 99}];
+    const mockStockHoldings = [{current_total: 123}];
     const action = {
       type: 'SET_PORTFOLIO',
       state: {
-        portfolio: {name: 'my_port', cash: '0.0', id: '123-abc'}
+        portfolio: mockPortoflio,
+        value: mockValue,
+        cashHoldings: mockCashHoldings,
+        stockHoldings: mockStockHoldings
       }
     };
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      portfolio: {
-        name: 'my_port',
-        cash: '0.0',
-        id: '123-abc'
-      }
+      portfolio: mockPortoflio,
+      value: mockValue,
+      cashHoldings: mockCashHoldings,
+      stockHoldings: mockStockHoldings
     }));
   });
 
@@ -36,7 +42,7 @@ describe('reducer', () => {
     expect(messages).to.equal(fromJS(
       [newMessage]
     ))
-  })
+  });
 
   it('ADD_TRADE adds trade', () => {
     const newTrade = {
@@ -54,5 +60,5 @@ describe('reducer', () => {
     expect(trades).to.equal(fromJS(
       [newTrade]
     ))
-  })
+  });
 });

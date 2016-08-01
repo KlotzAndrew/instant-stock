@@ -38,8 +38,12 @@ export default function (state = INITIAL_STATE, action) {
   return state;
 }
 
-export const INITIAL_STATE = fromJS({
+export const INITIAL_STATE = fromJS(
+  {
     portfolio: null,
     messages: [],
-    trades: []
-});
+    trades: [],
+    cashHoldings: [],
+    stockHoldings: []
+  }
+);

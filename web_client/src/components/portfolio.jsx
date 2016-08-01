@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {MessagesContainer} from './messages'
 import {TradesContainer} from './trades'
+import {HoldingsContainer} from './holdings'
 
 export const Portfolio = React.createClass({
   render: function() {
@@ -12,6 +13,7 @@ export const Portfolio = React.createClass({
             <h3>Portfolio name: {this.props.name}</h3>
             <h3>Portfolio value: {this.props.value}</h3>
             <TradesContainer />
+            <HoldingsContainer />
           </div>
           <div className="col-xs-12 col-sm-6">
             <MessagesContainer portfolioId={this.props.id} />
@@ -26,7 +28,7 @@ function mapStateToProps(state) {
   return {
     name: state.getIn(['portfolio', 'name']),
     id: state.getIn(['portfolio', 'id']),
-    value: state.getIn(['value']),
+    value: state.getIn(['value'])
   }
 }
 
