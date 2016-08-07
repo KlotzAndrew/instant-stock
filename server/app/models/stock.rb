@@ -16,6 +16,8 @@
 class Stock < ApplicationRecord
   has_many :stock_holdings
   has_many :portfolios, through: :stock_holdings
+  has_many :day_bars
+  has_many :minute_bars
 
   validates :ticker, presence: true
   validates :stock_exchange, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731184659) do
+ActiveRecord::Schema.define(version: 20160806232630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +32,40 @@ ActiveRecord::Schema.define(version: 20160731184659) do
     t.index ["cash_holding_id"], name: "index_cash_trades_on_cash_holding_id", using: :btree
   end
 
+  create_table "day_bars", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "stock_id",                                null: false
+    t.string   "data_source",                             null: false
+    t.datetime "quote_time",                              null: false
+    t.decimal  "high",           precision: 15, scale: 2
+    t.decimal  "open",           precision: 15, scale: 2
+    t.decimal  "close",          precision: 15, scale: 2
+    t.decimal  "adjusted_close", precision: 15, scale: 2
+    t.decimal  "volume",         precision: 15, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["data_source", "stock_id"], name: "index_day_bars_on_data_source_and_stock_id", using: :btree
+  end
+
   create_table "messages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "portfolio_id", null: false
     t.text     "content"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["portfolio_id"], name: "index_messages_on_portfolio_id", using: :btree
+  end
+
+  create_table "minute_bars", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "stock_id",                                null: false
+    t.string   "data_source",                             null: false
+    t.datetime "quote_time",                              null: false
+    t.decimal  "high",           precision: 15, scale: 2
+    t.decimal  "open",           precision: 15, scale: 2
+    t.decimal  "close",          precision: 15, scale: 2
+    t.decimal  "adjusted_close", precision: 15, scale: 2
+    t.decimal  "volume",         precision: 15, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["data_source", "stock_id"], name: "index_minute_bars_on_data_source_and_stock_id", using: :btree
   end
 
   create_table "portfolios", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

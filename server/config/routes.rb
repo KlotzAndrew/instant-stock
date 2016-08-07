@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :day_bars
+  resources :minute_bars
   namespace :api do
     namespace :v1 do
       resources :cash_holdings

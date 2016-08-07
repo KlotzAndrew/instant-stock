@@ -19,6 +19,8 @@ class StockTest < ActiveSupport::TestCase
   context '#relations' do
     should have_many :stock_holdings
     should have_many :portfolios
+    should have_many :minute_bars
+    should have_many :day_bars
   end
 
   context '#validations' do
