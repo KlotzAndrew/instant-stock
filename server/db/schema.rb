@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160806232630) do
     t.decimal  "high",           precision: 15, scale: 2
     t.decimal  "open",           precision: 15, scale: 2
     t.decimal  "close",          precision: 15, scale: 2
+    t.decimal  "low",            precision: 15, scale: 2
     t.decimal  "adjusted_close", precision: 15, scale: 2
     t.decimal  "volume",         precision: 15, scale: 2
     t.datetime "created_at",                              null: false
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160806232630) do
     t.decimal  "high",           precision: 15, scale: 2
     t.decimal  "open",           precision: 15, scale: 2
     t.decimal  "close",          precision: 15, scale: 2
+    t.decimal  "low",            precision: 15, scale: 2
     t.decimal  "adjusted_close", precision: 15, scale: 2
     t.decimal  "volume",         precision: 15, scale: 2
     t.datetime "created_at",                              null: false

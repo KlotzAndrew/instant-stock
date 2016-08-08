@@ -8,6 +8,7 @@ class CreateMinuteBars < ActiveRecord::Migration[5.0]
       t.decimal :high, precision: 15, scale: 2
       t.decimal :open, precision: 15, scale: 2
       t.decimal :close, precision: 15, scale: 2
+      t.decimal :low, precision: 15, scale: 2
       t.decimal :adjusted_close, precision: 15, scale: 2
       t.decimal :volume, precision: 15, scale: 2
 

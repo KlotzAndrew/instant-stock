@@ -28,9 +28,4 @@ class PortfolioTest < ActiveSupport::TestCase
   context '#validations' do
     should validate_presence_of :name
   end
-
-  test 'requires name' do
-    @portfolio.name = nil
-    refute @portfolio.valid?
-  end
 end

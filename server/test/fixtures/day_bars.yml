@@ -9,6 +9,7 @@
 #  high           :decimal(15, 2)
 #  open           :decimal(15, 2)
 #  close          :decimal(15, 2)
+#  low            :decimal(15, 2)
 #  adjusted_close :decimal(15, 2)
 #  volume         :decimal(15, 2)
 #  created_at     :datetime         not null
