@@ -14,6 +14,24 @@ FactoryGirl.define do
     end
   end
 
+  trait :with_stock_holding do
+    after(:build) do |portfolio|
+      stock = FactoryGirl.build :stock
+      stock_holding = FactoryGirl.build :stock_holding,
+                                        stock:     stock,
+                                        portfolio: portfolio
+      portfolio.stock_holdings << stock_holding
+    end
+  end
+
+  trait :with_cash_holding do
+    after(:build) do |portfolio|
+      cash_holding = FactoryGirl.build :cash_holding,
+                                        portfolio: portfolio
+      portfolio.cash_holdings << cash_holding
+    end
+  end
+
   trait :with_cash_and_stock do
     after(:build) do |portfolio|
       cash_holding = build_list :cash_holding,

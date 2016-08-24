@@ -16,6 +16,8 @@ class CashHolding < ApplicationRecord
   validates :portfolio_id, presence: true
   validates :currency, presence: true
 
+  alias trades cash_trades
+
   USD = 'USD'.freeze
 
   def current_total

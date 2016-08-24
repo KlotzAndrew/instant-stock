@@ -24,10 +24,11 @@ class CreateMinuteBars
   end
 
   def create_minute_bar(bar, stock_id)
-    return if already_quoted? bar, stock_id
+    quote_time = round_time_to_minute bar[:quote_time]
+    return if already_quoted? quote_time, stock_id
     MinuteBar.create(
       data_source:    bar[:data_source],
-      quote_time:     bar[:quote_time],
+      quote_time:     quote_time,
       high:           bar[:high],
       open:           bar[:open],
       close:          bar[:close],
@@ -38,10 +39,17 @@ class CreateMinuteBars
     )
   end
 
-  def already_quoted?(bar, stock_id)
+  def round_time_to_minute(quote_time)
+    minute_seconds = 60
+    rounded_minutes = (quote_time.to_r / minute_seconds).round
+    Time.zone.at(rounded_minutes * minute_seconds)
+  end
+
+  # TODO: this can be a model validation now
+  def already_quoted?(quote_time, stock_id)
     minute_bar = MinuteBar.find_by(
       stock_id:   stock_id,
-      quote_time: bar[:quote_time]
+      quote_time: quote_time
     )
     minute_bar.present? ? true : false
   end

@@ -15,6 +15,8 @@ class StockHolding < ApplicationRecord
   belongs_to :stock
   has_many :stock_trades
 
+  alias trades stock_trades
+
   def current_total
     stock_trades.to_a.sum(&:quantity)
   end
