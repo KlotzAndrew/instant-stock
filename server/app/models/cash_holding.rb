@@ -23,9 +23,4 @@ class CashHolding < ApplicationRecord
   def current_total
     cash_trades.to_a.sum(&:quantity)
   end
-
-  def change_cash(amount_change)
-    new_amount = amount + amount_change
-    update amount: new_amount
-  end
 end

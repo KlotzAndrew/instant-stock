@@ -15,6 +15,9 @@ class StockHolding < ApplicationRecord
   belongs_to :stock
   has_many :stock_trades
 
+  validates :portfolio_id, presence: true
+  validates :stock_id, presence: true
+
   alias trades stock_trades
 
   def current_total

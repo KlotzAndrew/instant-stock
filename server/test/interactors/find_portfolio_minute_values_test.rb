@@ -19,7 +19,7 @@ class FindPortfolioMinuteValuesTest < ActiveSupport::TestCase
 
     stock_minute_bar_1 = FactoryGirl.build :minute_bar,
                                            stock: stock,
-                                           quote_time: (Time.zone.now)
+                                           quote_time: Time.zone.now
     stock.minute_bars << stock_minute_bar_1
 
     stock_minute_bar_2 = FactoryGirl.build :minute_bar,
@@ -29,7 +29,7 @@ class FindPortfolioMinuteValuesTest < ActiveSupport::TestCase
 
     stock_minute_bar_3 = FactoryGirl.build :minute_bar,
                                            stock: stock,
-                                           quote_time: (Time.zone.now - 2.minute)
+                                           quote_time: (Time.zone.now - 2.minutes)
     stock.minute_bars << stock_minute_bar_3
 
     UpdateStocksMinuteBars.expects(:call).with(stocks: portfolio.stocks)
@@ -113,6 +113,10 @@ class FindPortfolioMinuteValuesTest < ActiveSupport::TestCase
   end
 
   test '#call does something when no minute bars before holding' do
+    skip 'tbd'
+  end
+
+  test '#call does something when missing minute bar' do
     skip 'tbd'
   end
 

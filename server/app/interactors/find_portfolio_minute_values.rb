@@ -38,7 +38,7 @@ class FindPortfolioMinuteValues
 
   def valuate_holding(time, value, minutes)
     until minutes[time]
-      time =-1.minute
+      time -= 1.minute
       break if time < @history_minutes
     end
     value * minutes[time].close
@@ -60,7 +60,7 @@ class FindPortfolioMinuteValues
     minutes = {}
     while time < (@start_time + 1.minute)
       minutes[time] = 0
-      time          += 1.minute
+      time         += 1.minute
     end
     minutes
   end
@@ -96,17 +96,10 @@ class FindPortfolioMinuteValues
 
   def find_total_time(time)
     minutes = time || DEFAULT_MINUTES
-    minutes - 60
     Time.zone.now - minutes * 60
   end
 
   def update_stock_minute_bars
     UpdateStocksMinuteBars.call stocks: @portfolio.stocks
-  end
-
-  def find_portfolio_stocks
-    @portfolio.stock_holdings.map do |holding|
-      holding.stock
-    end
   end
 end

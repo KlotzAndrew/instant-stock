@@ -25,7 +25,7 @@ class CreateMinuteBarsTest < ActiveSupport::TestCase
     MinuteBar.expects(:create).with(expected_minute_bar)
     MinuteBar.expects(:find_by).times(2).with(
       stock_id:   stock.id,
-      quote_time: Time.zone.local(2016, 8, 5, 12, 27, 0),
+      quote_time: Time.zone.local(2016, 8, 5, 12, 27, 0)
     ).returns(nil).then.returns(true)
 
     result = CreateMinuteBars.call stock_minute_bars: stock_minute_bars

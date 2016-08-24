@@ -22,10 +22,10 @@ class FindStockMinuteBarsTest < ActiveSupport::TestCase
       }
     }
 
-
-    stock.minute_bars.expects(:where)
-                     .with("created_at > ?", (Time.zone.now - history_minutes))
-                     .returns(minute_bars)
+    stock.minute_bars
+         .expects(:where)
+         .with('created_at > ?', (Time.zone.now - history_minutes))
+         .returns(minute_bars)
 
     result = FindStockMinuteBars.call params
 

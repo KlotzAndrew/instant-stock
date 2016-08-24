@@ -39,7 +39,7 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
   end
 
   test '#call should return minute values for cash' do
-    portfolio     = FactoryGirl.build :portfolio, :with_cash_holding
+    portfolio    = FactoryGirl.build :portfolio, :with_cash_holding
     cash_holding = portfolio.cash_holdings.first
 
     add_cash_trade_to_holding cash_holding, 1, @base_time - 360
@@ -115,6 +115,6 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
 
   def round_down_to_minute(time)
     extra_seconds = time.to_i % 60
-    Time.zone.at (time - extra_seconds)
+    Time.zone.at(time - extra_seconds)
   end
 end

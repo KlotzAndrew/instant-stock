@@ -36,4 +36,8 @@ class CashHoldingTest < ActiveSupport::TestCase
 
     assert_equal expected_total, @cash_holding.current_total
   end
+
+  test '#trades equals cash_trades' do
+    CashHolding.new.trades == CashHolding.new.cash_trades
+  end
 end
