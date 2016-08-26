@@ -12,6 +12,7 @@ module Api
         expected_value = 99
         expected_cash_holdings = JSON.parse([{}].to_json)
         expected_stock_holdings = JSON.parse([{}].to_json)
+        expected_portfolio_minutes = JSON.parse([{}].to_json)
 
         mock_interactor = mock 'mock interactor'
         mock_interactor.expects(:success?).returns(true)
@@ -23,6 +24,8 @@ module Api
                        .returns(expected_cash_holdings)
         mock_interactor.expects(:stock_holdings)
                        .returns(expected_stock_holdings)
+        mock_interactor.expects(:portfolio_minutes)
+                       .returns(expected_portfolio_minutes)
         ReturnPromoPortfolio.expects(:call).returns(mock_interactor)
 
         get api_v1_promo_url
@@ -34,6 +37,7 @@ module Api
         assert_equal body['value'], expected_value
         assert_equal body['cash_holdings'], expected_cash_holdings
         assert_equal body['stock_holdings'], expected_stock_holdings
+        assert_equal body['portfolio_minutes'], expected_portfolio_minutes
       end
 
       test 'should get index' do

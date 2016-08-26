@@ -12,8 +12,8 @@ class FindStockMinuteBarsTest < ActiveSupport::TestCase
     minute_bars     = [minute_bar]
     history_minutes = 100
     params          = {
-      stocks:          stocks,
-      history_minutes: history_minutes
+      stocks:       stocks,
+      history_time: Time.zone.now - history_minutes
     }
 
     expected_result = {
@@ -31,6 +31,10 @@ class FindStockMinuteBarsTest < ActiveSupport::TestCase
 
     assert result.success?
     assert_equal expected_result, result.stock_minute_bars
+  end
+
+  test '#call sets time when minutes passed in' do
+    skip 'tbd'
   end
 
   test '#call should use default time when not provided' do

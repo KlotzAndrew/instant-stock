@@ -1,8 +1,10 @@
 class FindHoldingMinuteQuantities
   include Interactor
 
+  DEFAULT_MINUTES = 90
+
   def call
-    @next_minute_base   = round_down_to_minute context.next_minute
+    @next_minute_base   = context.history_time || find_total_time(context.history_minutes)
     @end_time           = Time.zone.now
     @holding_quantities = {}
 
@@ -72,6 +74,12 @@ class FindHoldingMinuteQuantities
     if trade.created_at < @next_minute
       @minute_quantities[@next_minute] += trade.quantity
     end
+  end
+
+  def find_total_time(minutes)
+    minutes ||= DEFAULT_MINUTES
+    total_time = Time.zone.now - minutes * 60
+    round_down_to_minute total_time
   end
 
   def round_down_to_minute(time)

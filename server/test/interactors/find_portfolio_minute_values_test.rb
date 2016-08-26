@@ -48,7 +48,7 @@ class FindPortfolioMinuteValuesTest < ActiveSupport::TestCase
 
     cash_holding_params = {
       holdings:    portfolio.cash_holdings,
-      next_minute: (Time.zone.now - history_minutes * 60)
+      history_time: (Time.zone.now - history_minutes * 60)
     }
     mock_cash_quantities = mock 'cash quantities'
     cash_quantities = {
@@ -65,7 +65,7 @@ class FindPortfolioMinuteValuesTest < ActiveSupport::TestCase
 
     stock_holding_params = {
       holdings:    portfolio.stock_holdings,
-      next_minute: (Time.zone.now - history_minutes * 60)
+      history_time: (Time.zone.now - history_minutes * 60)
     }
     mock_stock_quantities = mock 'stock quantities'
     stock_quantities      = {

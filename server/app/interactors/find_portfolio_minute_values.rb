@@ -6,8 +6,8 @@ class FindPortfolioMinuteValues
   def call
     @start_time        = Time.zone.now
     @portfolio         = context.portfolio
-    @history_minutes   = find_total_time context.history_minutes
-    @portfolio_minutes = setup_portfolio_minutes @history_minutes
+    @history_time      = find_total_time context.history_minutes
+    @portfolio_minutes = setup_portfolio_minutes @history_time
 
     update_stock_minute_bars
     find_portfolio_minute_values
@@ -39,8 +39,9 @@ class FindPortfolioMinuteValues
   def valuate_holding(time, value, minutes)
     until minutes[time]
       time -= 1.minute
-      break if time < @history_minutes
+      break if time < @history_time
     end
+    return 0 if minutes[time].nil?
     value * minutes[time].close
   end
 
@@ -67,8 +68,8 @@ class FindPortfolioMinuteValues
 
   def get_stock_minute_values
     params = {
-      stocks:          @portfolio.stocks,
-      history_minutes: @history_minutes
+      stocks:       @portfolio.stocks,
+      history_time: @history_time
     }
     result = FindStockMinuteBars.call params
     result.stock_minute_bars
@@ -77,7 +78,7 @@ class FindPortfolioMinuteValues
   def get_cash_holding_quantities
     cash_holding_params = {
       holdings:    @portfolio.cash_holdings,
-      next_minute: @history_minutes
+      history_time: @history_time
     }
 
     result = FindHoldingMinuteQuantities.call cash_holding_params
@@ -86,17 +87,23 @@ class FindPortfolioMinuteValues
 
   def get_stock_holding_quantities
     stock_holding_params = {
-      holdings:    @portfolio.stock_holdings,
-      next_minute: @history_minutes
+      holdings:     @portfolio.stock_holdings,
+      history_time: @history_time
     }
 
     result = FindHoldingMinuteQuantities.call stock_holding_params
     result.holding_quantities
   end
 
-  def find_total_time(time)
-    minutes = time || DEFAULT_MINUTES
-    Time.zone.now - minutes * 60
+  def find_total_time(minutes)
+    minutes ||= DEFAULT_MINUTES
+    total_time = Time.zone.now - minutes * 60
+    round_down_to_minute total_time
+  end
+
+  def round_down_to_minute(time)
+    extra_seconds = time.to_i % 60
+    Time.zone.at (time - extra_seconds)
   end
 
   def update_stock_minute_bars

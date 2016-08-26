@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
   setup do
-    @base_time = Timecop.freeze(Time.zone.local(2016, 8, 17, 0, 0, 30))
+    @base_time = Timecop.freeze(Time.zone.local(2016, 8, 17, 0, 0, 0))
   end
 
   test '#call should return minute values for varied buys' do
@@ -12,7 +12,7 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
     add_stock_trade_to_holding stock_holding, 1, @base_time - 360
     add_stock_trade_to_holding stock_holding, 1, @base_time - 300
     add_stock_trade_to_holding stock_holding, 1, @base_time - 240
-    add_stock_trade_to_holding stock_holding, 1, @base_time - 60
+    add_stock_trade_to_holding stock_holding, 1, @base_time - 61
 
     time = round_down_to_minute Time.zone.now
 
@@ -21,14 +21,13 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
         time - 4.minutes => 2,
         time - 3.minutes => 3,
         time - 2.minutes => 3,
-        time - 1.minute  => 3,
-        time             => 4
+        time - 1.minute  => 4
       }
     }
 
     params = {
-      holdings: portfolio.stock_holdings,
-      next_minute:    @base_time - 240
+      holdings:     portfolio.stock_holdings,
+      history_time: @base_time - 240
     }
 
     result = FindHoldingMinuteQuantities.call params
@@ -45,7 +44,7 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
     add_cash_trade_to_holding cash_holding, 1, @base_time - 360
     add_cash_trade_to_holding cash_holding, 1, @base_time - 300
     add_cash_trade_to_holding cash_holding, 1, @base_time - 240
-    add_cash_trade_to_holding cash_holding, 1, @base_time - 60
+    add_cash_trade_to_holding cash_holding, 1, @base_time - 61
 
     time = round_down_to_minute Time.zone.now
 
@@ -54,14 +53,13 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
         time - 4.minutes => 2,
         time - 3.minutes => 3,
         time - 2.minutes => 3,
-        time - 1.minute  => 3,
-        time             => 4
+        time - 1.minute  => 4
       }
     }
 
     params = {
-      holdings: portfolio.cash_holdings,
-      next_minute:    @base_time - 240
+      holdings:     portfolio.cash_holdings,
+      history_time: @base_time - 240
     }
 
     result = FindHoldingMinuteQuantities.call params
@@ -70,7 +68,7 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
     assert_equal 1, result.holding_quantities.size
 
     minute_quantities = result.holding_quantities.first.last
-    assert_equal 5, minute_quantities.size
+    assert_equal 4, minute_quantities.size
 
     assert_equal expected_holding_quantities, result.holding_quantities
   end
@@ -79,7 +77,7 @@ class FindHoldingMinuteQuantitiesTest < ActiveSupport::TestCase
     portfolio = FactoryGirl.build :portfolio, :with_stock_holding
     params    = {
       holdings:    portfolio.stock_holdings,
-      next_minute: @base_time
+      history_minutes: 4.5
     }
 
     result = FindHoldingMinuteQuantities.call params
