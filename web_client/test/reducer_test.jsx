@@ -1,32 +1,36 @@
-import { List, Map, fromJS } from 'immutable';
+import { List, Map, fromJS, Seq } from 'immutable';
 import { expect } from 'chai';
-import { INITIAL_STATE } from '../src/reducer'
+import { INITIAL_STATE } from '../src/reducer';
+import _ from 'lodash';
 
 import reducer from '../src/reducer';
 
 describe('reducer', () => {
   it('SET_PORTFOLIO sets portfolio', () => {
     const initialState = fromJS({});
-    const mockPortoflio = {name: 'my_port', cash: '0.0', id: '123-abc'};
-    const mockValue = '99';
-    const mockCashHoldings = [{current_total: 99}];
-    const mockStockHoldings = [{current_total: 123}];
+    const portoflio = {name: 'my_port', cash: '0.0', id: '123-abc'};
+    const value = '99';
+    const cashHoldings = [{current_total: 99}];
+    const stockHoldings = [{current_total: 123}];
+    const portfolioMinutes = {'2016-08-27 19:02:00 UTC': '123'};
     const action = {
       type: 'SET_PORTFOLIO',
       state: {
-        portfolio: mockPortoflio,
-        value: mockValue,
-        cashHoldings: mockCashHoldings,
-        stockHoldings: mockStockHoldings
+        portfolio: portoflio,
+        value: value,
+        cashHoldings: cashHoldings,
+        stockHoldings: stockHoldings,
+        portfolioMinutes: portfolioMinutes
       }
     };
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      portfolio: mockPortoflio,
-      value: mockValue,
-      cashHoldings: mockCashHoldings,
-      stockHoldings: mockStockHoldings
+      portfolio: portoflio,
+      value: value,
+      cashHoldings: cashHoldings,
+      stockHoldings: stockHoldings,
+      portfolioMinutes: portfolioMinutes
     }));
   });
 

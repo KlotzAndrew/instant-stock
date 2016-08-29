@@ -88,7 +88,7 @@ class FindPortfolioMinuteValuesTest < ActiveSupport::TestCase
       t2 => cash_value(t2, cash_quantities, cash_holding) + stock_value(t2, stock_quantities, stock_minute_bars, stock_holding),
       t1 => cash_value(t1, cash_quantities, cash_holding) + stock_value(t1, stock_quantities, stock_minute_bars, stock_holding),
       t  => cash_value(t, cash_quantities, cash_holding) + stock_value(t, stock_quantities, stock_minute_bars, stock_holding)
-    }
+    }.to_a
 
     result = FindPortfolioMinuteValues.call params
 

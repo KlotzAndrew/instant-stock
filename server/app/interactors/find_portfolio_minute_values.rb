@@ -12,7 +12,7 @@ class FindPortfolioMinuteValues
     update_stock_minute_bars
     find_portfolio_minute_values
 
-    context.portfolio_minutes = @portfolio_minutes
+    context.portfolio_minutes = @portfolio_minutes.to_a
   end
 
   private

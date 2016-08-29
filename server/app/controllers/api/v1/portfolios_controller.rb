@@ -4,14 +4,14 @@ module Api
       before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
       def promo
-        result = ReturnPromoPortfolio.call
+        result = ReturnPromoPortfolio.call history_minutes: 30
 
         if result.success?
           render json: {
-            portfolio:      result.portfolio,
-            value:          result.value,
-            cash_holdings:  result.cash_holdings,
-            stock_holdings: result.stock_holdings,
+            portfolio:         result.portfolio,
+            value:             result.value,
+            cash_holdings:     result.cash_holdings,
+            stock_holdings:    result.stock_holdings,
             portfolio_minutes: result.portfolio_minutes
           }, status:   200
         else

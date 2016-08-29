@@ -56,13 +56,15 @@ export default class App extends Component {
     function apiCall() {
       return axiosInstance.get('/promo')
                           .then(function(response) {
+                            console.log('response', response)
                             store.dispatch({
                               type: 'SET_PORTFOLIO',
                               state: {
                                 portfolio: response.data.portfolio,
                                 value: response.data.value,
                                 cashHoldings: response.data.cash_holdings,
-                                stockHoldings: response.data.stock_holdings
+                                stockHoldings: response.data.stock_holdings,
+                                portfolioMinutes: response.data.portfolio_minutes
                               }
                             });
                           })

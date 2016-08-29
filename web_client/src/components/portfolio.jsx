@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {MessagesContainer} from './messages'
 import {TradesContainer} from './trades'
 import {HoldingsContainer} from './holdings'
+import {PortfolioChartContainer} from './portfolioChart.jsx'
 
 export const Portfolio = React.createClass({
   render: function() {
@@ -11,6 +12,7 @@ export const Portfolio = React.createClass({
         <div className="row">
           <div className="col-xs-12 col-sm-6">
             <h3>Portfolio name: {this.props.name}</h3>
+            <PortfolioChartContainer />
             <h3>Portfolio value: {this.props.value}</h3>
             <TradesContainer />
             <HoldingsContainer />
