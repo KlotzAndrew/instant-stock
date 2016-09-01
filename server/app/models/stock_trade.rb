@@ -17,5 +17,7 @@ class StockTrade < ApplicationRecord
 
   validates :stock_holding_id, presence: true
 
+  alias holding stock_holding
+
   after_create_commit { TradeBroadcastJob.perform_later self }
 end

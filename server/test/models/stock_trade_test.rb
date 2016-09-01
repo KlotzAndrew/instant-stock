@@ -22,4 +22,8 @@ class StockTradeTest < ActiveSupport::TestCase
   context '#validations' do
     should validate_presence_of :stock_holding_id
   end
+
+  test '#holding equals stock_holding' do
+    StockTrade.new.holding == StockTrade.new.stock_holding
+  end
 end

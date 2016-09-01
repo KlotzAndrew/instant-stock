@@ -3,6 +3,5 @@ class ReturnPromoPortfolio
 
   organize FindPromoPortfolio,
            FindPortfolioValue,
-           GetAllHoldings,
-           FindPortfolioMinuteValues
+           SerializeHoldingsAndTrades
 end

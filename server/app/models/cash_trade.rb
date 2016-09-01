@@ -13,4 +13,6 @@ class CashTrade < ApplicationRecord
   belongs_to :cash_holding
 
   validates :cash_holding_id, presence: true
+
+  alias holding cash_holding
 end

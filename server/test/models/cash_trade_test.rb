@@ -19,4 +19,8 @@ class CashTradeTest < ActiveSupport::TestCase
   context '#validations' do
     should validate_presence_of :cash_holding_id
   end
+
+  test '#holding equals cash_holding' do
+    CashTrade.new.holding == CashTrade.new.cash_holding
+  end
 end

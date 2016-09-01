@@ -20,8 +20,8 @@ export const Holdings = React.createClass({
     return holdings.map(function(holding, i) {
       return (
         <CashHolding
-          currency={holding.getIn(['currency'])}
-          current_total={holding.getIn(['current_total'])}
+          currency={holding.getIn(['holding', 'currency'])}
+          current_total={holding.getIn(['holding', 'current_total'])}
           key={i}
         />
       )
@@ -32,8 +32,8 @@ export const Holdings = React.createClass({
     return holdings.map(function(holding, i) {
       return (
         <StockHolding
-          name={holding.getIn(['name'])}
-          current_total={holding.getIn(['current_total'])}
+          name={holding.getIn(['holding', 'name'])}
+          current_total={holding.getIn(['holding', 'current_total'])}
           key={i}
         />
       )
