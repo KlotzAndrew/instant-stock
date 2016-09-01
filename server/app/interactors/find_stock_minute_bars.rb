@@ -15,8 +15,11 @@ class FindStockMinuteBars
   private
 
   def find_stock_minute_bars
-    @stocks.each_with_object({}) do |stock, hash|
-      hash[stock.id] = (get_minute_bars stock)
+    @stocks.map do |stock|
+      {
+        stock: stock,
+        minute_bars: get_minute_bars(stock)
+      }
     end
   end
 
@@ -28,7 +31,7 @@ class FindStockMinuteBars
   end
 
   def find_total_time(minutes)
-    minutes ||= DEFAULT_MINUTES
+    minutes ||= DEFAULT_HISTORY_MINUTES
     total_time = Time.zone.now - minutes * 60
     round_down_to_minute total_time
   end

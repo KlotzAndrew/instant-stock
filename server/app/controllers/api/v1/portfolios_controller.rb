@@ -11,7 +11,8 @@ module Api
             portfolio:         result.portfolio,
             value:             result.value,
             cash_holdings:     result.cash_holdings,
-            stock_holdings:    result.stock_holdings
+            stock_holdings:    result.stock_holdings,
+            stock_minute_bars: result.stock_minute_bars
           }, status:   200
         else
           render json: { error: 'something bad' }, status: 400

@@ -16,11 +16,14 @@ class FindStockMinuteBarsTest < ActiveSupport::TestCase
       history_time: Time.zone.now - history_minutes
     }
 
-    expected_result = {
-      stock.id => {
-        minute_bar.quote_time => minute_bar
+    expected_result = [
+      {
+        stock:       stock,
+        minute_bars: {
+          minute_bar.quote_time => minute_bar
+        }
       }
-    }
+    ]
 
     stock.minute_bars
          .expects(:where)
