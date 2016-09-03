@@ -25,9 +25,10 @@ class FindStockMinuteBars
 
   def get_minute_bars(stock)
     bars = stock.minute_bars.where("created_at > ?", @history_time)
-    bars.each_with_object({}) do |bar, hash|
-      hash[bar.quote_time] = bar
-    end
+    # bars.each_with_object({}) do |bar, hash|
+    #   hash[bar.quote_time] = bar
+    # end
+    bars.map { |bar| bar.attributes }
   end
 
   def find_total_time(minutes)

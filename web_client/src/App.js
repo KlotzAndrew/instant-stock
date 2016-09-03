@@ -64,7 +64,7 @@ export default class App extends Component {
                                 value: response.data.value,
                                 cashHoldings: response.data.cash_holdings,
                                 stockHoldings: response.data.stock_holdings,
-                                portfolioMinutes: response.data.portfolio_minutes
+                                stockMinuteBars: response.data.stock_minute_bars
                               }
                             });
                           })

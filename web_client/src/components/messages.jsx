@@ -4,21 +4,22 @@ import axiosInstance from '../config/axios';
 import {Message} from './message'
 import { List, Map, fromJS } from 'immutable';
 
-export const Messages = React.createClass({
-  getInitialState: function() {
-    return {value: ''};
-  },
-  handleChange: function(event) {
+export class Messages extends React.Component {
+  state = {
+      value: '',
+  };
+
+  handleChange = (event) => {
     this.setState({value: event.target.value});
-  },
-  _handleKeyPress: function(e) {
+  };
+  _handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       this._submitMessage(this.state.value, this.props.portfolioId);
       this.state.value = '';
     }
-  },
+  };
 
-  render: function() {
+  render = () => {
     return (
       <div>
         <h1>Messages~</h1>
@@ -32,18 +33,19 @@ export const Messages = React.createClass({
         />
       </div>
     )
-  },
+  };
 
-  _renderMessages(messages) {
+  _renderMessages = (messages) => {
     return messages.map(function(message, i) {
       return (<Message content={message.getIn(['content'])} key={i}/>)
     });
-  },
+  };
 
-  _submitMessage(message, portfolioId) {
+  _submitMessage = (message, portfolioId) => {
     return axiosInstance.post(`/portfolios/${portfolioId}/messages`, {content: message});
-  }
-});
+  };
+}
+
 
 function mapStateToProps(state) {
   return {
