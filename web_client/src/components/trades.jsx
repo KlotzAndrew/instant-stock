@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import {Trade} from './trade'
 import { List, Map, fromJS } from 'immutable';
 
-export const Trades = React.createClass({
-  render: function() {
+export class Trades extends React.Component {
+  render = () => {
     return (
       <div>
         <h1>Trades~</h1>
         {this._renderTrades(this.props.trades)}
       </div>
     )
-  },
+  };
 
-  _renderTrades(trades) {
+  _renderTrades = (trades) => {
     return trades.map(function(trade, i) {
       return (
         <Trade
@@ -24,12 +24,12 @@ export const Trades = React.createClass({
         />
       )
     });
-  },
-});
+  };
+};
 
 function mapStateToProps(state) {
   return {
-    trades: state.getIn(['trades']),
+    trades: state.getIn(['portfolio', 'trades']),
   }
 }
 

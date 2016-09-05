@@ -4,16 +4,20 @@ import {MessagesContainer} from './messages'
 import {TradesContainer} from './trades'
 import {HoldingsContainer} from './holdings'
 import {PortfolioChartContainer} from './portfolioChart.jsx'
+import {setPromoPortfolio} from '../actions.jsx'
 
-export const Portfolio = React.createClass({
-  render: function() {
+export class Portfolio extends React.Component {
+  componentDidMount = () => {
+    this.props.setPromoPortfolio();
+  }
+
+  render = () => {
     return (
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-sm-6">
             <h3>Portfolio name: {this.props.name}</h3>
             <PortfolioChartContainer />
-            <h3>Portfolio value: {this.props.value}</h3>
             <TradesContainer />
             <HoldingsContainer />
           </div>
@@ -23,17 +27,17 @@ export const Portfolio = React.createClass({
         </div>
       </div>
     )
-  }
-})
+  };
+}
 
 function mapStateToProps(state) {
   return {
     name: state.getIn(['portfolio', 'name']),
-    id: state.getIn(['portfolio', 'id']),
-    value: state.getIn(['value'])
+    id: state.getIn(['portfolio', 'id'])
   }
 }
 
 export const PortfolioContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  { setPromoPortfolio }
 )(Portfolio);

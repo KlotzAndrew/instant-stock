@@ -22,5 +22,13 @@ module InstantStock
     end
 
     config.active_job.queue_adapter = :sidekiq
+
+    ActiveModel::Serializer.config.adapter = :json_api
+    ActiveModelSerializers.config.key_transform = :camel_lower
+
+    config.after_initialize do
+      Bullet.enable = true
+      Bullet.bullet_logger = true
+    end
   end
 end

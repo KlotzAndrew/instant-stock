@@ -49,7 +49,7 @@ export class Messages extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.getIn(['messages']),
+    messages: state.getIn(['portfolio', 'messages']),
   }
 }
 

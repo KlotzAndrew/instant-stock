@@ -11,6 +11,8 @@ module ActionDispatch
     include Capybara::DSL
     include ActiveJob::TestHelper
 
+
+    self.use_transactional_tests = false
     # Reset sessions and driver between tests
     # Use super wherever this method is redefined in your
     # individual test classes

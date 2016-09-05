@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {PortfolioContainer} from './components/portfolio';
 import {FullNavbar} from './components/fullNavbar'
-import axiosInstance from './config/axios';
-import {createStore} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
 ActionCable = require('actioncable')
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  applyMiddleware(thunk)
+);
 const cable = ActionCable.createConsumer('ws:dockermachine:4000/cable');
 
 cable.subscriptions.create('RoomChannel', {
@@ -37,10 +40,6 @@ cable.subscriptions.create('RoomChannel', {
 });
 
 export default class App extends Component {
-  componentDidMount() {
-    this._getPromoPortfolio();
-  }
-
   render() {
     return (
       <Provider store={store}>
@@ -51,29 +50,5 @@ export default class App extends Component {
       </Provider>
     );
   }
-
-  _getPromoPortfolio = () => {
-    function apiCall() {
-      return axiosInstance.get('/promo')
-                          .then(function(response) {
-                            console.log('response', response)
-                            store.dispatch({
-                              type: 'SET_PORTFOLIO',
-                              state: {
-                                portfolio: response.data.portfolio,
-                                value: response.data.value,
-                                cashHoldings: response.data.cash_holdings,
-                                stockHoldings: response.data.stock_holdings,
-                                stockMinuteBars: response.data.stock_minute_bars
-                              }
-                            });
-                          })
-                          .catch(function(response) {
-                            console.log(response);
-                          });
-    }
-
-    apiCall();
-  };
 }
 

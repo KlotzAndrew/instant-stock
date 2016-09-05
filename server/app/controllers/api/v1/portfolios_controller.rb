@@ -4,19 +4,17 @@ module Api
       before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
       def promo
-        result = ReturnPromoPortfolio.call
-
-        if result.success?
-          render json: {
-            portfolio:         result.portfolio,
-            value:             result.value,
-            cash_holdings:     result.cash_holdings,
-            stock_holdings:    result.stock_holdings,
-            stock_minute_bars: result.stock_minute_bars
-          }, status:   200
-        else
-          render json: { error: 'something bad' }, status: 400
-        end
+        portfolio = Portfolio.includes(
+          :stocks,
+          :stock_holdings,
+          :cash_holdings,
+          :messages,
+          stock_holdings: [:stock_trades, :portfolio],
+          cash_holdings: [:cash_trades],
+          stocks: [:minute_bars, :day_bars, :stock_holdings, :portfolios]
+        ).find_by(promo_portfolio: true)
+        render json: portfolio,
+               include: ['stock_holdings', 'stock_holdings.stock_trades', 'cash_holdings', 'cash_holdings.cash_trades', 'stocks', 'stocks.minute_bars']
       end
 
       # GET /portfolios

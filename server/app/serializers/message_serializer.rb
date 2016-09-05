@@ -9,10 +9,8 @@
 #  updated_at   :datetime         not null
 #
 
-class Message < ApplicationRecord
+class MessageSerializer < ActiveModel::Serializer
+  attributes :id, :portfolio_id, :content, :created_at
+
   belongs_to :portfolio
-
-  validates :portfolio_id, presence: true
-
-  after_create_commit { MessageBroadcastJob.perform_later self }
 end

@@ -13,8 +13,8 @@ export class PortfolioChart extends React.Component{
   };
 
   componentDidUpdate = () => {
-    if (this.props.cashHoldings && this.props.stockHoldings && this.props.stockMinuteBars) {
-      this._nvd3Chart(this.state.chartId, this.props.cashHoldings, this.props.stockHoldings, this.props.stockMinuteBars);
+    if (this.props.portfolio && this.props.cashHoldings && this.props.cashTrades && this.props.stockHoldings && this.props.stockTrades && this.props.stocks) {
+      this._nvd3Chart(this.state.chartId, this.props.portfolio, this.props.cashHoldings, this.props.cashTrades, this.props.stockHoldings, this.props.stockTrades, this.props.stocks);
     }
   };
 
@@ -26,7 +26,7 @@ export class PortfolioChart extends React.Component{
     )
   };
 
-  _nvd3Chart = (chartId, cashHoldings, stockHoldings, stockMinuteBars) => {
+  _nvd3Chart = (chartId, portfolio, cashHoldings, cashTrades, stockHoldings, stockTrades, stocks) => {
     let current_time = Date.now();
     let start_time = Date.now() - 60000 * 60 * 24;
     let extra_seconds = start_time % 60000;
@@ -35,16 +35,21 @@ export class PortfolioChart extends React.Component{
     let portfolioData = [];
     let that = this;
 
+    const cashHoldingsIds = portfolio.getIn(['cashHoldings']).map(k => k.getIn(['id']));
     cashHoldings.forEach(function(holding) {
-      let holdingData = that._holdingCashData(holding, _.cloneDeep(start_time), _.cloneDeep(current_time));
-      portfolioData.push(holdingData)
+      if (cashHoldingsIds.includes(holding.getIn(['id']))) {
+        let holdingData = that._holdingCashData(portfolio, holding, cashTrades, _.cloneDeep(start_time), _.cloneDeep(current_time));
+        portfolioData.push(holdingData)
+      }
     });
 
+    const stockHoldingsIds = portfolio.getIn(['stockHoldings']).map(k => k.getIn(['id']));
     stockHoldings.forEach(function(holding) {
-        let minuteBars = that._findMinuteBar(holding, stockMinuteBars);
-
-        let holdingData = that._holdingStockData(holding, minuteBars, _.cloneDeep(start_time), _.cloneDeep(current_time));
+      if (stockHoldingsIds.includes(holding.getIn(['id']))) {
+        let minuteBars = that._findMinuteBar(holding, stocks);
+        let holdingData = that._holdingStockData(holding, stockTrades, minuteBars, _.cloneDeep(start_time), _.cloneDeep(current_time));
         portfolioData.push(holdingData)
+      }
     });
 
     var colors = d3.scale.category20();
@@ -85,28 +90,27 @@ export class PortfolioChart extends React.Component{
     });
   };
 
-  _findMinuteBar = (holding, minuteBars) => {
-    let foundBars;
-    minuteBars.forEach(function(bars) {
-      if (holding.getIn(['holding', 'stock_id']) == bars.getIn(['stock', 'id'])) {
-        foundBars = bars
-      }
-    });
-    return foundBars
+  _findMinuteBar = (holding, stocks) => {
+    const stock = stocks.getIn([holding.getIn(['stockId'])]);
+    return stock.getIn(['minuteBars']).valueSeq().sortBy(v => v.getIn(['createdAt']));
   };
 
-  _holdingCashData = (holding, start_time, current_time) => {
+  _holdingCashData = (portfolio, holding, cashTrades, start_time, current_time) => {
     let holdingData = {
-      key: holding.getIn(['holding', 'currency']),
+      key: holding.getIn(['currency']),
       values: [],
     };
 
-    let trades = _.cloneDeep(holding.getIn(['trades']).toJS());
+    const holdingTradeIds = holding.getIn(['cashTrades']).map(k => k.getIn(['id']));
+    const unsortedTrades = cashTrades.filter((v, k) => holdingTradeIds.includes(k));
+    const sortedTrades = unsortedTrades.valueSeq().sortBy(v => v.getIn(['createdAt']) );
+
+    let trades = sortedTrades.toJS()
     let quantity = 0;
-    let moving_date = new Date(trades[0].created_at).getTime();
+    let moving_date = new Date(trades[0].createdAt).getTime();
 
     while (moving_date < start_time && trades.size > 0) {
-      while (new Date(trades[0].created_at).getTime() < moving_date) {
+      while (new Date(trades[0].createdAt).getTime() < moving_date) {
         let trade = trades.shift();
         quantity = quantity + Number(trade.quantity);
         trades = trades;
@@ -114,7 +118,7 @@ export class PortfolioChart extends React.Component{
       moving_date = moving_date + 60000;
     }
     while (start_time < current_time) {
-      while (trades.length > 0 && new Date(trades[0].created_at).getTime() < start_time) {
+      while (trades.length > 0 && new Date(trades[0].createdAt).getTime() < (start_time + 60000)) {
         let trade = trades.shift();
         quantity = quantity + Number(trade.quantity);
       }
@@ -124,14 +128,14 @@ export class PortfolioChart extends React.Component{
     return holdingData;
   };
 
-  _holdingStockData = (holding, minuteBars, start_time, current_time) => {
+  _holdingStockData = (holding, stockTrades, minuteBars, start_time, current_time) => {
     let holdingData = {
       key: holding.getIn(['holding', 'name']),
       values: [],
     };
 
-    let quotes = _.cloneDeep(minuteBars.getIn(['minute_bars']).toJS());
-    let trades = _.cloneDeep(holding.getIn(['trades']).toJS());
+    let quotes = _.cloneDeep(minuteBars.toJS());
+    let trades = _.cloneDeep(stockTrades.valueSeq().sortBy(v => v.getIn(['createdAt'])).toJS());
     let quantity = 0;
     let moving_date = new Date(trades[0].created_at).getTime();
 
@@ -159,7 +163,7 @@ export class PortfolioChart extends React.Component{
         break
       }
 
-      while (trades.length > 0 && new Date(trades[0].created_at).getTime() < start_time) {
+      while (trades.length > 0 && new Date(trades[0].createdAt).getTime() < start_time) {
         let trade = trades.shift();
         quantity = quantity + Number(trade.quantity);
       }
@@ -173,9 +177,12 @@ export class PortfolioChart extends React.Component{
 
 function mapStateToProps(state) {
   return {
+    portfolio: state.getIn(['portfolio']),
     cashHoldings: state.getIn(['cashHoldings']),
     stockHoldings: state.getIn(['stockHoldings']),
-    stockMinuteBars: state.getIn(['stockMinuteBars']),
+    stocks: state.getIn(['stocks']),
+    cashTrades: state.getIn(['cashTrades']),
+    stockTrades: state.getIn(['stockTrades']),
   }
 }
 

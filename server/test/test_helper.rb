@@ -19,7 +19,6 @@ require 'webmock/minitest'
 
 module ActiveSupport
   class TestCase
-    self.use_transactional_tests = false
 
     VCR.configure do |c|
       c.cassette_library_dir = 'fixtures/vcr_cassettes'
