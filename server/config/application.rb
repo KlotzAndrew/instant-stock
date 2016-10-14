@@ -26,9 +26,11 @@ module InstantStock
     ActiveModel::Serializer.config.adapter = :json_api
     ActiveModelSerializers.config.key_transform = :camel_lower
 
-    config.after_initialize do
-      Bullet.enable = true
-      Bullet.bullet_logger = true
+    unless Rails.env == 'production'
+      config.after_initialize do
+        Bullet.enable = true
+        Bullet.bullet_logger = true
+      end
     end
   end
 end

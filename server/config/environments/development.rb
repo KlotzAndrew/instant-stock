@@ -49,15 +49,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # TODO: send this in as env variable
-  # http://stackoverflow.com/questions/29417328/how-to-disable-cannot-render-console-from-on-rails
-  Rails.application.config.action_cable.allowed_request_origins = %w(
-    http://dockermachine:4000
-    http://159.203.62.55:000
-  )
-  config.web_console.whitelisted_ips = %w(
-    192.168.99.1
-    159.203.62.55
-  )
   Rails.application.config.action_cable.disable_request_forgery_protection = true
 end

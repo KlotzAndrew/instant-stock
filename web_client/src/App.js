@@ -5,13 +5,15 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
-ActionCable = require('actioncable')
+ActionCable = require('actioncable');
+import serverConfig from '../serverConfig.json';
 
 const store = createStore(
   reducer,
   applyMiddleware(thunk)
 );
-const cable = ActionCable.createConsumer('ws:dockermachine:4000/cable');
+
+const cable = ActionCable.createConsumer(`ws:${serverConfig.API_LOCATION}:4000/cable`);
 
 cable.subscriptions.create('RoomChannel', {
   connected: function() {

@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+import serverConfig from '../../serverConfig.json';
+const protocol = 'http://';
 
 let axiosInstance = axios.create({
-  baseURL: 'http://dockermachine:4000/api/v1'
+  baseURL: `${protocol}${serverConfig.API_LOCATION}:4000/api/v1`
 });
 
 module.exports = axiosInstance;

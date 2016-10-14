@@ -3,33 +3,60 @@ services:
   db:
     image: postgres
     ports:
-      - "5432:5432"
+      - "5432"
+    restart: always
 
   redis:
     image: redis:latest
     ports:
-      - "6379:6379"
+      - "6379"
+    restart: always
 
   web:
-    image: klotzandrew/instantstock_web
-    command: sh lib/scripts/start_webapp.sh
-    volumes:
-      - .:/myapp
+    image: klotzandrew/instantstock_web:0.0.7
+    command: sh lib/scripts/start_webapp_production.sh
     ports:
-      - "3000:3000"
+      - "4000:4000"
     depends_on:
       - db
       - redis
     environment:
       REDIS_URL: redis://redis:6379
+      SECRET_KEY_BASE: d3b3a031b7555f8988ee1bdabc5d3e23124ba3b6f502d81dd24a472692b36f36f38776b280f6959947e27566de28f28a3db205d5b79a091e27ba1c7f85889f04
+      API_LOCATION: ${API_LOCATION}
+    restart: always
 
   sidekiq:
-    image: klotzandrew/instantstock_web
-    volumes:
-      - .:/myapp
+    image: klotzandrew/instantstock_web:0.0.7
+    command: sh lib/scripts/start_sidekiq_production.sh
     links:
       - db
       - redis
-    command: sh lib/scripts/start_sidekiq.sh
     environment:
       REDIS_URL: redis://redis:6379
+    restart: always
+
+  web_client:
+    image: klotzandrew/instantstock_web_client:0.0.4
+    ports:
+     - "3000:3000"
+    links:
+     - web
+    environment:
+      API_LOCATION: ${API_LOCATION}
+    restart: always
+
+  nginx_client:
+    image: klotzandrew/instantstock_nginx_client:0.0.3
+    ports:
+     - "80:80"
+    links:
+     - web_client:web_client
+    restart: always
+
+  nginx_api:
+    image: klotzandrew/instantstock_nginx_api:0.0.3
+    ports:
+     - '81:80'
+    links:
+     - web:web
