@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "web client w/ react hot reload",
   "scripts": {
-    "start": "webpack-dashboard -c magenta -- node server.js",
+    "start": "webpack-dashboard -c blue -- node server.js",
     "start:prod": "npm run build:prod && NODE_ENV=production PORT=3000 npm start",
     "build:prod": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "lint": "eslint src",

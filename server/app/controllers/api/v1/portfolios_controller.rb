@@ -4,17 +4,9 @@ module Api
       before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
       def promo
-        portfolio = Portfolio.includes(
-          :stocks,
-          :stock_holdings,
-          :cash_holdings,
-          :messages,
-          stock_holdings: [:stock_trades, :portfolio],
-          cash_holdings: [:cash_trades],
-          stocks: [:minute_bars, :day_bars, :stock_holdings, :portfolios]
-        ).find_by(promo_portfolio: true)
-        render json: portfolio,
-               include: ['stock_holdings', 'stock_holdings.stock_trades', 'cash_holdings', 'cash_holdings.cash_trades', 'stocks', 'stocks.minute_bars']
+        portfolio = Portfolio.find_by(promo_portfolio: true)
+
+        render json: portfolio
       end
 
       # GET /portfolios

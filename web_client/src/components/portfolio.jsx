@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {MessagesContainer} from './messages'
+import {MessagesContainer} from './Messages'
 import {TradesContainer} from './Trades'
-import {HoldingsContainer} from './holdings'
+import {HoldingsContainer} from './Holdings'
 import {setPromoPortfolio} from '../actions.jsx'
 
 export class Portfolio extends React.Component {
   componentDidMount = () => {
     this.props.setPromoPortfolio();
-  }
+  };
 
   render = () => {
     return (

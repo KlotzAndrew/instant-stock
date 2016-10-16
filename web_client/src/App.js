@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {PortfolioContainer} from './components/portfolio';
+import {PortfolioContainer} from './components/Portfolio';
 import {FullNavbar} from './components/fullNavbar'
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';

@@ -14,7 +14,7 @@ require 'test_helper'
 
 class StockHoldingTest < ActiveSupport::TestCase
   def setup
-    @holding = FactoryGirl.build :stock_holding
+    @holding = FactoryGirl.build :stock_holding, :with_stock_trade
   end
 
   context '#relations' do
@@ -42,5 +42,9 @@ class StockHoldingTest < ActiveSupport::TestCase
 
   test '#trades equals stock_trades' do
     StockHolding.new.trades == StockHolding.new.stock_trades
+  end
+
+  test '#stock_name' do
+    assert_equal @holding.stock.name, @holding.stock_name
   end
 end

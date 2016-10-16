@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axiosInstance from '../config/axios';
-import {Message} from './message'
+import {Message} from './Message'
 import { List, Map, fromJS } from 'immutable';
 
 export class Messages extends React.Component {
@@ -23,7 +23,7 @@ export class Messages extends React.Component {
     return (
       <div>
         <h1>Messages~</h1>
-        {this._renderMessages(this.props.messages)}
+        {this._renderMessages(this.props.portfolioMessages, this.props.messages)}
         <input
           type="text"
           value={this.state.value}
@@ -35,10 +35,16 @@ export class Messages extends React.Component {
     )
   };
 
-  _renderMessages = (messages) => {
-    return messages.map(function(message, i) {
-      return (<Message content={message.getIn(['content'])} key={i}/>)
-    });
+  _renderMessages = (portMessages, messages) => {
+    if (portMessages) {
+      return portMessages.map(function(portMessage, i) {
+      const messageId = portMessage.getIn(['id']);
+      const message = messages.getIn([messageId]);
+        if (message) {
+          return (<Message content={message.getIn(['content'])} key={i}/>)
+        }
+      });
+    }
   };
 
   _submitMessage = (message, portfolioId) => {
@@ -49,7 +55,9 @@ export class Messages extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.getIn(['portfolio', 'messages']),
+    portfolioMessages: state.getIn(['portfolio', 'relationships', 'messages', 'data']),
+    messages: state.getIn(['messages']),
+    port: state.getIn(['portfolio'])
   }
 }
 

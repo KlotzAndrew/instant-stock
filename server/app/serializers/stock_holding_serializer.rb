@@ -11,7 +11,7 @@
 #
 
 class StockHoldingSerializer < ActiveModel::Serializer
-  attributes :id, :portfolio_id, :stock_id, :current_total
+  attributes :id, :portfolio_id, :stock_id, :current_total, :stock_name
 
   belongs_to :portfolio
   belongs_to :stock
@@ -19,5 +19,9 @@ class StockHoldingSerializer < ActiveModel::Serializer
 
   def current_total
     object.current_total
+  end
+
+  def stock_name
+    object.stock_name
   end
 end

@@ -23,4 +23,8 @@ class StockHolding < ApplicationRecord
   def current_total
     stock_trades.to_a.sum(&:quantity)
   end
+
+  def stock_name
+    stock.name
+  end
 end
