@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CashHolding } from './cashHolding'
+import { CashHolding } from './CashHolding'
 import { StockHolding } from './StockHolding'
 import { List, Map, fromJS } from 'immutable';
 
@@ -17,23 +17,26 @@ export class Holdings extends React.Component {
   };
 
   _renderCashHoldings = (portfolio, holdings) => {
-    //return portfolio.getIn(['cashHoldings']).map((portfolioHolding, index) => {
-    //  const id = portfolioHolding.getIn(['id']);
-    //  const holding = holdings.getIn([id]);
-    //  if (holding) {
-    //    return (
-    //      <CashHolding
-    //        currency={holding.getIn(['currency'])}
-    //        current_total={holding.getIn(['currentTotal'])}
-    //        key={id}
-    //      />
-    //    )
-    //  }
-    //});
+    const holdingRelationships = portfolio.getIn(["relationships", "cashHoldings", "data"]);
+    if (holdingRelationships) {
+      return holdingRelationships.map((portfolioHolding, index) => {
+        const id = portfolioHolding.getIn(['id']);
+        const holding = holdings.getIn([id]);
+        if (holding) {
+          return (
+            <CashHolding
+              currency={holding.getIn(['attributes', 'currency'])}
+              current_total={holding.getIn(['attributes', 'currentTotal'])}
+              key={index}
+            />
+          )
+        }
+      });
+    }
   };
 
   _renderStockHoldings = (portfolio, holdings) => {
-    const holdingRelationships = portfolio.getIn(["relationships", "stockHoldings", "data"])
+    const holdingRelationships = portfolio.getIn(["relationships", "stockHoldings", "data"]);
     if (holdingRelationships) {
       return holdingRelationships.map((portfolioHolding, index) => {
         const id = portfolioHolding.getIn(['id']);

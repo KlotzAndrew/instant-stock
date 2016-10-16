@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   resources :minute_bars
   namespace :api do
     namespace :v1 do
-      resources :cash_holdings
       resources :cash_trades
       resources :stock_trades
       resources :stocks
       resources :portfolios do
+        resources :cash_holdings
         resources :stock_holdings
         resources :messages
       end

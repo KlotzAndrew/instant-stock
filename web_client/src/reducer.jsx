@@ -42,6 +42,15 @@ function setStockHoldings(state, stockHoldings) {
   return returnState
 }
 
+function setCashHoldings(state, cashHoldings) {
+  const newCashHoldings = fromJS(cashHoldings);
+
+  const formattedHoldings = Map(newCashHoldings.map(v => [v.getIn(['id']), v]));
+  const returnState = state.setIn(['cashHoldings'], formattedHoldings);
+
+  return returnState
+}
+
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'SET_PORTFOLIO':
@@ -51,7 +60,9 @@ export default function (state = INITIAL_STATE, action) {
     case 'ADD_TRADE':
       return addTrade(state, action.trade);
     case 'SET_STOCK_HOLDINGS':
-      return setStockHoldings(state, action.stockHoldings)
+      return setStockHoldings(state, action.stockHoldings);
+    case 'SET_CASH_HOLDINGS':
+      return setCashHoldings(state, action.cashHoldings);
   }
 
   return state;

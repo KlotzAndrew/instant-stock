@@ -3,8 +3,6 @@ module Api
     class StockHoldingsController < ApplicationController
       before_action :set_holding, only: [:show, :edit, :update, :destroy]
 
-      # GET /holdings
-      # GET /holdings.json
       def index
         result         = GetPortfolioStockHoldings.call portfolio_id: params[:portfolio_id]
         stock_holdings = result.stock_holdings
@@ -12,22 +10,16 @@ module Api
         render json: stock_holdings, each_serializer: StockHoldingSerializer
       end
 
-      # GET /holdings/1
-      # GET /holdings/1.json
       def show
       end
 
-      # GET /holdings/new
       def new
         @holding = StockHolding.new
       end
 
-      # GET /holdings/1/edit
       def edit
       end
 
-      # POST /holdings
-      # POST /holdings.json
       def create
         @holding = StockHolding.new(holding_params)
 
@@ -42,8 +34,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /holdings/1
-      # PATCH/PUT /holdings/1.json
       def update
         respond_to do |format|
           if @holding.update(holding_params)
@@ -56,8 +46,6 @@ module Api
         end
       end
 
-      # DELETE /holdings/1
-      # DELETE /holdings/1.json
       def destroy
         @holding.destroy
         respond_to do |format|

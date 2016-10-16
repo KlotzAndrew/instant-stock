@@ -131,4 +131,32 @@ describe('reducer', () => {
       ));
     })
   });
+
+  describe('SET_CASH_HOLDINGS', () => {
+    it('adds cashHoldings to store', () => {
+      const newCashHolding = {
+        id: 'ch123',
+        type: 'cashHoldings',
+        attributes: {
+          currentTotal: "8888.88",
+          portfolioId: 'pabc',
+          stockId: 'sabc',
+        },
+        relationships: {}
+      }
+      const newCashHoldings = [
+        newCashHolding
+      ];
+      const action = {
+        type: 'SET_CASH_HOLDINGS',
+        cashHoldings: newCashHoldings,
+      };
+      const nextState = reducer(INITIAL_STATE, action);
+
+      const cashHoldings = nextState.getIn(['cashHoldings', newCashHolding.id]);
+      expect(cashHoldings).to.equal(fromJS(
+        newCashHolding
+      ));
+    })
+  });
 });

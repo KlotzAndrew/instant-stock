@@ -6,4 +6,4 @@ export const Message = React.createClass({
       <p>anon: {this.props.content}</p>
     )
   }
-})
+});
