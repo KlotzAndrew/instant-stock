@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "web client w/ react hot reload",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dashboard -c magenta -- node server.js",
     "start:prod": "npm run build:prod && NODE_ENV=production PORT=3000 npm start",
     "build:prod": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "lint": "eslint src",
@@ -49,6 +49,7 @@
     "svg-loader": "0.0.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.2",
+    "webpack-dashboard": "^0.2.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^1.12.1",
     "webpack-hot-middleware": "^2.12.2"
