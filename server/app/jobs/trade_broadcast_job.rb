@@ -3,15 +3,12 @@ class TradeBroadcastJob < ApplicationJob
 
   def perform(trade)
     ActionCable.server.broadcast 'room_channel',
-                                 trade: render_trade(trade)
+                                 trade: serialize_obj(trade)
   end
 
-  def render_trade(trade)
-    {
-      id:          trade.id,
-      stock_name:  trade.stock_holding.stock.name,
-      quantity:    trade.quantity,
-      enter_price: trade.enter_price
-    }.to_json
+  def serialize_obj(trade)
+    serializer = StockTradeSerializer.new(trade)
+    adapter = ActiveModelSerializers::Adapter.create(serializer)
+    adapter.to_json
   end
 end

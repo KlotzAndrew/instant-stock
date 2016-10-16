@@ -17,6 +17,7 @@ require 'test_helper'
 class StockTradeTest < ActiveSupport::TestCase
   context '#relations' do
     should belong_to :stock_holding
+    should have_one :stock
   end
 
   context '#validations' do
@@ -24,6 +25,16 @@ class StockTradeTest < ActiveSupport::TestCase
   end
 
   test '#holding equals stock_holding' do
-    StockTrade.new.holding == StockTrade.new.stock_holding
+    assert_equal StockTrade.new.holding, StockTrade.new.stock_holding
+  end
+
+  test '#stock_name' do
+    holding = FactoryGirl.build :stock_holding, :with_stock_trade
+    stock   = holding.stock
+    trade   = holding.trades.first
+
+    trade.expects(:stock).returns(stock)
+
+    assert_equal stock.name, trade.stock_name
   end
 end

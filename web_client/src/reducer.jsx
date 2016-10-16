@@ -84,10 +84,14 @@ function addMessage(state, message) {
 
 function addTrade(state, trade) {
   const newTrade = fromJS(trade);
-  const newTrades = state.getIn(['portfolio', 'trades']).concat([newTrade]);
-  const returnState = state.setIn(['portfolio', 'trades'], newTrades);
 
-  return returnState
+  const tradeId = newTrade.getIn(['data', 'id']);
+  const portfolioTrades = state.getIn(['portfolio', 'trades']).concat([tradeId]);
+
+  const tradeState = state.setIn(['trades', tradeId], newTrade.getIn(['data']));
+  const portfolioState = tradeState.setIn(['portfolio', 'trades'], portfolioTrades);
+
+  return portfolioState
 }
 
 export default function (state = INITIAL_STATE, action) {

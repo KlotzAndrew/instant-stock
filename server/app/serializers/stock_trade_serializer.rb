@@ -13,7 +13,11 @@
 #
 
 class StockTradeSerializer < ActiveModel::Serializer
-  attributes :id, :stock_holding_id, :quantity, :enter_price, :created_at
+  attributes :id, :stock_holding_id, :quantity, :enter_price, :created_at, :stock_name
 
   belongs_to :stock_holding
+
+  def stock_name
+    object.stock_name
+  end
 end

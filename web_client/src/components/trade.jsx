@@ -4,8 +4,8 @@ export const Trade = React.createClass({
   render: function() {
     return (
       <p>
-        stock_name: {this.props.stock_name} |
-        enter_price: {this.props.enter_price} |
+        {this.props.stockName} |
+        enter_price: {this.props.enterPrice} |
         quantity: {this.props.quantity}
       </p>
     )

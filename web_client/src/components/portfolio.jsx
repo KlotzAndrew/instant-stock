@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {MessagesContainer} from './messages'
-import {TradesContainer} from './trades'
+import {TradesContainer} from './Trades'
 import {HoldingsContainer} from './holdings'
-import {PortfolioChartContainer} from './portfolioChart.jsx'
 import {setPromoPortfolio} from '../actions.jsx'
 
 export class Portfolio extends React.Component {
@@ -15,13 +14,16 @@ export class Portfolio extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-12 col-sm-6">
-            <h3>Portfolio name: {this.props.name}</h3>
-            <PortfolioChartContainer />
-            <TradesContainer />
+          <h3>Portfolio name: {this.props.name}</h3>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-4">
             <HoldingsContainer />
           </div>
-          <div className="col-xs-12 col-sm-6">
+          <div className="col-xs-12 col-sm-4">
+            <TradesContainer />
+          </div>
+          <div className="col-xs-12 col-sm-4">
             <MessagesContainer portfolioId={this.props.id} />
           </div>
         </div>

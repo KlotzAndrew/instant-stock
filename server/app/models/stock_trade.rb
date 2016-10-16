@@ -14,10 +14,15 @@
 
 class StockTrade < ApplicationRecord
   belongs_to :stock_holding
+  has_one :stock, :through => :stock_holding
 
   validates :stock_holding_id, presence: true
 
   alias holding stock_holding
 
   after_create_commit { TradeBroadcastJob.perform_later self }
+
+  def stock_name
+    stock.name
+  end
 end

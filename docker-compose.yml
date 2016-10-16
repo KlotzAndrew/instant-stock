@@ -12,7 +12,7 @@ services:
 
   web:
     build: ./server
-    command: sh lib/scripts/start_webapp_production.sh
+    command: sh lib/scripts/start_webapp.sh
     volumes:
       - ./server:/myapp
     ports:
@@ -27,7 +27,7 @@ services:
 
   sidekiq:
     build: ./server
-    command: sh lib/scripts/start_sidekiq_production.sh
+    command: sh lib/scripts/start_sidekiq.sh
     volumes:
       - ./server:/myapp
     links:

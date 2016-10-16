@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
-ActionCable = require('actioncable');
+import ActionCable from 'actioncable';
 import serverConfig from '../serverConfig.json';
 
 const store = createStore(
@@ -25,6 +25,7 @@ cable.subscriptions.create('RoomChannel', {
   },
 
   received: function(data) {
+    console.log('data', data)
     if (data.message) {
       const message = JSON.parse(data.message);
        store.dispatch({

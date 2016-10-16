@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Trade} from './trade'
+import {Trade} from './Trade'
 import { List, Map, fromJS } from 'immutable';
 
 export class Trades extends React.Component {
@@ -17,9 +17,9 @@ export class Trades extends React.Component {
     return trades.map(function(trade, i) {
       return (
         <Trade
-          enter_price={trade.getIn(['enter_price'])}
-          quantity={trade.getIn(['quantity'])}
-          stock_name={trade.getIn(['stock_name'])}
+          enterPrice={trade.getIn(['attributes', 'enterPrice'])}
+          quantity={trade.getIn(['attributes', 'quantity'])}
+          stockName={trade.getIn(['attributes', 'stockName'])}
           key={i}
         />
       )
@@ -29,7 +29,7 @@ export class Trades extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    trades: state.getIn(['portfolio', 'trades']),
+    trades: state.getIn(['trades']),
   }
 }
 
