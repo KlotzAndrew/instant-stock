@@ -15,4 +15,6 @@ class CashTrade < ApplicationRecord
   validates :cash_holding_id, presence: true
 
   alias holding cash_holding
+
+  after_create_commit { CashTradeBroadcastJob.perform_later self }
 end

@@ -23,4 +23,11 @@ class CashTradeTest < ActiveSupport::TestCase
   test '#holding equals cash_holding' do
     CashTrade.new.holding == CashTrade.new.cash_holding
   end
+
+  test '#save broadcasts job' do
+    trade = FactoryGirl.build :cash_trade
+    CashTradeBroadcastJob.expects(:perform_later).with(trade)
+
+    assert trade.save!
+  end
 end

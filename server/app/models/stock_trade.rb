@@ -20,7 +20,7 @@ class StockTrade < ApplicationRecord
 
   alias holding stock_holding
 
-  after_create_commit { TradeBroadcastJob.perform_later self }
+  after_create_commit { StockTradeBroadcastJob.perform_later self }
 
   def stock_name
     stock.name

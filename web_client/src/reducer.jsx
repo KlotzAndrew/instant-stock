@@ -18,17 +18,32 @@ function addMessage(state, message) {
   return returnState
 }
 
-function addTrade(state, trade) {
+function addStockTrade(state, trade) {
   const newTrade = fromJS(trade);
 
   const tradeId = newTrade.getIn(['data', 'id']);
-  const stateWithTrade = state.setIn(['trades', tradeId], newTrade.getIn(['data']));
+  const stateWithTrade = state.setIn(['stockTrades', tradeId], newTrade.getIn(['data']));
 
-  const holdingId = newTrade.getIn(['data', 'attributes', 'stockHoldingId'])
+  const holdingId = newTrade.getIn(['data', 'attributes', 'stockHoldingId']);
   const holdingTotal = state.getIn(['stockHoldings', holdingId, 'attributes', 'currentTotal']);
 
-  const newTotal = holdingTotal + newTrade.getIn(['data', 'attributes', 'quantity'])
+  const newTotal = holdingTotal + newTrade.getIn(['data', 'attributes', 'quantity']);
   const stateWithHolding = stateWithTrade.setIn(['stockHoldings', holdingId, 'attributes', 'currentTotal'], newTotal);
+
+  return stateWithHolding
+}
+
+function addCashTrade(state, trade) {
+  const newTrade = fromJS(trade);
+
+  const tradeId = newTrade.getIn(['data', 'id']);
+  const stateWithTrade = state.setIn(['cashTrades', tradeId], newTrade.getIn(['data']));
+
+  const holdingId = newTrade.getIn(['data', 'attributes', 'cashHoldingId']);
+  const holdingTotal = state.getIn(['cashHoldings', holdingId, 'attributes', 'currentTotal']);
+
+  const newTotal = parseFloat(holdingTotal) + parseFloat(newTrade.getIn(['data', 'attributes', 'quantity']));
+  const stateWithHolding = stateWithTrade.setIn(['cashHoldings', holdingId, 'attributes', 'currentTotal'], newTotal.toString());
 
   return stateWithHolding
 }
@@ -57,8 +72,10 @@ export default function (state = INITIAL_STATE, action) {
       return setPortfolio(state, action.portfolio);
     case 'ADD_MESSAGE':
       return addMessage(state, action.message);
-    case 'ADD_TRADE':
-      return addTrade(state, action.trade);
+    case 'ADD_STOCK_TRADE':
+      return addStockTrade(state, action.trade);
+    case 'ADD_CASH_TRADE':
+      return addCashTrade(state, action.trade);
     case 'SET_STOCK_HOLDINGS':
       return setStockHoldings(state, action.stockHoldings);
     case 'SET_CASH_HOLDINGS':
@@ -83,7 +100,6 @@ export const INITIAL_STATE = fromJS(
         },
       },
     },
-    trades: {},
     cashHoldings: {},
     stockHoldings: {},
     stocks: {},

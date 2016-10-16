@@ -32,10 +32,16 @@ cable.subscriptions.create('RoomChannel', {
          type: 'ADD_MESSAGE',
          message: message,
        })
-    } else if (data.trade) {
-      const trade = JSON.parse(data.trade);
+    } else if (data.stock_trade) {
+      const trade = JSON.parse(data.stock_trade);
       store.dispatch({
-        type: 'ADD_TRADE',
+        type: 'ADD_STOCK_TRADE',
+        trade: trade,
+      })
+    } else if (data.cash_trade) {
+      const trade = JSON.parse(data.cash_trade);
+      store.dispatch({
+        type: 'ADD_CASH_TRADE',
         trade: trade,
       })
     }

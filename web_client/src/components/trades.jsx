@@ -29,7 +29,7 @@ export class Trades extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    trades: state.getIn(['trades']),
+    trades: state.getIn(['stockTrades']),
   }
 }
 

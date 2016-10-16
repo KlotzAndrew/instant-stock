@@ -50,7 +50,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('ADD_TRADE', () => {
+  describe('ADD_STOCK_TRADE', () => {
     const tradeId = 'trade1';
     const stockHoldingId = 'holding1';
     const newTrade = {
@@ -73,14 +73,14 @@ describe('reducer', () => {
       }
     };
     const action = {
-      type: 'ADD_TRADE',
+      type: 'ADD_STOCK_TRADE',
       trade: newTrade,
     };
 
     it('adds trade to store', () => {
       const nextState = reducer(INITIAL_STATE, action);
 
-      const trades = nextState.getIn(['trades', tradeId]);
+      const trades = nextState.getIn(['stockTrades', tradeId]);
       expect(trades).to.equal(fromJS(
         newTrade.data
       ))
@@ -100,6 +100,58 @@ describe('reducer', () => {
       const newTotal = nextState.getIn(['stockHoldings', stockHoldingId, 'attributes', 'currentTotal']);
       expect(newTotal).to.equal(fromJS(
         1000
+      ))
+    })
+  });
+
+  describe('ADD_CASH_TRADE', () => {
+    const tradeId = 'trade1';
+    const cashHoldingId = 'holding1';
+    const newTrade = {
+      data: {
+        type: 'cashTrades',
+        id: tradeId,
+        attributes: {
+          quantity: '-200.01',
+          cashHoldingId: cashHoldingId,
+        },
+        relationships: {
+          cashHolding: {
+            data: {
+              id: cashHoldingId,
+            }
+          }
+        }
+      }
+    };
+    const action = {
+      type: 'ADD_CASH_TRADE',
+      trade: newTrade,
+    };
+
+    it('adds trade to store', () => {
+      const nextState = reducer(INITIAL_STATE, action);
+
+      const trades = nextState.getIn(['cashTrades', tradeId]);
+      expect(trades).to.equal(fromJS(
+        newTrade.data
+      ))
+    });
+
+    it('adjusts stockHolding currentTotal', () => {
+      const cashHolding = {
+        id: cashHoldingId,
+        attributes: {
+          currentTotal: '1000',
+        }
+      };
+      const testState = INITIAL_STATE.setIn(['cashHoldings', cashHoldingId], fromJS(cashHolding))
+
+      const nextState = reducer(testState, action);
+
+      const newTotal = nextState.getIn(['cashHoldings', cashHoldingId, 'attributes', 'currentTotal']);
+      expect(newTotal).to.equal(fromJS(
+        '799.99'
       ))
     })
   });
