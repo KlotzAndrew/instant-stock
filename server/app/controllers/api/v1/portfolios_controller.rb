@@ -4,19 +4,16 @@ module Api
       before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
       def promo
-        portfolio = Portfolio.find_by(promo_portfolio: true)
+        result    = FindPromoPortfolio.call
+        portfolio = result.portfolio
 
         render json: portfolio
       end
 
-      # GET /portfolios
-      # GET /portfolios.json
       def index
         @portfolios = Portfolio.all
       end
 
-      # GET /portfolios/1
-      # GET /portfolios/1.json
       def show
         @messages = Message.all
         @trades = []
@@ -26,17 +23,13 @@ module Api
         @portfolio_value = value_result.value
       end
 
-      # GET /portfolios/new
       def new
         @portfolio = Portfolio.new
       end
 
-      # GET /portfolios/1/edit
       def edit
       end
 
-      # POST /portfolios
-      # POST /portfolios.json
       def create
         @portfolio = Portfolio.new(portfolio_params)
 
@@ -51,8 +44,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /portfolios/1
-      # PATCH/PUT /portfolios/1.json
       def update
         respond_to do |format|
           if @portfolio.update(portfolio_params)
@@ -65,8 +56,6 @@ module Api
         end
       end
 
-      # DELETE /portfolios/1
-      # DELETE /portfolios/1.json
       def destroy
         @portfolio.destroy
         respond_to do |format|

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StockHoldingSerializerTest < ActiveJob::TestCase
+class CashHoldingSerializerTest < ActiveJob::TestCase
   def setup
     # TODO: figure out why mocking fails here
     @holding            = FactoryGirl.create :cash_holding, :with_cash_trade
