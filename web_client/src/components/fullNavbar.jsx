@@ -1,8 +1,8 @@
 import React from 'react';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
-export const FullNavbar = React.createClass({
-  render: function() {
+export class FullNavbar extends React.Component {
+  render = () => {
     return (
       <Navbar inverse>
         <Navbar.Header>
@@ -23,5 +23,5 @@ export const FullNavbar = React.createClass({
         </Navbar.Collapse>
       </Navbar>
     )
-  },
-});
+  }
+}

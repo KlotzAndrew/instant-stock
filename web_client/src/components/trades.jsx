@@ -33,6 +33,6 @@ function mapStateToProps(state) {
   }
 }
 
-export const TradesContainer = connect(
+export default connect(
   mapStateToProps
 )(Trades);

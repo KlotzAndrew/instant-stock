@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axiosInstance from '../config/axios';
-import {Message} from './Message'
+import { Message } from './Message'
 import { List, Map, fromJS } from 'immutable';
 
 export class Messages extends React.Component {
@@ -56,11 +56,10 @@ export class Messages extends React.Component {
 function mapStateToProps(state) {
   return {
     portfolioMessages: state.getIn(['portfolio', 'relationships', 'messages', 'data']),
-    messages: state.getIn(['messages']),
-    port: state.getIn(['portfolio'])
+    messages: state.getIn(['messages'])
   }
 }
 
-export const MessagesContainer = connect(
+export default connect(
   mapStateToProps
 )(Messages);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {PortfolioContainer} from './components/Portfolio';
-import {FullNavbar} from './components/fullNavbar'
+import Portfolio from './components/Portfolio';
+import {FullNavbar} from './components/FullNavbar'
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
@@ -54,7 +54,7 @@ export default class App extends Component {
       <Provider store={store}>
         <div>
           <FullNavbar />
-          <PortfolioContainer />
+          <Portfolio />
         </div>
       </Provider>
     );

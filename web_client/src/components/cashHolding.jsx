@@ -1,12 +1,8 @@
 import React from 'react';
 
-export const CashHolding = React.createClass({
-  render: function() {
-    return (
-      <p>
-        current_total: {this.props.current_total} |
-        currency: {this.props.currency}
-      </p>
-    )
-  }
-})
+export const CashHolding = ({currency, current_total}) => (
+  <p>
+    current_total: {current_total} |
+    currency: {currency}
+  </p>
+);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {MessagesContainer} from './Messages'
-import {TradesContainer} from './Trades'
-import {HoldingsContainer} from './Holdings'
+import Messages from './Messages'
+import Trades from './Trades'
+import Holdings from './Holdings'
 import {setPromoPortfolio} from '../actions.jsx'
 
 export class Portfolio extends React.Component {
@@ -14,17 +14,17 @@ export class Portfolio extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <h3>Portfolio name: {this.props.name}</h3>
+          <h3 className="portfolio-name">Portfolio name: {this.props.name}</h3>
         </div>
         <div className="row">
           <div className="col-xs-12 col-sm-4">
-            <HoldingsContainer />
+            <Holdings />
           </div>
           <div className="col-xs-12 col-sm-4">
-            <TradesContainer />
+            <Trades />
           </div>
           <div className="col-xs-12 col-sm-4">
-            <MessagesContainer portfolioId={this.props.id} />
+            <Messages portfolioId={this.props.id} />
           </div>
         </div>
       </div>
@@ -34,12 +34,12 @@ export class Portfolio extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    name: state.getIn(['portfolio', 'name']),
+    name: state.getIn(['portfolio', 'attributes', 'name']),
     id: state.getIn(['portfolio', 'id'])
   }
 }
 
-export const PortfolioContainer = connect(
+export default connect(
   mapStateToProps,
   { setPromoPortfolio }
 )(Portfolio);
