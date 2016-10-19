@@ -1,3 +1,4 @@
+import * as types from './ActionTypes'
 import { List, Map, fromJS } from 'immutable';
 import { createStore } from 'redux'
 
@@ -68,17 +69,17 @@ function setCashHoldings(state, cashHoldings) {
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'SET_PORTFOLIO':
+    case types.SET_PORTFOLIO:
       return setPortfolio(state, action.portfolio);
-    case 'ADD_MESSAGE':
+    case types.ADD_MESSAGE:
       return addMessage(state, action.message);
-    case 'ADD_STOCK_TRADE':
+    case types.ADD_STOCK_TRADE:
       return addStockTrade(state, action.trade);
-    case 'ADD_CASH_TRADE':
+    case types.ADD_CASH_TRADE:
       return addCashTrade(state, action.trade);
-    case 'SET_STOCK_HOLDINGS':
+    case types.SET_STOCK_HOLDINGS:
       return setStockHoldings(state, action.stockHoldings);
-    case 'SET_CASH_HOLDINGS':
+    case types.SET_CASH_HOLDINGS:
       return setCashHoldings(state, action.cashHoldings);
   }
 

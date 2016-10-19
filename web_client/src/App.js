@@ -7,6 +7,7 @@ import reducer from './reducer';
 import { Provider } from 'react-redux';
 import ActionCable from 'actioncable';
 import serverConfig from '../serverConfig.json';
+import * as actions from './actions.jsx'
 
 const store = createStore(
   reducer,
@@ -28,22 +29,13 @@ cable.subscriptions.create('RoomChannel', {
     console.log('data', data)
     if (data.message) {
       const message = JSON.parse(data.message);
-       store.dispatch({
-         type: 'ADD_MESSAGE',
-         message: message,
-       })
+       store.dispatch(actions.addMessage(message))
     } else if (data.stock_trade) {
       const trade = JSON.parse(data.stock_trade);
-      store.dispatch({
-        type: 'ADD_STOCK_TRADE',
-        trade: trade,
-      })
+      store.dispatch(actions.addStockTrade(trade))
     } else if (data.cash_trade) {
       const trade = JSON.parse(data.cash_trade);
-      store.dispatch({
-        type: 'ADD_CASH_TRADE',
-        trade: trade,
-      })
+      store.dispatch(actions.addCashTrade((trade)))
     }
   },
 });

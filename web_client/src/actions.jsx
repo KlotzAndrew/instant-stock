@@ -1,11 +1,7 @@
-//import * as types from '../constants/ActionTypes'
-export const SET_PORTFOLIO = 'SET_PORTFOLIO';
-export const SET_PORTFOLIO_ASSOCIATIONS = 'SET_PORTFOLIO_ASSOCIATIONS';
-export const SET_STOCK_HOLDINGS = 'SET_STOCK_HOLDINGS';
-export const SET_CASH_HOLDINGS = 'SET_CASH_HOLDINGS';
 import portfolioApi from './api/portfolio.jsx';
 import stockHoldingsApi from './api/portfolioStockHoldings.jsx'
 import cashHoldingsApi from './api/portfolioCashHoldings.jsx'
+import * as types from './ActionTypes'
 
 export function setPromoPortfolio() {
   return dispatch => {
@@ -46,13 +42,34 @@ export function setPortfolioStockHoldings(portfolioId) {
 }
 
 export function setPortfolio(portfolio) {
-  return { type: SET_PORTFOLIO, portfolio }
+  return { type: types.SET_PORTFOLIO, portfolio }
 }
 
 export function setStockHoldings(stockHoldings) {
-  return { type: SET_STOCK_HOLDINGS, stockHoldings }
+  return { type: types.SET_STOCK_HOLDINGS, stockHoldings }
 }
 
 export function setCashHoldings(cashHoldings) {
-  return { type: SET_CASH_HOLDINGS, cashHoldings }
+  return { type: types.SET_CASH_HOLDINGS, cashHoldings }
+}
+
+export function addMessage(message) {
+  return {
+    type: types.ADD_MESSAGE,
+    message,
+  }
+}
+
+export function addStockTrade(trade) {
+  return {
+    type: types.ADD_STOCK_TRADE,
+    trade,
+  }
+}
+
+export function addCashTrade(trade) {
+  return {
+    type: types.ADD_CASH_TRADE,
+    trade,
+  }
 }
