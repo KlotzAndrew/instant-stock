@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const CashHolding = ({currency, current_total}) => (
+export const CashHolding = ({currency, currentTotal}) => (
   <p>
-    current_total: {current_total} |
+    currentTotal: {currentTotal} |
     currency: {currency}
   </p>
 );

@@ -47,4 +47,9 @@ class StockHoldingTest < ActiveSupport::TestCase
   test '#stock_name' do
     assert_equal @holding.stock.name, @holding.stock_name
   end
+
+  test '#last_quote' do
+    stock = @holding.stock
+    assert_equal stock.last_quote, @holding.last_quote
+  end
 end

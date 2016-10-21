@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const StockHolding = ({name, current_total}) => (
-  <p>{name} | current_total: {current_total}</p>
+export const StockHolding = ({name, currentTotal, lastQuote}) => (
+  <p>{name} | total: {currentTotal} | ${(currentTotal*lastQuote).toFixed(2)}</p>
 );

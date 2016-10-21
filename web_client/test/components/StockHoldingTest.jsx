@@ -7,14 +7,16 @@ import { StockHolding } from '../../src/components/StockHolding.jsx'
 
 describe('StockHolding', function cashHolding() {
   it('should render', function renderProps() {
-    const current_total = '123.01';
+    const lastQuote = '10.01';
+    const currentTotal = '10';
     const name = 'test name';
 
-    const expectedString = 'test name | current_total: 123.01';
+    const expectedString = 'test name | total: 10 | $1001.00';
 
     const wrapper = shallow(
       <StockHolding
-        current_total={current_total}
+        lastQuote={currentTotal*lastQuote}
+        currentTotal={currentTotal}
         name={name}
       />
     );

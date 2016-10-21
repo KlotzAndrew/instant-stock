@@ -26,7 +26,7 @@ export class Holdings extends React.Component {
           return (
             <CashHolding
               currency={holding.getIn(['attributes', 'currency'])}
-              current_total={holding.getIn(['attributes', 'currentTotal'])}
+              currentTotal={holding.getIn(['attributes', 'currentTotal'])}
               key={index}
             />
           )
@@ -45,7 +45,8 @@ export class Holdings extends React.Component {
           return (
             <StockHolding
               name={holding.getIn(['attributes', 'stockName'])}
-              current_total={holding.getIn(['attributes', 'currentTotal'])}
+              currentTotal={holding.getIn(['attributes', 'currentTotal'])}
+              lastQuote={holding.getIn(['attributes', 'lastQuote'])}
               key={index}
             />
           )

@@ -27,4 +27,8 @@ class StockHolding < ApplicationRecord
   def stock_name
     stock.name
   end
+
+  def last_quote
+    stock.last_quote
+  end
 end

@@ -11,7 +11,7 @@ class StockHoldingSerializerTest < ActiveJob::TestCase
 
   test 'should serialize' do
     serliazed_values = [
-      :id, :portfolio_id, :stock_id, :current_total, :stock_name
+      :id, :portfolio_id, :stock_id, :current_total, :stock_name, :last_quote
     ]
 
     serliazed_values.each do |value|
