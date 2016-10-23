@@ -1,5 +1,7 @@
 import React from 'react';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export class FullNavbar extends React.Component {
   render = () => {
@@ -7,14 +9,15 @@ export class FullNavbar extends React.Component {
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Portfolio</a>
+            <Link to={`/`}>Portfolio</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} href="#">Trades</NavItem>
-            <NavItem eventKey={2} href="#">Holdings</NavItem>
+            <LinkContainer to={`/trades`} >
+              <NavItem eventKey={1} href="/trades">Trades</NavItem>
+            </LinkContainer>
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={1} href="#">Log In</NavItem>

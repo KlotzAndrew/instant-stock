@@ -53,6 +53,19 @@ export function setCashHoldings(cashHoldings) {
   return { type: types.SET_CASH_HOLDINGS, cashHoldings }
 }
 
+export function receiveChannelData(data) {
+  if (data.message) {
+    const message = JSON.parse(data.message);
+    return addMessage(message)
+  } else if (data.stock_trade) {
+    const trade = JSON.parse(data.stock_trade);
+    return addStockTrade(trade)
+  } else if (data.cash_trade) {
+    const trade = JSON.parse(data.cash_trade);
+    return addCashTrade(trade)
+  }
+}
+
 export function addMessage(message) {
   return {
     type: types.ADD_MESSAGE,

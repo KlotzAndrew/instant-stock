@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Messages from './Messages'
 import Trades from './Trades'
 import Holdings from './Holdings'
-import {setPromoPortfolio} from '../actions.jsx'
+import { setPromoPortfolio } from '../actions.jsx'
 
-export class Portfolio extends React.Component {
+
+export class PortfolioLayout extends React.Component {
   componentDidMount = () => {
     this.props.setPromoPortfolio();
   };
@@ -42,4 +43,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { setPromoPortfolio }
-)(Portfolio);
+)(PortfolioLayout);
