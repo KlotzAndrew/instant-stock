@@ -86,3 +86,10 @@ export function addCashTrade(trade) {
     trade,
   }
 }
+
+export function toggleStockHoldingCollapsed(id) {
+  return {
+    type: types.TOGGLE_STOCK_HOLDING_COLLAPSED,
+    id,
+  }
+}

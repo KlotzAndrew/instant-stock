@@ -29,6 +29,7 @@ cable.subscriptions.create('RoomChannel', {
   },
 
   received: function(data) {
+    console.log('data', data)
     store.dispatch(receiveChannelData(data));
   },
 });

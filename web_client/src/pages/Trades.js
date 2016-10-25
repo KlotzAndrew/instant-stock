@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FullNavbar } from './../components/FullNavbar';
+import TradesLayout from './../components/TradesLayout.jsx';
 
 
 export default class TradesPage extends Component {
@@ -7,6 +8,7 @@ export default class TradesPage extends Component {
     return (
       <div>
         <FullNavbar />
+        <TradesLayout />
       </div>
     );
   }

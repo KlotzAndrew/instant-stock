@@ -1,26 +1,42 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { fromJS } from 'immutable';
 
-import { Trade } from '../../src/components/Trade.jsx'
+import { Trade } from '../../src/components/Trade.jsx';
 
 
 describe('Trade', function trade() {
-  it('should render props', function renderProps() {
+  it('should render props', () => {
     const enterPrice = '123';
     const quantity = '99';
     const stockName = 'test name';
+    const trade = fromJS({
+      attributes: {
+        stockName: stockName,
+        enter_price: enterPrice,
+        quantity: quantity,
+        createdAt: '2016-10-25T00:28:42.728Z'
+      }
+    });
 
-    const expectedString = 'test name | enter_price: 123 | quantity: 99';
+    const expectedString = 'test name |2016/10/24 20:28:42 | enter_price:  | quantity: 99';
 
     const wrapper = shallow(
       <Trade
-        enterPrice={enterPrice}
-        quantity={quantity}
-        stockName={stockName}
+        trade={trade}
       />
     );
 
-    expect(wrapper.text()).to.equal(expectedString)
-  })
+    expect(wrapper.text()).to.equal(expectedString);
+  });
+
+  it('should render loading without trade', () => {
+    const expectedString = 'loading...';
+    const wrapper = shallow(
+      <Trade />
+    );
+
+    expect(wrapper.text()).to.equal(expectedString);
+  });
 });

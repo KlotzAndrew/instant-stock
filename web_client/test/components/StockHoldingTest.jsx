@@ -1,6 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { fromJS } from 'immutable';
 
 import { StockHolding } from '../../src/components/StockHolding.jsx'
 
@@ -8,16 +9,21 @@ import { StockHolding } from '../../src/components/StockHolding.jsx'
 describe('StockHolding', function cashHolding() {
   it('should render', function renderProps() {
     const lastQuote = '10.01';
-    const currentTotal = '10';
-    const name = 'test name';
+    const currentTotal = 10;
+    const stockName = 'test name';
+    const stockHolding = fromJS({
+      attributes: {
+        currentTotal: currentTotal,
+        stockName: stockName,
+        lastQuote: lastQuote
+      }
+    });
 
-    const expectedString = 'test name | total: 10 | $1001.00';
+    const expectedString = 'test name | total: 10 | $100.10';
 
     const wrapper = shallow(
       <StockHolding
-        lastQuote={currentTotal*lastQuote}
-        currentTotal={currentTotal}
-        name={name}
+        stockHolding={stockHolding}
       />
     );
 

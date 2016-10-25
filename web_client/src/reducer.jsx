@@ -67,6 +67,13 @@ function setCashHoldings(state, cashHoldings) {
   return returnState
 }
 
+function toggleStockHoldingCollapsed(state, id) {
+  const collapsedStatus = state.getIn(['stockHoldings', id, 'collapsedStatus']);
+  const newCollapsedStatus = collapsedStatus ? false : true;
+
+  return state.setIn(['stockHoldings', id, 'collapsedStatus'], newCollapsedStatus);
+}
+
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case types.SET_PORTFOLIO:
@@ -81,6 +88,8 @@ export default function (state = INITIAL_STATE, action) {
       return setStockHoldings(state, action.stockHoldings);
     case types.SET_CASH_HOLDINGS:
       return setCashHoldings(state, action.cashHoldings);
+    case types.TOGGLE_STOCK_HOLDING_COLLAPSED:
+      return toggleStockHoldingCollapsed(state, action.id)
   }
 
   return state;

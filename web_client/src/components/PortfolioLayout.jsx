@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Messages from './Messages'
-import Trades from './Trades'
-import Holdings from './Holdings'
-import { setPromoPortfolio } from '../actions.jsx'
+import Messages from './Messages';
+import Trades from './Trades';
+import StockHoldings from './StockHoldings';
+import StockHolding from './StockHolding.jsx';
+import CashHoldings from './CashHoldings.jsx';
+import { setPromoPortfolio } from '../actions.jsx';
 
 
 export class PortfolioLayout extends React.Component {
@@ -19,7 +21,8 @@ export class PortfolioLayout extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-12 col-sm-4">
-            <Holdings />
+            <StockHoldings holdingComponent={StockHolding} />
+            <CashHoldings />
           </div>
           <div className="col-xs-12 col-sm-4">
             <Trades />

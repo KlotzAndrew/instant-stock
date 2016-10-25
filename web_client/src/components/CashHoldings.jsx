@@ -1,17 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CashHolding } from './CashHolding'
-import { StockHolding } from './StockHolding'
+import { CashHolding } from './CashHolding';
 import { List, Map, fromJS } from 'immutable';
 
-export class Holdings extends React.Component {
+export class CashHoldings extends React.Component {
   render = () => {
     return (
       <div>
         <h4>CashHoldings~</h4>
         {this._renderCashHoldings(this.props.portfolio, this.props.cashHoldings)}
-        <h4>StockHoldings~</h4>
-        {this._renderStockHoldings(this.props.portfolio, this.props.stockHoldings)}
       </div>
     )
   };
@@ -34,36 +31,15 @@ export class Holdings extends React.Component {
       });
     }
   };
-
-  _renderStockHoldings = (portfolio, holdings) => {
-    const holdingRelationships = portfolio.getIn(["relationships", "stockHoldings", "data"]);
-    if (holdingRelationships) {
-      return holdingRelationships.map((portfolioHolding, index) => {
-        const id = portfolioHolding.getIn(['id']);
-        const holding = holdings.getIn([id]);
-        if (holding) {
-          return (
-            <StockHolding
-              name={holding.getIn(['attributes', 'stockName'])}
-              currentTotal={holding.getIn(['attributes', 'currentTotal'])}
-              lastQuote={holding.getIn(['attributes', 'lastQuote'])}
-              key={index}
-            />
-          )
-        }
-      });
-    }
-  };
 };
 
 function mapStateToProps(state) {
   return {
     portfolio: state.getIn(['portfolio']),
-    cashHoldings: state.getIn(['cashHoldings']),
-    stockHoldings: state.getIn(['stockHoldings'])
+    cashHoldings: state.getIn(['cashHoldings'])
   }
 }
 
 export default connect(
   mapStateToProps
-)(Holdings);
+)(CashHoldings);
