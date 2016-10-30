@@ -21,6 +21,7 @@ FactoryGirl.define do
                                         stock:     stock,
                                         portfolio: portfolio
       portfolio.stock_holdings << stock_holding
+      portfolio.stocks << stock
     end
   end
 
