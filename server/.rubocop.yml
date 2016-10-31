@@ -20,3 +20,6 @@ AllCops:
 
 Documentation:
   Enabled: false
+
+Rails/Delegate:
+  Enabled: false

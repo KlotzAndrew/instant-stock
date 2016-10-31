@@ -1,28 +1,20 @@
 class TradesController < ApplicationController
   before_action :set_trade, only: [:show, :edit, :update, :destroy]
 
-  # GET /trades
-  # GET /trades.json
   def index
     @trades = StockTrade.all
   end
 
-  # GET /trades/1
-  # GET /trades/1.json
   def show
   end
 
-  # GET /trades/new
   def new
     @trade = StockTrade.new
   end
 
-  # GET /trades/1/edit
   def edit
   end
 
-  # POST /trades
-  # POST /trades.json
   def create
     @trade = StockTrade.new(trade_params)
 
@@ -37,8 +29,6 @@ class TradesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /trades/1
-  # PATCH/PUT /trades/1.json
   def update
     respond_to do |format|
       if @trade.update(trade_params)
@@ -51,8 +41,6 @@ class TradesController < ApplicationController
     end
   end
 
-  # DELETE /trades/1
-  # DELETE /trades/1.json
   def destroy
     @trade.destroy
     respond_to do |format|

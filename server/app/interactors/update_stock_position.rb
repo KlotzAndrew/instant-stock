@@ -4,7 +4,7 @@ class UpdateStockPosition
   organize FindPromoPortfolio,
            FindPortfolioStocks,
            FetchStockQuotes
-           # UpdateStocksFromQuote,
-           # CalculatePositionChange,
-           # PerformStockTrades
+  # UpdateStocksFromQuote,
+  # CalculatePositionChange,
+  # PerformStockTrades
 end

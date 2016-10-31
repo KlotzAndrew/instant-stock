@@ -3,7 +3,7 @@ require 'test_helper'
 class GetPortfolioStockHoldingsTest < ActiveSupport::TestCase
   setup do
     @portfolio = FactoryGirl.build :portfolio,
-                                    :with_stock_holding
+                                   :with_stock_holding
   end
 
   test '#call should return stock_holdings' do

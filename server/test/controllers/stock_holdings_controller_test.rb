@@ -5,7 +5,7 @@ module Api
     class StockHoldingsControllerTest < ActionDispatch::IntegrationTest
       setup do
         @portfolio = FactoryGirl.build :portfolio,
-                                        :with_stock_holding
+                                       :with_stock_holding
         @stock_holding = @portfolio.stock_holdings.first
       end
 

@@ -6,7 +6,9 @@ class StockHoldingSerializerTest < ActiveJob::TestCase
     @holding = FactoryGirl.create :stock_holding, :with_stock_trade
 
     # @holding.expects(:stock).returns(@holding.stock).at_least(1)
-    @serialized_holding = JSON.parse(StockHoldingSerializer.new(@holding).to_json)
+    @serialized_holding = JSON.parse(
+      StockHoldingSerializer.new(@holding).to_json
+    )
   end
 
   test 'should serialize' do

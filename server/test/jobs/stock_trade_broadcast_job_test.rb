@@ -17,7 +17,7 @@ class StockTradeBroadcastJobTest < ActiveJob::TestCase
 
   test '#perform broadcasts trade' do
     channel   = 'room_channel'
-    broadcast = { :stock_trade => serialize_obj(@trade) }
+    broadcast = { stock_trade: serialize_obj(@trade) }
 
     ActionCable.server.expects(:broadcast).with(channel, broadcast)
 

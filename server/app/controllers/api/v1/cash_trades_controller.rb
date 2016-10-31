@@ -41,13 +41,12 @@ class CashTradesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cash_trade
-      @cash_trade = CashTrade.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cash_trade_params
-      params.fetch(:cash_trade, {})
-    end
+  def set_cash_trade
+    @cash_trade = CashTrade.find(params[:id])
+  end
+
+  def cash_trade_params
+    params.fetch(:cash_trade, {})
+  end
 end

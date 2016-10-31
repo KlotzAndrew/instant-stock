@@ -4,7 +4,9 @@ class CashHoldingSerializerTest < ActiveJob::TestCase
   def setup
     # TODO: figure out why mocking fails here
     @holding            = FactoryGirl.create :cash_holding, :with_cash_trade
-    @serialized_holding = JSON.parse(CashHoldingSerializer.new(@holding).to_json)
+    @serialized_holding = JSON.parse(
+      CashHoldingSerializer.new(@holding).to_json
+    )
   end
 
   test 'should serialize' do
