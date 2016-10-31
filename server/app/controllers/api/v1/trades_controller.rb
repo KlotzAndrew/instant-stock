@@ -16,37 +16,12 @@ class TradesController < ApplicationController
   end
 
   def create
-    @trade = StockTrade.new(trade_params)
-
-    respond_to do |format|
-      if @trade.save
-        format.html { redirect_to @trade, notice: 'Trade was successfully created.' }
-        format.json { render :show, status: :created, location: @trade }
-      else
-        format.html { render :new }
-        format.json { render json: @trade.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update
-    respond_to do |format|
-      if @trade.update(trade_params)
-        format.html { redirect_to @trade, notice: 'Trade was successfully updated.' }
-        format.json { render :show, status: :ok, location: @trade }
-      else
-        format.html { render :edit }
-        format.json { render json: @trade.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def destroy
-    @trade.destroy
-    respond_to do |format|
-      format.html { redirect_to trades_url, notice: 'Trade was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
