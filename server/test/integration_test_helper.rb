@@ -35,7 +35,5 @@ module ActionDispatch
     Capybara.server_port = 34_033
 
     Capybara.server = :puma
-
-    DatabaseCleaner.strategy = :truncation
   end
 end

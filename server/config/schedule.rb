@@ -5,5 +5,5 @@ set :output, { :error => 'log/cron.log', :standard => 'log/cron.log' }
 set :job_template, nil
 
 every 1.minute do
-  rake 'fetch:update_stock_positions'
+  rake 'trade:auto_trade'
 end

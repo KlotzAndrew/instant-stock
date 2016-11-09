@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :stock do
     id { SecureRandom.uuid }
-    ticker { [*'A'..'Z'].sample(4).join }
+    ticker { 'GOOG' }
     stock_exchange { [*'A'..'Z'].sample(3).join }
     name { Faker::Company.name }
     currency CashHolding::USD

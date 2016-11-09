@@ -2504,4 +2504,108 @@ http_interactions:
         :0 } \n\n]\n} )"
     http_version: 
   recorded_at: Sun, 07 Aug 2016 22:23:59 GMT
+- request:
+    method: get
+    uri: https://query.yahooapis.com/v1/public/yql?callback=&diagnostics=true&env=store://datatables.org/alltableswithkeys&format=json&q=SELECT%20*%20FROM%20yahoo.finance.quotes%20WHERE%20symbol%20IN%20(%27TSLA%27)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Yql-Host:
+      - prod_bf1_1;paas.yql;queryyahooapiscomproductionbf1;a88cd5df-a2ae-11e6-9353-d4ae5297450a
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json;charset=utf-8
+      Cache-Control:
+      - no-cache
+      Date:
+      - Wed, 09 Nov 2016 14:18:03 GMT
+      Age:
+      - '0'
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Via:
+      - http/1.1 a20.ue.bf1.yahoo.net (ApacheTrafficServer [cMsSf ])
+      Server:
+      - ATS
+      Y-Trace:
+      - BAEAQAAAAACCJjtxj5Yd9QAAAAAAAAAAdjKwmpU2KS0AAAAAAAAAAAAFQN7s0eeDAAVA3uzSg4rgecpuAAAAAA--
+    body:
+      encoding: UTF-8
+      string: '{"query":{"count":1,"created":"2016-11-09T14:18:03Z","lang":"en-US","diagnostics":{"url":[{"execution-start-time":"0","execution-stop-time":"1","execution-time":"1","content":"http://www.datatables.org/yahoo/finance/yahoo.finance.quotes.xml"},{"execution-start-time":"4","execution-stop-time":"25","execution-time":"21","content":"http://download.finance.yahoo.com/d/quotes.csv?f=aa2bb2b3b4cc1c3c4c6c8dd1d2ee1e7e8e9ghjkg1g3g4g5g6ii5j1j3j4j5j6k1k2k4k5ll1l2l3mm2m3m4m5m6m7m8nn4opp1p2p5p6qrr1r2r5r6r7ss1s7t1t7t8vv1v7ww1w4xy&s=TSLA"}],"publiclyCallable":"true","cache":{"execution-start-time":"3","execution-stop-time":"4","execution-time":"1","method":"GET","type":"MEMCACHED","content":"5d1e1de680846a307c9874dc3d6878dc"},"query":{"execution-start-time":"4","execution-stop-time":"26","execution-time":"22","params":"{url=[http://download.finance.yahoo.com/d/quotes.csv?f=aa2bb2b3b4cc1c3c4c6c8dd1d2ee1e7e8e9ghjkg1g3g4g5g6ii5j1j3j4j5j6k1k2k4k5ll1l2l3mm2m3m4m5m6m7m8nn4opp1p2p5p6qrr1r2r5r6r7ss1s7t1t7t8vv1v7ww1w4xy&s=TSLA]}","content":"select
+        * from csv where url=@url and columns=''Ask,AverageDailyVolume,Bid,AskRealtime,BidRealtime,BookValue,Change&PercentChange,Change,Commission,Currency,ChangeRealtime,AfterHoursChangeRealtime,DividendShare,LastTradeDate,TradeDate,EarningsShare,ErrorIndicationreturnedforsymbolchangedinvalid,EPSEstimateCurrentYear,EPSEstimateNextYear,EPSEstimateNextQuarter,DaysLow,DaysHigh,YearLow,YearHigh,HoldingsGainPercent,AnnualizedGain,HoldingsGain,HoldingsGainPercentRealtime,HoldingsGainRealtime,MoreInfo,OrderBookRealtime,MarketCapitalization,MarketCapRealtime,EBITDA,ChangeFromYearLow,PercentChangeFromYearLow,LastTradeRealtimeWithTime,ChangePercentRealtime,ChangeFromYearHigh,PercebtChangeFromYearHigh,LastTradeWithTime,LastTradePriceOnly,HighLimit,LowLimit,DaysRange,DaysRangeRealtime,FiftydayMovingAverage,TwoHundreddayMovingAverage,ChangeFromTwoHundreddayMovingAverage,PercentChangeFromTwoHundreddayMovingAverage,ChangeFromFiftydayMovingAverage,PercentChangeFromFiftydayMovingAverage,Name,Notes,Open,PreviousClose,PricePaid,ChangeinPercent,PriceSales,PriceBook,ExDividendDate,PERatio,DividendPayDate,PERatioRealtime,PEGRatio,PriceEPSEstimateCurrentYear,PriceEPSEstimateNextYear,Symbol,SharesOwned,ShortRatio,LastTradeTime,TickerTrend,OneyrTargetPrice,Volume,HoldingsValue,HoldingsValueRealtime,YearRange,DaysValueChange,DaysValueChangeRealtime,StockExchange,DividendYield''"},"javascript":{"execution-start-time":"2","execution-stop-time":"36","execution-time":"33","instructions-used":"62530","table-name":"yahoo.finance.quotes"},"user-time":"37","service-time":"23","build-version":"2.0.77"},"results":{"quote":{"symbol":"TSLA","Ask":"190.00","AverageDailyVolume":"3535930","Bid":"188.99","AskRealtime":null,"BidRealtime":null,"BookValue":"17.99","Change_PercentChange":"+1.73
+        - +0.90%","Change":"+1.73","Commission":null,"Currency":"USD","ChangeRealtime":null,"AfterHoursChangeRealtime":null,"DividendShare":null,"LastTradeDate":"11/8/2016","TradeDate":null,"EarningsShare":"-6.32","ErrorIndicationreturnedforsymbolchangedinvalid":null,"EPSEstimateCurrentYear":"-2.03","EPSEstimateNextYear":"-0.29","EPSEstimateNextQuarter":"-0.05","DaysLow":null,"DaysHigh":null,"YearLow":"141.05","YearHigh":"269.34","HoldingsGainPercent":null,"AnnualizedGain":null,"HoldingsGain":null,"HoldingsGainPercentRealtime":null,"HoldingsGainRealtime":null,"MoreInfo":null,"OrderBookRealtime":null,"MarketCapitalization":"29.04B","MarketCapRealtime":null,"EBITDA":"32.44M","ChangeFromYearLow":"53.89","PercentChangeFromYearLow":"+38.21%","LastTradeRealtimeWithTime":null,"ChangePercentRealtime":null,"ChangeFromYearHigh":"-74.40","PercebtChangeFromYearHigh":"-27.62%","LastTradeWithTime":"4:00pm
+        - <b>194.94</b>","LastTradePriceOnly":"194.94","HighLimit":null,"LowLimit":null,"DaysRange":null,"DaysRangeRealtime":null,"FiftydayMovingAverage":"200.83","TwoHundreddayMovingAverage":"214.12","ChangeFromTwoHundreddayMovingAverage":"-19.18","PercentChangeFromTwoHundreddayMovingAverage":"-8.96%","ChangeFromFiftydayMovingAverage":"-5.89","PercentChangeFromFiftydayMovingAverage":"-2.93%","Name":"Tesla
+        Motors, Inc.","Notes":null,"Open":null,"PreviousClose":"193.21","PricePaid":null,"ChangeinPercent":"+0.90%","PriceSales":"4.85","PriceBook":"10.74","ExDividendDate":null,"PERatio":null,"DividendPayDate":null,"PERatioRealtime":null,"PEGRatio":"-2.72","PriceEPSEstimateCurrentYear":null,"PriceEPSEstimateNextYear":null,"Symbol":"TSLA","SharesOwned":null,"ShortRatio":"9.48","LastTradeTime":"4:00pm","TickerTrend":null,"OneyrTargetPrice":"231.79","Volume":"9447","HoldingsValue":null,"HoldingsValueRealtime":null,"YearRange":"141.05
+        - 269.34","DaysValueChange":null,"DaysValueChangeRealtime":null,"StockExchange":"NMS","DividendYield":null,"PercentChange":"+0.90%"}}}}'
+    http_version: 
+  recorded_at: Wed, 09 Nov 2016 14:18:03 GMT
+- request:
+    method: get
+    uri: https://query.yahooapis.com/v1/public/yql?callback=&diagnostics=true&env=store://datatables.org/alltableswithkeys&format=json&q=SELECT%20*%20FROM%20yahoo.finance.quotes%20WHERE%20symbol%20IN%20(%27GOOG%27)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Yql-Host:
+      - prod_bf1_1;paas.yql;queryyahooapiscomproductionbf1;a8944ff4-a2ae-11e6-9353-d4ae5297450a
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json;charset=utf-8
+      Cache-Control:
+      - no-cache
+      Date:
+      - Wed, 09 Nov 2016 14:30:27 GMT
+      Age:
+      - '0'
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Via:
+      - http/1.1 a34.ue.bf1.yahoo.net (ApacheTrafficServer [cMsSf ])
+      Server:
+      - ATS
+      Y-Trace:
+      - BAEAQAAAAADOkNn7FyF4swAAAAAAAAAAxuwnsWaZMHoAAAAAAAAAAAAFQN8ZK11wAAVA3xksBrvC8AgqAAAAAA--
+    body:
+      encoding: UTF-8
+      string: '{"query":{"count":1,"created":"2016-11-09T14:30:27Z","lang":"en-US","diagnostics":{"url":[{"execution-start-time":"0","execution-stop-time":"14","execution-time":"14","content":"http://www.datatables.org/yahoo/finance/yahoo.finance.quotes.xml"},{"execution-start-time":"18","execution-stop-time":"33","execution-time":"15","content":"http://download.finance.yahoo.com/d/quotes.csv?f=aa2bb2b3b4cc1c3c4c6c8dd1d2ee1e7e8e9ghjkg1g3g4g5g6ii5j1j3j4j5j6k1k2k4k5ll1l2l3mm2m3m4m5m6m7m8nn4opp1p2p5p6qrr1r2r5r6r7ss1s7t1t7t8vv1v7ww1w4xy&s=GOOG"}],"publiclyCallable":"true","cache":{"execution-start-time":"17","execution-stop-time":"17","execution-time":"0","method":"GET","type":"MEMCACHED","content":"5d1e1de680846a307c9874dc3d6878dc"},"query":{"execution-start-time":"17","execution-stop-time":"33","execution-time":"16","params":"{url=[http://download.finance.yahoo.com/d/quotes.csv?f=aa2bb2b3b4cc1c3c4c6c8dd1d2ee1e7e8e9ghjkg1g3g4g5g6ii5j1j3j4j5j6k1k2k4k5ll1l2l3mm2m3m4m5m6m7m8nn4opp1p2p5p6qrr1r2r5r6r7ss1s7t1t7t8vv1v7ww1w4xy&s=GOOG]}","content":"select
+        * from csv where url=@url and columns=''Ask,AverageDailyVolume,Bid,AskRealtime,BidRealtime,BookValue,Change&PercentChange,Change,Commission,Currency,ChangeRealtime,AfterHoursChangeRealtime,DividendShare,LastTradeDate,TradeDate,EarningsShare,ErrorIndicationreturnedforsymbolchangedinvalid,EPSEstimateCurrentYear,EPSEstimateNextYear,EPSEstimateNextQuarter,DaysLow,DaysHigh,YearLow,YearHigh,HoldingsGainPercent,AnnualizedGain,HoldingsGain,HoldingsGainPercentRealtime,HoldingsGainRealtime,MoreInfo,OrderBookRealtime,MarketCapitalization,MarketCapRealtime,EBITDA,ChangeFromYearLow,PercentChangeFromYearLow,LastTradeRealtimeWithTime,ChangePercentRealtime,ChangeFromYearHigh,PercebtChangeFromYearHigh,LastTradeWithTime,LastTradePriceOnly,HighLimit,LowLimit,DaysRange,DaysRangeRealtime,FiftydayMovingAverage,TwoHundreddayMovingAverage,ChangeFromTwoHundreddayMovingAverage,PercentChangeFromTwoHundreddayMovingAverage,ChangeFromFiftydayMovingAverage,PercentChangeFromFiftydayMovingAverage,Name,Notes,Open,PreviousClose,PricePaid,ChangeinPercent,PriceSales,PriceBook,ExDividendDate,PERatio,DividendPayDate,PERatioRealtime,PEGRatio,PriceEPSEstimateCurrentYear,PriceEPSEstimateNextYear,Symbol,SharesOwned,ShortRatio,LastTradeTime,TickerTrend,OneyrTargetPrice,Volume,HoldingsValue,HoldingsValueRealtime,YearRange,DaysValueChange,DaysValueChangeRealtime,StockExchange,DividendYield''"},"javascript":{"execution-start-time":"16","execution-stop-time":"39","execution-time":"23","instructions-used":"63182","table-name":"yahoo.finance.quotes"},"user-time":"40","service-time":"29","build-version":"2.0.77"},"results":{"quote":{"symbol":"GOOG","Ask":"772.00","AverageDailyVolume":"1374830","Bid":"765.00","AskRealtime":null,"BidRealtime":null,"BookValue":"194.60","Change_PercentChange":"+7.99
+        - +1.02%","Change":"+7.99","Commission":null,"Currency":"USD","ChangeRealtime":null,"AfterHoursChangeRealtime":null,"DividendShare":null,"LastTradeDate":"11/8/2016","TradeDate":null,"EarningsShare":"27.40","ErrorIndicationreturnedforsymbolchangedinvalid":null,"EPSEstimateCurrentYear":"34.40","EPSEstimateNextYear":"40.96","EPSEstimateNextQuarter":"9.33","DaysLow":null,"DaysHigh":null,"YearLow":"663.06","YearHigh":"816.68","HoldingsGainPercent":null,"AnnualizedGain":null,"HoldingsGain":null,"HoldingsGainPercentRealtime":null,"HoldingsGainRealtime":null,"MoreInfo":null,"OrderBookRealtime":null,"MarketCapitalization":"544.77B","MarketCapRealtime":null,"EBITDA":"28.32B","ChangeFromYearLow":"127.45","PercentChangeFromYearLow":"+19.22%","LastTradeRealtimeWithTime":null,"ChangePercentRealtime":null,"ChangeFromYearHigh":"-26.17","PercebtChangeFromYearHigh":"-3.20%","LastTradeWithTime":"4:00pm
+        - <b>790.51</b>","LastTradePriceOnly":"790.51","HighLimit":null,"LowLimit":null,"DaysRange":null,"DaysRangeRealtime":null,"FiftydayMovingAverage":"783.88","TwoHundreddayMovingAverage":"746.98","ChangeFromTwoHundreddayMovingAverage":"43.53","PercentChangeFromTwoHundreddayMovingAverage":"+5.83%","ChangeFromFiftydayMovingAverage":"6.63","PercentChangeFromFiftydayMovingAverage":"+0.85%","Name":"Alphabet
+        Inc.","Notes":null,"Open":null,"PreviousClose":"782.52","PricePaid":null,"ChangeinPercent":"+1.02%","PriceSales":"6.30","PriceBook":"4.02","ExDividendDate":null,"PERatio":"28.85","DividendPayDate":null,"PERatioRealtime":null,"PEGRatio":"1.21","PriceEPSEstimateCurrentYear":"22.98","PriceEPSEstimateNextYear":"19.30","Symbol":"GOOG","SharesOwned":null,"ShortRatio":"1.64","LastTradeTime":"4:00pm","TickerTrend":null,"OneyrTargetPrice":"939.00","Volume":"3384","HoldingsValue":null,"HoldingsValueRealtime":null,"YearRange":"663.06
+        - 816.68","DaysValueChange":null,"DaysValueChangeRealtime":null,"StockExchange":"NMS","DividendYield":null,"PercentChange":"+1.02%"}}}}'
+    http_version: 
+  recorded_at: Wed, 09 Nov 2016 14:30:27 GMT
 recorded_with: VCR 3.0.3

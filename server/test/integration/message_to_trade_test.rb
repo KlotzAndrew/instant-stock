@@ -3,6 +3,9 @@ require 'integration_test_helper'
 
 class MessageToTradeTest < ActionDispatch::IntegrationTest
   def setup
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+
     time = Time.zone.local(2016, 7, 31, 14, 0, 0)
     Timecop.freeze(time)
 
@@ -12,6 +15,10 @@ class MessageToTradeTest < ActionDispatch::IntegrationTest
     cash_holding = FactoryGirl.create :cash_holding
     FactoryGirl.create :cash_trade,
                        cash_holding: cash_holding
+  end
+
+  def teardown
+    DatabaseCleaner.clean
   end
 
   test 'sending a message should correctly buy a stock' do

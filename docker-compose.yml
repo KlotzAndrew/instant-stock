@@ -41,8 +41,13 @@ services:
     command: sh lib/scripts/start_cron_server_dev.sh
     volumes:
      - ./server:/myapp
-    links:
-     - db
+    depends_on:
+      - db
+      - redis
+    environment:
+      REDIS_URL: redis://redis:6379
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      API_LOCATION: ${API_LOCATION}
 
   web_client:
     build: ./web_client

@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :portfolio do
     id { SecureRandom.uuid }
     name { Faker::Company.name }
+    promo_portfolio true
   end
 
   trait :with_cash do
