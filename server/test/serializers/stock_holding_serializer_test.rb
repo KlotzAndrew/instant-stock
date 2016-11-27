@@ -12,6 +12,7 @@ class StockHoldingSerializerTest < ActiveJob::TestCase
   end
 
   test 'should serialize' do
+    skip 'will deprecate AMS'
     serliazed_values = [
       :id, :portfolio_id, :stock_id, :current_total, :stock_name, :last_quote
     ]
