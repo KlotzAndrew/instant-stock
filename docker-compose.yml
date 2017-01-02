@@ -5,49 +5,49 @@ services:
     ports:
       - "5432"
 
-  redis:
-    image: redis:latest
-    ports:
-      - "6379"
+  # redis:
+  #   image: redis:latest
+  #   ports:
+  #     - "6379"
 
   web:
-    build: ./server
+    build: ./phoenix_api
     command: sh lib/scripts/start_webapp.sh
     volumes:
-      - ./server:/myapp
+      - ./phoenix_api:/app
     ports:
       - "4000:4000"
     depends_on:
       - db
-      - redis
+      # - redis
     environment:
       REDIS_URL: redis://redis:6379
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       API_LOCATION: ${API_LOCATION}
 
-  sidekiq:
-    build: ./server
-    command: sh lib/scripts/start_sidekiq.sh
-    volumes:
-      - ./server:/myapp
-    links:
-      - db
-      - redis
-    environment:
-      REDIS_URL: redis://redis:6379
-
-  cron_service:
-    build: ./server
-    command: sh lib/scripts/start_cron_server_dev.sh
-    volumes:
-     - ./server:/myapp
-    depends_on:
-      - db
-      - redis
-    environment:
-      REDIS_URL: redis://redis:6379
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-      API_LOCATION: ${API_LOCATION}
+  # sidekiq:
+  #   build: ./server
+  #   command: sh lib/scripts/start_sidekiq.sh
+  #   volumes:
+  #     - ./server:/myapp
+  #   links:
+  #     - db
+  #     - redis
+  #   environment:
+  #     REDIS_URL: redis://redis:6379
+  #
+  # cron_service:
+  #   build: ./server
+  #   command: sh lib/scripts/start_cron_server_dev.sh
+  #   volumes:
+  #    - ./server:/myapp
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   environment:
+  #     REDIS_URL: redis://redis:6379
+  #     SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+  #     API_LOCATION: ${API_LOCATION}
 
   web_client:
     build: ./web_client
