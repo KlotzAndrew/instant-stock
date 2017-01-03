@@ -6,7 +6,7 @@ defmodule PhoenixApi.PortfolioControllerTest do
   @invalid_attrs %{}
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    {:ok, conn: put_req_header(conn, "accept", "application/vnd.api+json")}
   end
 
   test "shows promo portfolio", %{conn: conn} do
@@ -14,7 +14,7 @@ defmodule PhoenixApi.PortfolioControllerTest do
     portfolio = Repo.insert! %Portfolio{name: name}
 
     conn = get conn, portfolio_path(conn, :promo)
-    assert json_response(conn, 200)["data"]["name"] == name
+    assert json_response(conn, 200)["data"]["attributes"]["name"] == name
   end
 
   test "lists all entries on index", %{conn: conn} do
@@ -25,8 +25,8 @@ defmodule PhoenixApi.PortfolioControllerTest do
   test "shows chosen resource", %{conn: conn} do
     portfolio = Repo.insert! %Portfolio{}
     conn = get conn, portfolio_path(conn, :show, portfolio)
-    assert json_response(conn, 200)["data"] == %{"id" => portfolio.id,
-      "name" => portfolio.name}
+    assert json_response(conn, 200)["data"]["id"] == Integer.to_string(portfolio.id)
+    assert json_response(conn, 200)["data"]["attributes"]["name"] == portfolio.name
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do

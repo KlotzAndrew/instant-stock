@@ -38,6 +38,7 @@ defmodule PhoenixApi.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cors_plug, "~> 1.1"},
+     {:ja_serializer, "~> 0.11.2"},
      {:cowboy, "~> 1.0"}]
   end
 

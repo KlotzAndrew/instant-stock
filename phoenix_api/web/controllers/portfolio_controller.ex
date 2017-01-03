@@ -5,12 +5,12 @@ defmodule PhoenixApi.PortfolioController do
 
   def promo(conn, _params) do
     portfolio = Enum.at(Repo.all(Portfolio), 0)
-    render(conn, "show.json", portfolio: portfolio)
+    render(conn, "show.json", data: portfolio)
   end
 
   def index(conn, _params) do
     portfolios = Repo.all(Portfolio)
-    render(conn, "index.json", portfolios: portfolios)
+    render(conn, "index.json", data: portfolios)
   end
 
   def create(conn, %{"portfolio" => portfolio_params}) do
@@ -21,7 +21,7 @@ defmodule PhoenixApi.PortfolioController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", portfolio_path(conn, :show, portfolio))
-        |> render("show.json", portfolio: portfolio)
+        |> render("show.json", data: portfolio)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -31,7 +31,7 @@ defmodule PhoenixApi.PortfolioController do
 
   def show(conn, %{"id" => id}) do
     portfolio = Repo.get!(Portfolio, id)
-    render(conn, "show.json", portfolio: portfolio)
+    render(conn, "show.json", data: portfolio)
   end
 
   def update(conn, %{"id" => id, "portfolio" => portfolio_params}) do
@@ -40,7 +40,7 @@ defmodule PhoenixApi.PortfolioController do
 
     case Repo.update(changeset) do
       {:ok, portfolio} ->
-        render(conn, "show.json", portfolio: portfolio)
+        render(conn, "show.json", data: portfolio)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

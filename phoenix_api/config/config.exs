@@ -17,6 +17,10 @@ config :phoenix_api, PhoenixApi.Endpoint,
   pubsub: [name: PhoenixApi.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :plug, :mimes, %{
+ "application/vnd.api+json" => ["json-api"]
+}
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
