@@ -38,5 +38,7 @@ defmodule PhoenixApi.Endpoint do
     key: "_phoenix_api_key",
     signing_salt: "a4IKDBpt"
 
+  plug CORSPlug
+
   plug PhoenixApi.Router
 end
