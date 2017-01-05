@@ -48,7 +48,10 @@ export class Messages extends React.Component {
   };
 
   _submitMessage = (message, portfolioId) => {
-    return axiosInstance.post(`/portfolios/${portfolioId}/messages`, {content: message});
+    return axiosInstance.post(
+      `/messages`,
+      {message: {content: message, portfolio_id: portfolioId}}
+    );
   };
 }
 

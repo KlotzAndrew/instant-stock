@@ -10,7 +10,7 @@ defmodule PhoenixApi.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json-api"]
+    plug :accepts, ["json", "json-api"]
   end
 
   scope "/", PhoenixApi do
@@ -23,6 +23,7 @@ defmodule PhoenixApi.Router do
     pipe_through :api
 
     resources "/portfolios", PortfolioController
+    resources "/messages", MessageController
     get "/promo", PortfolioController, :promo
   end
 end
