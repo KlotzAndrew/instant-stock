@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import { Router, Route, Link, browserHistory } from 'react-router'
 import ActionCable from 'actioncable';
+import { Socket } from 'phoenix-socket';
 import serverConfig from '../serverConfig.json';
 import { receiveChannelData } from './actions.jsx'
 
@@ -17,22 +18,20 @@ const store = createStore(
   applyMiddleware(thunk)
 );
 
-const cable = ActionCable.createConsumer(`ws:${serverConfig.API_LOCATION}:4000/cable`);
+let socket = new Socket(`ws:${serverConfig.API_LOCATION}:4000/socket`)
+socket.connect()
 
-cable.subscriptions.create('RoomChannel', {
-  connected: function() {
-    console.log('connected!')
-  },
+let channel = socket.channel('room:lobby', {});
 
-  disconnected: function() {
-    console.log('disconnected!')
-  },
+channel.on('new:msg', payload => {
+  console.log('data', payload);
+  store.dispatch(receiveChannelData(payload));
+  }
+);
 
-  received: function(data) {
-    console.log('data', data)
-    store.dispatch(receiveChannelData(data));
-  },
-});
+channel.join()
+  .receive('ok', resp => { console.log('Joined successfully', resp) })
+  .receive('error', resp => { console.log('Unable to join', resp) })
 
 const routes = (
   <div>

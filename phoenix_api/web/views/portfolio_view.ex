@@ -3,4 +3,8 @@ defmodule PhoenixApi.PortfolioView do
   use JaSerializer.PhoenixView
 
   attributes [:name]
+
+  has_many :messages,
+    include: false
+
 end

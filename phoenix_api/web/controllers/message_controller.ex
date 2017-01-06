@@ -13,6 +13,8 @@ defmodule PhoenixApi.MessageController do
 
     case Repo.insert(changeset) do
       {:ok, message} ->
+        PhoenixApi.Endpoint.broadcast! "room:lobby", "new:msg", %{"message" => %{"id" => message.id, "content" => message.content}}
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", message_path(conn, :show, message))

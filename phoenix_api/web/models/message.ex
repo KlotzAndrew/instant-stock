@@ -3,7 +3,7 @@ defmodule PhoenixApi.Message do
 
   schema "messages" do
     field :content, :string
-    field :portfolio_id, :integer
+    belongs_to :portfolio, PhoenixApi.Portfolio
 
     timestamps()
   end

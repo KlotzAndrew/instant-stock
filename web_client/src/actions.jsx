@@ -55,8 +55,7 @@ export function setCashHoldings(cashHoldings) {
 
 export function receiveChannelData(data) {
   if (data.message) {
-    const message = JSON.parse(data.message);
-    return addMessage(message)
+    return addMessage(data.message)
   } else if (data.stock_trade) {
     const trade = JSON.parse(data.stock_trade);
     return addStockTrade(trade)

@@ -34,4 +34,5 @@ defmodule PhoenixApi.UserSocket do
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil
+  channel "room:lobby", PhoenixApi.RoomChannel
 end
