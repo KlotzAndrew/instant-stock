@@ -26,6 +26,7 @@ defmodule PhoenixApi.Router do
     resources "/messages", MessageController
     resources "/cash_holdings", CashHoldingController
     resources "/cash_trades", CashTradeController
+    resources "/stock_holdings", StockHoldingController
 
     resources "/stocks", StockController
 

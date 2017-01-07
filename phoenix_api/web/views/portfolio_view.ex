@@ -12,4 +12,8 @@ defmodule PhoenixApi.PortfolioView do
     serializer: PhoenixApi.CashHoldingView,
     include: true
 
+  has_many :stock_holdings,
+    serializer: PhoenixApi.StockHoldingView,
+    include: true
+
 end

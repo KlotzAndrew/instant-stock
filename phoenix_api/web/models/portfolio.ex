@@ -5,6 +5,7 @@ defmodule PhoenixApi.Portfolio do
     field :name, :string
     has_many :messages, PhoenixApi.Message
     has_many :cash_holdings, PhoenixApi.CashHolding
+    has_many :stock_holdings, PhoenixApi.StockHolding
 
     timestamps()
   end
