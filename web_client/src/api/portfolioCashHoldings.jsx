@@ -3,6 +3,6 @@ import axiosInstance from '../config/axios';
 
 export default {
   getPortfolioCashHoldings(portfolioId) {
-    return axiosInstance.get(`/portfolios/${portfolioId}/cash_holdings`)
+    return axiosInstance.get(`/cash_holdings`)
   }
 }

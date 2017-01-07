@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 
 function setPortfolio(state, portfolio) {
   const data = fromJS(portfolio);
-  return state.setIn(['portfolio'], data.merge(INITAL_PORTFOLIO))
+  return state.setIn(['portfolio'], data)
 }
 
 function addMessage(state, message) {
@@ -118,19 +118,3 @@ export const INITIAL_STATE = fromJS(
     stockTrades: {},
   }
 );
-
-export const INITAL_PORTFOLIO = fromJS(
-  {
-    relationships: {
-      messages: {
-        data: []
-      },
-      trades: {
-        data: []
-      },
-      stockHoldings: {
-        data: []
-      },
-    },
-  }
-)

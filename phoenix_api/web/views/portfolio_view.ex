@@ -5,6 +5,11 @@ defmodule PhoenixApi.PortfolioView do
   attributes [:name]
 
   has_many :messages,
-    include: false
+    serializer: PhoenixApi.MessageView,
+    include: true
+
+  has_many :cash_holdings,
+    serializer: PhoenixApi.CashHoldingView,
+    include: true
 
 end

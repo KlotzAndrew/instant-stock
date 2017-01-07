@@ -1,4 +1,4 @@
-class CreateCashHoldings < ActiveRecord::Migration[5.0]
+ class CreateCashHoldings < ActiveRecord::Migration[5.0]
   def change
     create_table :cash_holdings, id: :uuid do |t|
       t.string :currency, null: false
