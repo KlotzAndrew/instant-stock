@@ -4,6 +4,7 @@ defmodule PhoenixApi.CashHolding do
   schema "cash_holdings" do
     field :currency, :string
     belongs_to :portfolio, PhoenixApi.Portfolio
+    has_many :cash_trades, PhoenixApi.CashTrade
 
     timestamps()
   end
