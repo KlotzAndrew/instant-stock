@@ -27,6 +27,8 @@ defmodule PhoenixApi.Router do
     resources "/cash_holdings", CashHoldingController
     resources "/cash_trades", CashTradeController
 
+    resources "/stocks", StockController
+
     get "/promo", PortfolioController, :promo
   end
 end
