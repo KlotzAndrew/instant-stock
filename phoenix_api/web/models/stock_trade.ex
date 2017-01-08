@@ -2,7 +2,7 @@ defmodule PhoenixApi.StockTrade do
   use PhoenixApi.Web, :model
 
   schema "stock_trades" do
-    field :stock_holding_id, :integer
+    belongs_to :stock_holding, PhoenixApi.StockHolding
     field :quantity, :integer
     field :enter_price, :decimal
     field :exit_price, :decimal

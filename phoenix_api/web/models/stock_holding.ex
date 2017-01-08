@@ -2,8 +2,9 @@ defmodule PhoenixApi.StockHolding do
   use PhoenixApi.Web, :model
 
   schema "stock_holdings" do
-    field :stock_id, :integer
     belongs_to :portfolio, PhoenixApi.Portfolio
+    belongs_to :stock, PhoenixApi.Stock
+    has_many :stock_trades, PhoenixApi.StockTrade
 
     timestamps()
   end

@@ -14,7 +14,7 @@ export class StockHoldings extends React.Component {
   };
 
   _renderStockHoldings = (portfolio, holdings) => {
-    const holdingRelationships = portfolio.getIn(['relationships', 'stockHoldings', 'data']);
+    const holdingRelationships = portfolio.getIn(['relationships', 'stock-holdings', 'data']);
     if (holdingRelationships) {
       return holdingRelationships.map((portfolioHolding, index) => {
         const id = portfolioHolding.getIn(['id']);
