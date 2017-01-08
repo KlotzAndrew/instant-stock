@@ -5,7 +5,7 @@ Automated stock trading app with a chat room
 ### Setup
 
 It is all docker containers, so just run: `docker-compose up`
-Web container needs `rake db:create && db:migrate && db:seed` on first
+Web container needs `mix ecto.setup` on first
 run
 
 Client runs at `/` api server runs on `:4000`
@@ -24,20 +24,17 @@ All the services run in docker containers:
 Client
  * Node/express JS app, React/Redux/ImmutableJS
  * Nginx load balancer for node app
- 
+
 Server
- * Rails/puma Ruby app, Rails5/Websockets
- * Nginx load balancer for rails app
- * Sidekiq broadcasting to websocket
- * Whenever, running cron job (fetches stock prices using a gem API
-  request logic was extracted to)
- 
+ * Phoenix app, json api/websockets
+ * Nginx load balancer for phoenix app
+
 Persistence
  * PG db
- * Redis, Sidekiq job data store
- 
+
 ### TODO
 
+ * <s>Replace rails api with phoenix app</s>
  * Add GraphQL endpoint
  * Add logging service (Graylog?)
  * Setup PG master/slave (PgBouncer?)
@@ -45,4 +42,3 @@ Persistence
  * Serve react app from s3
  * Paginate main page items
  * Switch to docker swarm
- * Add a Pheonix service (maybe replace rails app)
