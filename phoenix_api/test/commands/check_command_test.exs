@@ -8,8 +8,8 @@ defmodule CheckCommandTest do
     result = CheckCommand.parse(buy_command)
 
     assert result
-    assert result[:ticker] === "TSLA"
-    assert result[:quantity] === 35
+    assert result[:tickers] == ["TSLA"]
+    assert result[:quantity] == 35
   end
 
   test "parse finds match for sell with default value" do
@@ -17,8 +17,8 @@ defmodule CheckCommandTest do
     result = CheckCommand.parse(sell_command)
 
     assert result
-    assert result[:ticker] === "K"
-    assert result[:quantity] === -1
+    assert result[:tickers] == ["K"]
+    assert result[:quantity] == -1
   end
 
   test "parse finds negative quantity" do
@@ -26,8 +26,8 @@ defmodule CheckCommandTest do
     result = CheckCommand.parse(sell_command)
 
     assert result
-    assert result[:ticker] === "GOOG"
-    assert result[:quantity] === -23
+    assert result[:tickers] == ["GOOG"]
+    assert result[:quantity] == -23
   end
 
   test "parse finds no match for string" do

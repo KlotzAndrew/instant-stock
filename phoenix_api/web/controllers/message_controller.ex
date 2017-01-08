@@ -2,10 +2,13 @@ defmodule PhoenixApi.MessageController do
   use PhoenixApi.Web, :controller
 
   alias PhoenixApi.Message
+  alias Commands.ExecuteTrade
+
+  require Logger
 
   def index(conn, _params) do
     messages = Repo.all(Message)
-    render(conn, "index.json", messages: messages)
+    render(conn, "index.json", data: messages)
   end
 
   def create(conn, %{"message" => message_params}) do
@@ -14,11 +17,25 @@ defmodule PhoenixApi.MessageController do
     case Repo.insert(changeset) do
       {:ok, message} ->
         PhoenixApi.Endpoint.broadcast! "room:lobby", "new:msg", %{"message" => %{"id" => message.id, "content" => message.content}}
+        case ExecuteTrade.trade(message_params["content"], message_params["portfolio_id"]) do
+          {:ok, trade} ->
+            PhoenixApi.Endpoint.broadcast! "room:lobby", "new:msg", %{
+              "stock_trade" => %{
+                "data" => %{
+                  "id" => trade.id,
+                  "attributes" => %{
+                    "stockHoldingId" => trade.stock_holding_id,
+                    "quantity" => trade.quantity,
+                    "enterPrice" => trade.enter_price
+                  }
+                }
+            }}
+        end
 
         conn
         |> put_status(:created)
         |> put_resp_header("location", message_path(conn, :show, message))
-        |> render("show.json", message: message)
+        |> render("show.json", data: message)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -28,7 +45,7 @@ defmodule PhoenixApi.MessageController do
 
   def show(conn, %{"id" => id}) do
     message = Repo.get!(Message, id)
-    render(conn, "show.json", message: message)
+    render(conn, "show.json", data: message)
   end
 
   def update(conn, %{"id" => id, "message" => message_params}) do
@@ -37,7 +54,7 @@ defmodule PhoenixApi.MessageController do
 
     case Repo.update(changeset) do
       {:ok, message} ->
-        render(conn, "show.json", message: message)
+        render(conn, "show.json", data: message)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

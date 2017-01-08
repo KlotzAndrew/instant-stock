@@ -30,6 +30,7 @@ defmodule PhoenixApi.MessageControllerTest do
     end
   end
 
+  @tag :skip
   test "creates and renders resource when data is valid", %{conn: conn} do
     conn = post conn, message_path(conn, :create), message: @valid_attrs
     assert json_response(conn, 201)["data"]["id"]
