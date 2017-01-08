@@ -5,7 +5,7 @@ defmodule PhoenixApi.CashTradeController do
 
   def index(conn, _params) do
     cash_trades = Repo.all(CashTrade)
-    render(conn, "index.json", cash_trades: cash_trades)
+    render(conn, "index.json", data: cash_trades)
   end
 
   def create(conn, %{"cash_trade" => cash_trade_params}) do
@@ -16,7 +16,7 @@ defmodule PhoenixApi.CashTradeController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", cash_trade_path(conn, :show, cash_trade))
-        |> render("show.json", cash_trade: cash_trade)
+        |> render("show.json", data: cash_trade)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -26,7 +26,7 @@ defmodule PhoenixApi.CashTradeController do
 
   def show(conn, %{"id" => id}) do
     cash_trade = Repo.get!(CashTrade, id)
-    render(conn, "show.json", cash_trade: cash_trade)
+    render(conn, "show.json", data: cash_trade)
   end
 
   def update(conn, %{"id" => id, "cash_trade" => cash_trade_params}) do
@@ -35,7 +35,7 @@ defmodule PhoenixApi.CashTradeController do
 
     case Repo.update(changeset) do
       {:ok, cash_trade} ->
-        render(conn, "show.json", cash_trade: cash_trade)
+        render(conn, "show.json", data: cash_trade)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

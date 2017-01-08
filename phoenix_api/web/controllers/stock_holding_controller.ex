@@ -16,7 +16,7 @@ defmodule PhoenixApi.StockHoldingController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", stock_holding_path(conn, :show, stock_holding))
-        |> render("show.json", stock_holding: stock_holding)
+        |> render("show.json", data: stock_holding)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -26,7 +26,7 @@ defmodule PhoenixApi.StockHoldingController do
 
   def show(conn, %{"id" => id}) do
     stock_holding = Repo.get!(StockHolding, id)
-    render(conn, "show.json", stock_holding: stock_holding)
+    render(conn, "show.json", data: stock_holding)
   end
 
   def update(conn, %{"id" => id, "stock_holding" => stock_holding_params}) do
@@ -35,7 +35,7 @@ defmodule PhoenixApi.StockHoldingController do
 
     case Repo.update(changeset) do
       {:ok, stock_holding} ->
-        render(conn, "show.json", stock_holding: stock_holding)
+        render(conn, "show.json", data: stock_holding)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

@@ -5,7 +5,7 @@ defmodule PhoenixApi.StockTradeController do
 
   def index(conn, _params) do
     stock_trades = Repo.all(StockTrade)
-    render(conn, "index.json", stock_trades: stock_trades)
+    render(conn, "index.json", data: stock_trades)
   end
 
   def create(conn, %{"stock_trade" => stock_trade_params}) do
@@ -16,7 +16,7 @@ defmodule PhoenixApi.StockTradeController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", stock_trade_path(conn, :show, stock_trade))
-        |> render("show.json", stock_trade: stock_trade)
+        |> render("show.json", data: stock_trade)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -26,7 +26,7 @@ defmodule PhoenixApi.StockTradeController do
 
   def show(conn, %{"id" => id}) do
     stock_trade = Repo.get!(StockTrade, id)
-    render(conn, "show.json", stock_trade: stock_trade)
+    render(conn, "show.json", data: stock_trade)
   end
 
   def update(conn, %{"id" => id, "stock_trade" => stock_trade_params}) do
@@ -35,7 +35,7 @@ defmodule PhoenixApi.StockTradeController do
 
     case Repo.update(changeset) do
       {:ok, stock_trade} ->
-        render(conn, "show.json", stock_trade: stock_trade)
+        render(conn, "show.json", data: stock_trade)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

@@ -21,10 +21,13 @@ defmodule PhoenixApi.PortfolioController do
 
     case Repo.insert(changeset) do
       {:ok, portfolio} ->
+        full_portfolio = Repo.preload(portfolio, :cash_holdings)
+        full_portfolio = Repo.preload(full_portfolio, :stock_holdings)
+        full_portfolio = Repo.preload(full_portfolio, :messages)
         conn
         |> put_status(:created)
-        |> put_resp_header("location", portfolio_path(conn, :show, portfolio))
-        |> render("show.json", data: portfolio)
+        |> put_resp_header("location", portfolio_path(conn, :show, full_portfolio))
+        |> render("show.json", data: full_portfolio)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -34,7 +37,10 @@ defmodule PhoenixApi.PortfolioController do
 
   def show(conn, %{"id" => id}) do
     portfolio = Repo.get!(Portfolio, id)
-    render(conn, "show.json", data: portfolio)
+    full_portfolio = Repo.preload(portfolio, :cash_holdings)
+    full_portfolio = Repo.preload(full_portfolio, :stock_holdings)
+    full_portfolio = Repo.preload(full_portfolio, :messages)
+    render(conn, "show.json", data: full_portfolio)
   end
 
   def update(conn, %{"id" => id, "portfolio" => portfolio_params}) do
@@ -43,7 +49,10 @@ defmodule PhoenixApi.PortfolioController do
 
     case Repo.update(changeset) do
       {:ok, portfolio} ->
-        render(conn, "show.json", data: portfolio)
+        full_portfolio = Repo.preload(portfolio, :cash_holdings)
+        full_portfolio = Repo.preload(full_portfolio, :stock_holdings)
+        full_portfolio = Repo.preload(full_portfolio, :messages)
+        render(conn, "show.json", data: full_portfolio)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

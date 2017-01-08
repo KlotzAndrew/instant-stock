@@ -17,9 +17,11 @@ defmodule PhoenixApi.MessageControllerTest do
   test "shows chosen resource", %{conn: conn} do
     message = Repo.insert! %Message{portfolio_id: 1}
     conn = get conn, message_path(conn, :show, message)
-    assert json_response(conn, 200)["data"] == %{"id" => message.id,
-      "content" => message.content,
-      "portfolio_id" => message.portfolio_id}
+    assert json_response(conn, 200)["data"] == %{
+      "id" => Integer.to_string(message.id),
+      "attributes" => %{"content" => nil},
+      "type" => "message"
+    }
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do

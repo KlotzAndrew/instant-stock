@@ -16,7 +16,7 @@ defmodule PhoenixApi.CashHoldingController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", cash_holding_path(conn, :show, cash_holding))
-        |> render("show.json", cash_holding: cash_holding)
+        |> render("show.json", data: cash_holding)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -26,7 +26,7 @@ defmodule PhoenixApi.CashHoldingController do
 
   def show(conn, %{"id" => id}) do
     cash_holding = Repo.get!(CashHolding, id)
-    render(conn, "show.json", cash_holding: cash_holding)
+    render(conn, "show.json", data: cash_holding)
   end
 
   def update(conn, %{"id" => id, "cash_holding" => cash_holding_params}) do
@@ -35,7 +35,7 @@ defmodule PhoenixApi.CashHoldingController do
 
     case Repo.update(changeset) do
       {:ok, cash_holding} ->
-        render(conn, "show.json", cash_holding: cash_holding)
+        render(conn, "show.json", data: cash_holding)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

@@ -5,7 +5,7 @@ defmodule PhoenixApi.MinuteBarController do
 
   def index(conn, _params) do
     minute_bars = Repo.all(MinuteBar)
-    render(conn, "index.json", minute_bars: minute_bars)
+    render(conn, "index.json", data: minute_bars)
   end
 
   def create(conn, %{"minute_bar" => minute_bar_params}) do
@@ -16,7 +16,7 @@ defmodule PhoenixApi.MinuteBarController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", minute_bar_path(conn, :show, minute_bar))
-        |> render("show.json", minute_bar: minute_bar)
+        |> render("show.json", data: minute_bar)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -26,7 +26,7 @@ defmodule PhoenixApi.MinuteBarController do
 
   def show(conn, %{"id" => id}) do
     minute_bar = Repo.get!(MinuteBar, id)
-    render(conn, "show.json", minute_bar: minute_bar)
+    render(conn, "show.json", data: minute_bar)
   end
 
   def update(conn, %{"id" => id, "minute_bar" => minute_bar_params}) do
@@ -35,7 +35,7 @@ defmodule PhoenixApi.MinuteBarController do
 
     case Repo.update(changeset) do
       {:ok, minute_bar} ->
-        render(conn, "show.json", minute_bar: minute_bar)
+        render(conn, "show.json", data: minute_bar)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
