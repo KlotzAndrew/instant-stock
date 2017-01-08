@@ -25,11 +25,11 @@ function addStockTrade(state, trade) {
   const tradeId = newTrade.getIn(['data', 'id']);
   const stateWithTrade = state.setIn(['stockTrades', tradeId], newTrade.getIn(['data']));
 
-  const holdingId = newTrade.getIn(['data', 'attributes', 'stockHoldingId']);
-  const holdingTotal = state.getIn(['stockHoldings', holdingId, 'attributes', 'currentTotal']);
+  const holdingId = JSON.stringify(newTrade.getIn(['data', 'attributes', 'stockHoldingId']));
+  const holdingTotal = state.getIn(['stockHoldings', holdingId, 'attributes', 'current-total']);
 
   const newTotal = holdingTotal + newTrade.getIn(['data', 'attributes', 'quantity']);
-  const stateWithHolding = stateWithTrade.setIn(['stockHoldings', holdingId, 'attributes', 'currentTotal'], newTotal);
+  const stateWithHolding = stateWithTrade.setIn(['stockHoldings', holdingId, 'attributes', 'current-total'], newTotal);
 
   return stateWithHolding
 }
@@ -40,11 +40,11 @@ function addCashTrade(state, trade) {
   const tradeId = newTrade.getIn(['data', 'id']);
   const stateWithTrade = state.setIn(['cashTrades', tradeId], newTrade.getIn(['data']));
 
-  const holdingId = newTrade.getIn(['data', 'attributes', 'cashHoldingId']);
-  const holdingTotal = state.getIn(['cashHoldings', holdingId, 'attributes', 'currentTotal']);
+  const holdingId = JSON.stringify(newTrade.getIn(['data', 'attributes', 'cashHoldingId']));
+  const holdingTotal = state.getIn(['cashHoldings', holdingId, 'attributes', 'current-total']);
 
   const newTotal = parseFloat(holdingTotal) + parseFloat(newTrade.getIn(['data', 'attributes', 'quantity']));
-  const stateWithHolding = stateWithTrade.setIn(['cashHoldings', holdingId, 'attributes', 'currentTotal'], newTotal.toString());
+  const stateWithHolding = stateWithTrade.setIn(['cashHoldings', holdingId, 'attributes', 'current-total'], newTotal.toString());
 
   return stateWithHolding
 }

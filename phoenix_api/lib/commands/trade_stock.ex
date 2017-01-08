@@ -26,8 +26,10 @@ defmodule Commands.TradeStock do
 
   defp perform_trade(stock_holding, cash_holding, last_quote, stock, quantity, repo) do
     result = repo.transaction fn ->
-      create_cash_trade(cash_holding, last_quote, quantity, repo)
-      create_stock_trade(stock_holding, last_quote, quantity, repo)
+      %{
+        cash_trade: create_cash_trade(cash_holding, last_quote, quantity, repo),
+        stock_trade: create_stock_trade(stock_holding, last_quote, quantity, repo)
+      }
     end
 
     result

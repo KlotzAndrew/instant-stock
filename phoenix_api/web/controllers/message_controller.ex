@@ -18,18 +18,33 @@ defmodule PhoenixApi.MessageController do
       {:ok, message} ->
         PhoenixApi.Endpoint.broadcast! "room:lobby", "new:msg", %{"message" => %{"id" => message.id, "content" => message.content}}
         case ExecuteTrade.trade(message_params["content"], message_params["portfolio_id"]) do
-          {:ok, trade} ->
+          {:ok, trades} ->
+            stock_trade = trades.stock_trade
             PhoenixApi.Endpoint.broadcast! "room:lobby", "new:msg", %{
               "stock_trade" => %{
                 "data" => %{
-                  "id" => trade.id,
+                  "id" => stock_trade.id,
                   "attributes" => %{
-                    "stockHoldingId" => trade.stock_holding_id,
-                    "quantity" => trade.quantity,
-                    "enterPrice" => trade.enter_price
+                    "stockHoldingId" => stock_trade.stock_holding_id,
+                    "quantity" => stock_trade.quantity,
+                    "enterPrice" => stock_trade.enter_price
                   }
                 }
             }}
+
+            cash_trade = trades.cash_trade
+            PhoenixApi.Endpoint.broadcast! "room:lobby", "new:msg", %{
+              "cash_trade" => %{
+                "data" => %{
+                  "id" => cash_trade.id,
+                  "attributes" => %{
+                    "cashHoldingId" => cash_trade.cash_holding_id,
+                    "quantity" => cash_trade.quantity
+                  }
+                }
+            }}
+          :nil ->
+            # do nothing
         end
 
         conn

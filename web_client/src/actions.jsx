@@ -59,8 +59,7 @@ export function receiveChannelData(data) {
   } else if (data.stock_trade) {
     return addStockTrade(data.stock_trade)
   } else if (data.cash_trade) {
-    const trade = JSON.parse(data.cash_trade);
-    return addCashTrade(trade)
+    return addCashTrade(data.cash_trade)
   }
 }
 
