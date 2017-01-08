@@ -8,6 +8,10 @@ defmodule PhoenixApi.StockHoldingView do
 
   attributes [:stock_name, :last_quote, :current_total]
 
+  has_many :stock_trades,
+    serializer: PhoenixApi.StockTradeView,
+    include: true
+
   def stock_name(stock_holding, _conn) do
     full_holding = Repo.preload(stock_holding, :stock)
 

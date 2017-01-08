@@ -14,8 +14,8 @@ export class StockHoldingTrades extends React.Component {
     return (
       <div>
         <p onClick={this._handleClick}>
-          {stockHolding.getIn(['attributes', 'stockName'])} |
-          total: {stockHolding.getIn(['attributes', 'currentTotal'])} |
+          {stockHolding.getIn(['attributes', 'stock-name'])} |
+          total: {stockHolding.getIn(['attributes', 'current-total'])} |
           ${(value).toFixed(2)}
         </p>
         {stockTrades}
@@ -30,7 +30,7 @@ export class StockHoldingTrades extends React.Component {
   _renderStockTrades = (collapsedStatus, stockHolding) => {
     if (collapsedStatus === true) {
       return this._listStockTrades(
-        stockHolding.getIn(['relationships', 'stockTrades', 'data'])
+        stockHolding.getIn(['relationships', 'stock-trades', 'data'])
       )
     }
   };
@@ -47,8 +47,8 @@ export class StockHoldingTrades extends React.Component {
   };
 
   _stockValue = (stockHolding) => {
-    const total = stockHolding.getIn(['attributes', 'currentTotal']);
-    const quote = stockHolding.getIn(['attributes', 'lastQuote']);
+    const total = stockHolding.getIn(['attributes', 'current-total']);
+    const quote = stockHolding.getIn(['attributes', 'last-quote']);
     return total*quote
   }
 }

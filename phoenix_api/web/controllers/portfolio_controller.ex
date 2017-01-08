@@ -5,9 +5,10 @@ defmodule PhoenixApi.PortfolioController do
 
   def promo(conn, _params) do
     portfolio = Enum.at(Repo.all(Portfolio), 0)
-    full_portfolio = Repo.preload(portfolio, :cash_holdings)
-    full_portfolio = Repo.preload(full_portfolio, :stock_holdings)
-    full_portfolio = Repo.preload(full_portfolio, :messages)
+    full_portfolio = Repo.preload(
+      portfolio,
+      [:cash_holdings, :messages, {:stock_holdings, :stock_trades}]
+    )
     render(conn, "show.json", data: full_portfolio)
   end
 

@@ -5,7 +5,8 @@ defmodule PhoenixApi.StockHoldingController do
 
   def index(conn, _params) do
     stock_holdings = Repo.all(StockHolding)
-    render(conn, "index.json", data: stock_holdings)
+    full_holding = Repo.preload(stock_holdings, :stock_trades)
+    render(conn, "index.json", data: full_holding)
   end
 
   def create(conn, %{"stock_holding" => stock_holding_params}) do
